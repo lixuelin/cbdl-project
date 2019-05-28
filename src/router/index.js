@@ -10,6 +10,7 @@ const Income = () => import("@/views/income")
 const Help = () => import("@/views/help")
 const Bank = () => import("@/views/bank")
 const ChangePwd = () => import("@/views/change_pwd")
+const Register = () => import("@/views/register")
 
 // const Invest = () => import("@/views/invest")
 // const Finder = () => import("./views/finder")
@@ -56,14 +57,22 @@ export default new Router({
               name: 'bank',
               component: Bank,
             }
-
           ]
         },
         {
           path: '/login',
           name: 'login',
           component: Login
-
-        }
+        },
+        {
+          path: '/register',
+          name: 'register',
+          component: Register
+        },
+      {
+        path: '/forget',
+        name: 'forget',
+        component: Forget
+      }
     ]
 })

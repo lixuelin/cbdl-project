@@ -238,7 +238,7 @@
         this.$router.push({"name": "help"})
       },
       goToLogin() {
-        window.location = "/login"
+        this.$router.push({path: "/login"})
       },
       goToRegister() {
         window.location = "/login#/register"
