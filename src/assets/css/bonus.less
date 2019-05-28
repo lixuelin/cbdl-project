@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.shadow_box(@shadow: 0 0 5px #ccc) {
+    box-shadow: @shadow;
+}
+
+.bonus {
+    &-head {
+        &-img {
+          & img {
+              display: block;
+              width: 100%;
+          }
+        }
+
+        &-total {
+            .marginCont(15px);
+            .paddingCont(15px);
+            background: #fff;
+            .border_radius();
+            .shadow_box();
+
+            &-cont {
+                padding-bottom: 5px;
+                border-bottom: 1px solid #f0f2f5;
+                text-align: center;
+
+                & span {
+                    color: #3679ff;
+                    font-size: 22px;
+                    font-weight: 700;
+                }
+            }
+
+            &-other {
+                display: flex;
+                .paddingCont(10px);
+                border-bottom: 1px solid #f0f2f5;
+
+                & div {
+                    flex: 1;
+                    text-align: center;
+                }
+
+                &-num {
+                    font-size: 16px;
+                }
+
+                &-tip {
+                    color: #b1b8c7;
+                    font-size: 12px;
+                }
+            }
+
+            &-handler {
+                .marginCont(15px);
+                text-align: center;
+
+                & button {
+                    width: 60%;
+                }
+
+                &-draw {
+                    display: flex;
+                    & p {
+                        flex: 1;
+
+                        &:last-child{
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+                    }
+                }
+
+                &-tips {
+                    line-height: 32px;
+                    color: #ef3024;
+                }
+
+                &-password {
+                    padding-top: 15px;
+
+                    & button {
+                        width: 60%;
+                    }
+
+                    & ul {
+                        display: flex;
+                    }
+
+                    & li {
+                        display: flex;
+                        flex: 1;
+                        align-items: center;
+                        justify-content: center;
+
+                        & span {
+                            display: block;
+                            width: 30px;
+                            height: 30px;
+                            border: 1px solid #ccc;
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
+    &-body {
+        .paddingCont();
+
+        h3 {
+            .paddingCont(15px 0);
+            font-size: 14px;
+        }
+
+        &-next {
+            background: #fff;
+            .shadow_box();
+            .border_radius();
+
+            & li {
+                display: flex;
+                .paddingCont(10px 0 10px 0);
+                border-bottom: 1px solid #eee;
+
+                &:first-child {
+                    //.paddingCont(10px 0 10px 0);
+                }
+            }
+
+            &-part {
+                flex-basis: 100px;
+                text-align: center;
+            }
+
+            &-title {
+                display: flex;
+            }
+
+            &-grid {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: center;
+
+                &-num {
+                    font-size: 14px;
+                }
+            }
+
+            &-name {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &-list {
+                &-cont {
+                    display: flex;
+                    .paddingCont(0 0 10px 0);
+
+                    &:last-child {
+                        .paddingCont(0 0 0 0);
+                    }
+
+                    & span {
+                        display: flex;
+                        flex: 1;
+                        justify-content: center;
+                    }
+                }
+
+            }
+        }
+    }
+}

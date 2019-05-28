@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/*
+ * login: 登陆
+ */
+
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.login {
+    display: flex;
+    .paddingCont();
+    height: 100%;
+    background: url("./../image/admin_bg.jpg") no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+
+    &-box {
+        width: 80%;
+    }
+
+    &-title {
+        & h1 {
+            line-height: 250%;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+
+    &-form{
+        &-grid {
+            .marginCont(0 0 15px 0);
+
+            & .ivu-input-prefix i {
+                color: #108ee9;
+            }
+        }
+        &-btns {
+            .marginCont(25px 0);
+
+            &-submit {
+                text-align: center;
+                & button {
+                    width: 80%;
+                }
+            }
+
+            &-other {
+                .paddingCont(15px 0);
+                font-size: 14px;
+                color: #108ee9;
+                text-align: center;
+
+                &-line {
+                    .paddingCont();
+                }
+            }
+        }
+    }
+
+
+}
+
+.register {
+    &-form {
+        .paddingCont(15px);
+    }
+}
+
+.forget {
+    &-form {
+        .paddingCont(15px);
+    }
+}

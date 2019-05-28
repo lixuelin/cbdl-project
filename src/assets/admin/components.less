@@ -1,0 +1,73 @@
+@charset "utf8";
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.admin-title {
+    & h2 {
+        .paddingCont(15px 15px);
+        font-size: 16px;
+    }
+}
+
+.admin-main {
+    .marginCont();
+
+    &-search {
+        .marginCont(0 0 15px 0);
+        .paddingCont(15px);
+        background: #fff;
+        .border_radius();
+
+        &-box {
+            display: flex;
+            .marginCont(0 0 15px 0);
+
+            &-fields {
+                flex: 1;
+            }
+
+            &:last-child {
+                .marginCont(0 0 0 0);
+            }
+
+            &-btns {
+                & button {
+                    .marginCont(0 15px 0 0);
+                }
+            }
+        }
+    }
+
+    &-flow {
+
+
+        &-table {
+            display: flex;
+            &-box {
+                flex: 1;
+                padding-right: 15px;
+
+                &:last-child {
+                    padding-right: 0;
+                }
+            }
+        }
+        &-page {
+            display: flex;
+            .paddingCont(15px);
+            justify-content: center;
+        }
+    }
+}

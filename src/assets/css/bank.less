@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.shadow_box(@shadow: 0 0 5px #ccc) {
+    box-shadow: @shadow;
+}
+
+.bank {
+    .marginCont(15px 10px);
+    height: 500px;
+
+    &-list {
+        & li {
+            position: relative;
+            .marginCont(0 0 15px 0);
+            .paddingCont(25px 15px);
+            .border_radius();
+            .shadow_box();
+            overflow: hidden;
+
+            &:last-child {
+                .paddingCont(10px);
+            }
+        }
+        &-cont {
+            color: #fff;
+
+            &-name {
+                .paddingCont(5px 0);
+                & h3 {
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+            }
+
+            &-type {
+                & p {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+            }
+
+            &-card {
+                .paddingCont(5px 0);
+                & p {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+
+            }
+        }
+
+        &-logo {
+            position: absolute;
+            right: -40px;
+            bottom: -80px;
+
+            & span {
+                font-size: 160px;
+                color: rgba(255,255,255,0.2);
+            }
+        }
+
+        &-add {
+            background: #fff;
+            text-align: center;
+        }
+    }
+}

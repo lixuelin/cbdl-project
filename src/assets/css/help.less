@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+
+.help {
+    .marginCont(15px);
+    .help-cont {
+        margin-bottom: 15px;
+        & h3 {
+            line-height: 40px;
+            font-size: 16px;
+        }
+
+        & p {
+            line-height: 180%;
+            text-indent: 24px;
+        }
+    }
+}

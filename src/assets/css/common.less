@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#app , #login {
+    margin: 0 auto;
+    min-height: 600px;
+    background: #f5f6f7;
+}
+
+#login {
+    height: 100%;
+}
+
+@media (max-width: 760px) {
+    #app, #login {
+        width: 100%;
+    }
+}
