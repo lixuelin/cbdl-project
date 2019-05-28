@@ -11,6 +11,7 @@ const Help = () => import("@/views/help")
 const Bank = () => import("@/views/bank")
 const ChangePwd = () => import("@/views/change_pwd")
 const Register = () => import("@/views/register")
+const Forget = () => import("@/views/forget")
 
 // const Invest = () => import("@/views/invest")
 // const Finder = () => import("./views/finder")
