@@ -1,6 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import Vue from 'vue'
+// import Router from 'vue-router'
 
 const Home = () => import("@/views/home")
 const Login = () => import("@/views/login")
@@ -12,21 +11,14 @@ const Bank = () => import("@/views/bank")
 const ChangePwd = () => import("@/views/change_pwd")
 const Register = () => import("@/views/register")
 const Forget = () => import("@/views/forget")
+const Invest = () => import("@/views/invest")
 
-// const Invest = () => import("@/views/invest")
-// const Finder = () => import("./views/finder")
-// const Manage = () => import("./views/manage")
-// const Mine = () => import("./views/mine")
-// const MineCash = () => import("./views/mine/cash_pwd")
-// const MineAbout = () => import("./views/mine/about")
+// Vue.use(Router)
 
-Vue.use(Router)
-
-export default new Router({
+export default new VueRouter({
     routes: [
         {
-          path: '/home/',
-          name: 'home',
+          path: '/',
           component: Home,
           children: [
             {
@@ -57,6 +49,11 @@ export default new Router({
               path: '/bank',
               name: 'bank',
               component: Bank,
+            },
+            {
+              path: '/invest',
+              name: 'invest',
+              component: Invest,
             }
           ]
         },

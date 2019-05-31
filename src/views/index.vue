@@ -130,7 +130,7 @@
   import {delCookie} from "./../utils/cookie";
   export default {
     name: "index",
-    // inject: ["reload"],
+    inject: ["reload"],
     data () {
       return {
         is_login: false,
@@ -146,19 +146,19 @@
         total: {
           startVal: 0,
           endVal: 0,
-          duration: 300,
+          duration: 10,
           float: 2
         },
         income: {
           startVal: 0,
           endVal: 0,
-          duration: 300,
+          duration: 10,
           float: 2
         },
         bonus: {
           startVal: 0,
           endVal: 0,
-          duration: 300,
+          duration: 10,
           float: 2
         },
         banner: {
@@ -232,7 +232,7 @@
         mylocalStorage.setItem("code", "")
         delCookie("session_id")
         this.reload();
-        this.$router.push({path: "/index", query: {timestamp: new Date().getTime()}})
+        this.$router.push({path: "/", query: {timestamp: new Date().getTime()}})
       },
       gotoHelp() {
         this.$router.push({"name": "help"})
@@ -241,7 +241,7 @@
         this.$router.push({path: "/login"})
       },
       goToRegister() {
-        window.location = "/login#/register"
+        this.$router.push({path: "/register"})
       },
       isLogin() {
         if (mylocalStorage.getItem("username")) {

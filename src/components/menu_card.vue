@@ -39,8 +39,8 @@
         methods: {
 	        tipLogin () {
 	        	this.$Message.warning("请先登录后再操作界面")
-		        window.location = "/login"
-            }
+            this.$router.push({"name": "login"})
+          }
         }
 	}
 </script>

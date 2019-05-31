@@ -5,7 +5,7 @@
           <h1 class="home-header-cont-title">{{this.$menu.name}}</h1>
         </div>
       </header>
-      <router-view v-if="true"></router-view>
+      <router-view v-if="isRouterAlive"></router-view>
       <div class="home-foot">
         <ul>
           <li v-for="(item, index) in menu" @click="checkedPage(index)">
@@ -39,7 +39,7 @@
             {
               "name": "首页",
               "type": "iconfont icon-home",
-              "route": "/home"
+              "route": "/"
             },
             {
               "name": "收益",
@@ -77,5 +77,7 @@
 
 <style lang="less" scoped>
   @import "./../assets/css/home";
+</style>
+<style lang="css" scoped>
   @import "./../assets/fonts/iconfont.css";
 </style>

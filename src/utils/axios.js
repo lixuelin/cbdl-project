@@ -3,10 +3,10 @@
  * 异步请求拦截封装
  */
 
-import axios from "axios"
+// import axios from "axios"
 import {getCookie, setCookie} from "./cookie"
 
-import { Message } from "iview"
+// import { Message } from "iview"
 import {mylocalStorage} from "./request_api";
 // import { LoadingBar } from "iview"
 
@@ -55,7 +55,7 @@ instance.interceptors.response.use(
 				msg: error.response.data.message
 			}
 			if (data.status === 401) {
-				Message.error(data.msg)
+        iview.Message.error(data.msg)
 				if (mylocalStorage.getItem("type") === "admin") {
 					window.location = "/admin"
 				} else {
