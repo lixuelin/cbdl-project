@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="b-home-main-newcomer">
-        <p class="b-home-main-newcomer-invest">4%</p>
+        <p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
         <p class="b-home-main-newcomer-year">月收益</p>
         <div class="b-home-main-newcomer-tip">
           <p>投资期限最长1个月</p>
@@ -99,13 +99,13 @@
         </p>
         <div class="b-home-main-ma">
           <div class="b-home-main-ma-box">
-            <p>QQ</p>
+            <p>微信</p>
             <div>
-              <img src="./../assets/image/1557665249.png">
+              <img src="./../assets/image/wx.png">
             </div>
           </div>
           <div class="b-home-main-ma-box">
-            <p>微信</p>
+            <p>QQ</p>
             <div>
               <img src="./../assets/image/1557665249.png">
             </div>
@@ -146,19 +146,19 @@
         total: {
           startVal: 0,
           endVal: 0,
-          duration: 10,
+          duration: 100,
           float: 2
         },
         income: {
           startVal: 0,
           endVal: 0,
-          duration: 10,
+          duration: 300,
           float: 2
         },
         bonus: {
           startVal: 0,
           endVal: 0,
-          duration: 10,
+          duration: 300,
           float: 2
         },
         banner: {
@@ -304,7 +304,7 @@
           let data = response.data.data;
           this.total.endVal = data[0].total;
           this.income.endVal = data[1].total;
-          this.bonus.endVal = data[2].total;
+          this.bonus.endVal = 0;
           console.log(this.bonus)
         }).catch(error => {
           console.log(error);

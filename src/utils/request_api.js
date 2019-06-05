@@ -38,7 +38,7 @@ export function queryBank(data) {
 }
 
 /**
- * 手机界面用户登陆接口
+ * 手机界面用户登录接口
  *
  */
 

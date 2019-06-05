@@ -52,7 +52,7 @@
                     <p>实际到账：</p>
                     <p>{{cash_info.cash}}</p>
                 </div>
-                <p class="card-body-handler-tips">资金返回至投资时使用的微信或支付宝零钱内</p>
+                <p class="card-body-handler-tips">资金返回至注册时填写的银行卡内</p>
             </div>
             <div slot="footer">
                 <Button type="success" size="default" long @click="cash_list_modal_sure = true">确定</Button>
@@ -72,6 +72,18 @@
                 <Button type="success" size="default" long :loading="loading" @click="cashSure">确定</Button>
             </div>
         </Modal>
+      <Modal v-model="cash_success" width="220">
+        <p slot="header">
+          <span>提现</span>
+        </p>
+        <div class="">
+          <p>提现成功</p>
+          <p>资金将在2小时日内到账，如有疑问请咨询客服</p>
+        </div>
+        <div slot="footer">
+          <Button type="success" size="default" long @click="cash_success=false">确定</Button>
+        </div>
+      </Modal>
     </div>
 </template>
 
@@ -85,6 +97,7 @@
 	            is_show_list: false,
 	            cash_list_modal: false,
 	            cash_list_modal_sure: false,
+              cash_success: false,
                 modal_loading: false,
                 income_status: {
                     0: "未开始收益",
@@ -110,19 +123,17 @@
         },
         methods: {
 	        goToHelp() {
-		        this.$router.push({"name": "mineHelp"});
+		        this.$router.push({"name": "help"});
             },
 	        goToInvest () {
 		        this.$router.push({"name": "invest"});
 	        },
             countCash(invest) {
-	            console.log(invest)
             	let data = {}
 	            if (invest.income_status === 0) {
 		            data.total = Number(invest.invest_num) + Number(invest.income_num);
-		            data.brokerage = Number(invest.invest_num) * 0.01;
+		            data.brokerage = (Number(invest.invest_num) * 0.01).toFixed(2);
 		            data.cash =  Number(invest.invest_num) - (Number(invest.invest_num) * 0.01);
-		            console.log(data, "dd")
 	            } else if (invest.income_status === 1) {
 		            data.total = invest.invest_num + Number(invest.income_num);
 		            data.brokerage = 0;
@@ -133,6 +144,7 @@
 	        cashMoney(invest){
 	        	this.cash_list_modal = true;
 		        // this.modal_loading = true;
+            console.log(invest, "ddd")
 		        this.cash_info = this.countCash(invest);
 		        this.cash_invest = invest
             },
@@ -147,32 +159,35 @@
 			        cash_pwd: this.cash_pwd
 		        };
 		        checkCashPwd(data).then(response => {
-		        	console.log(response, "cc")
                     let is_exist = response.data.data.is_exist;
-		        	console.log(is_exist, "ddd")
                     if (is_exist) {
                     	this.cashInvestMoney(user_id);
                     } else {
+                        this.loading = false;
                         this.$Message.error("密码错误！")
                     }
                 }).catch(error => {
+                  this.loading = false
                 	console.log(error)
                 });
 		        
 	        },
             cashInvestMoney(user_id) {
-	        	console.log(this.cash_invest)
 	            let data = {
 		            user_id: user_id,
-		            invest_id: this.cash_invest.id
+		            invest_id: this.cash_invest.id,
+                invest_num: this.cash_invest.invest_num,
+                brokerage: this.cash_info.brokerage,
+                cash_num: this.cash_info.cash,
+                income_num: this.cash_invest.income_num
 	            };
-	        	
 	            IncomeCashOne(data).then(response => {
 	            	let cash_status = response.data.data.success
 	            	if (cash_status) {
 			            this.cash_list_modal = false;
 			            this.cash_list_modal_sure = false;
-			            this.$Message.success("提现成功！");
+			            this.cash_success = true
+                  this.loading = false
 			            this.cash_pwd = "";
 			            let msg = {
 			            	is_update: true

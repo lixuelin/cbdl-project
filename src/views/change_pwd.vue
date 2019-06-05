@@ -67,7 +67,7 @@
       };
       const validatePasswordCheck = (rule, value, callback) => {
         if (value !== this.formValidate.password) {
-          callback(new Error('账户密码不一致，请重新输入！'));
+          callback(new Error('账号密码不一致，请重新输入！'));
         } else {
           callback();
         }
@@ -86,11 +86,11 @@
             { validator: validateoldPassWord, trigger: 'blur' }
           ],
           password: [
-            { required: true, type: 'string', message: '账户密码不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '账号密码不能为空！', trigger: 'blur' },
             { validator: validatePassword, trigger: 'blur' }
           ],
           passwordCheck: [
-            { required: true, type: 'string', message: '再次输入账户密码不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '再次输入账号密码不能为空！', trigger: 'blur' },
             { validator: validatePasswordCheck, trigger: 'blur' }
           ],
         }

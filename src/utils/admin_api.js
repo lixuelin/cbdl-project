@@ -65,6 +65,17 @@ export function queryInvestList(data) {
 		+ data.invest_num + "&cash_status=" + data.cash_status + "&invest_pay=" + data.invest_pay)
 }
 
+/**
+ *
+ * 后台确认数据接口
+ *
+ */
+
+export function updateVerify(data) {
+  return all("post", "/invest/verify_num", data)
+}
+
+
 
 /**
  *
@@ -100,6 +111,17 @@ export function queryCashList(data) {
 		+ "&household=" + data.household + "&cash_num=" + data.cash_num + "&cash_type=" + data.cash_type
 		+ "&cash_pay=" + data.cash_pay)
 }
+
+/**
+ *
+ * 后台获取每天提现接口
+ *
+ */
+
+export function verify_cash(data) {
+  return all("post", "/cash/verify_cash", data)
+}
+
 
 
 /**

@@ -3,13 +3,13 @@
     <div class="register-form">
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="20">
         <FormItem label=" " prop="username">
-          <Input v-model="formValidate.username" placeholder="请输入账户"></Input>
+          <Input v-model="formValidate.username" placeholder="请输入账号"></Input>
         </FormItem>
         <FormItem label=" " prop="password">
-          <Input type="password" v-model="formValidate.password" placeholder="请输入账户密码"></Input>
+          <Input type="password" v-model="formValidate.password" placeholder="请输入账号密码"></Input>
         </FormItem>
         <FormItem label=" " prop="passwordCheck">
-          <Input type="password" v-model="formValidate.passwordCheck" placeholder="请再次输入账户密码"></Input>
+          <Input type="password" v-model="formValidate.passwordCheck" placeholder="请再次输入账号密码"></Input>
         </FormItem>
         <FormItem label=" " prop="card">
           <Input v-model="formValidate.card" placeholder="请输入银行卡号"></Input>
@@ -21,7 +21,7 @@
           所属银行：<span>{{formValidate.bank_name}}</span>
         </FormItem>
         <FormItem label=" " prop="household">
-          <Input v-model="formValidate.household" placeholder="请输入户主"></Input>
+          <Input v-model="formValidate.household" placeholder="请输入姓名"></Input>
         </FormItem>
         <FormItem label=" " prop="cashPwd">
           <Input type="password" v-model="formValidate.cashPwd" placeholder="请输入提现密码"></Input>
@@ -30,7 +30,7 @@
           <Input type="password" v-model="formValidate.cashPwdCheck" placeholder="请再次输入提现密码"></Input>
         </FormItem>
         <FormItem label=" " prop="beInviteCode">
-          <Input type="password" v-model="formValidate.beInviteCode" placeholder="请输入邀请码"></Input>
+          <Input type="text" v-model="formValidate.beInviteCode" placeholder="请输入邀请码"></Input>
         </FormItem>
         <FormItem>
           <Button type="primary" @click="handleSubmit('formValidate')">注册</Button>
@@ -59,7 +59,7 @@
               if(response.data.data.is_exist === 0) {
                 callback();
               } else {
-                callback(new Error('用户名称已存在!'));
+                callback(new Error('姓名名称已存在!'));
               }
             }).catch(error => {
               this.$Message.error("接口请求失败")
@@ -82,7 +82,7 @@
       };
       const validatePasswordCheck = (rule, value, callback) => {
         if (value !== this.formValidate.password) {
-          callback(new Error('账户密码不一致，请重新输入！'));
+          callback(new Error('账号密码不一致，请重新输入！'));
         } else {
           callback();
         }
@@ -157,15 +157,15 @@
         is_validate: false,
         ruleValidate: {
           username: [
-            { required: true, type: 'string', message: '账户名称不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '账号名称不能为空！', trigger: 'blur' },
             { validator: validateUsername, trigger: 'blur' }
           ],
           password: [
-            { required: true, type: 'string', message: '账户密码不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '账号密码不能为空！', trigger: 'blur' },
             { validator: validatePassword, trigger: 'blur' }
           ],
           passwordCheck: [
-            { required: true, type: 'string', message: '再次输入账户密码不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '再次输入账号密码不能为空！', trigger: 'blur' },
             { validator: validatePasswordCheck, trigger: 'blur' }
           ],
           card: [
@@ -180,7 +180,7 @@
             { required: true, message: 'Please select the date', trigger: 'change' }
           ],
           household: [
-            { required: true, type: 'string', message: '户主名称不能为空！', trigger: 'blur' },
+            { required: true, type: 'string', message: '名称不能为空！', trigger: 'blur' },
             { validator: validateHousehold, trigger: 'blur' }
           ],
           cashPwd: [
@@ -202,7 +202,6 @@
     methods: {
       handleSubmit (name) {
         this.$refs[name].validate((valid) => {
-          console.log(valid, 'dd')
           this.is_validate = valid
           if (valid) {
             this.registerUser();
@@ -215,7 +214,7 @@
         let data = this.formValidate;
         registerRequest(data).then(res => {
           this.$Message.success('注册成功!');
-          window.location = "/login"
+          this.$router.push({"name": "login"})
         }).catch(err => {
           console.log(err)
           this.$Message.error('注册失败!');

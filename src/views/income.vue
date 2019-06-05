@@ -46,7 +46,7 @@
           <p>实际到账：</p>
           <p>{{cash_info.cash}}</p>
         </div>
-        <p class="card-body-handler-tips">资金返回至投资时使用的微信或支付宝零钱内</p>
+        <p class="card-body-handler-tips">资金返回至注册时填写的银行卡内</p>
       </div>
       <div slot="footer">
         <Button type="primary" size="default" long @click="cash_modal_sure = true">确定</Button>
@@ -66,6 +66,18 @@
         <i-button type="primary" long :loading="loading" @click="cashAllSure">
           <span>确定</span>
         </i-button>
+      </div>
+    </Modal>
+    <Modal v-model="cash_all_success" width="220">
+      <p slot="header">
+        <span>提现</span>
+      </p>
+      <div class="">
+        <p>提现成功</p>
+        <p>资金将在2个小时内到账，如有疑问请咨询客服</p>
+      </div>
+      <div slot="footer">
+        <Button type="success" size="default" long @click="cash_all_success=false">确定</Button>
       </div>
     </Modal>
   </div>
@@ -94,6 +106,7 @@
           brokerage: 0,
           cash: 0
         },
+        cash_all_success: false,
         cash_modal: false,
         cash_modal_sure: false,
         invest_list: [],
@@ -143,6 +156,7 @@
       isUpdateInvest (data) {
         if (data.is_update) {
           this.queryList();
+          this.queryTotal();
         }
       },
       queryList() {
@@ -193,8 +207,8 @@
 
         this.cash_info = {
           total: this.total.endVal,
-          brokerage: Number(invest_brokerage),
-          cash: Number(invest_total) + this.income_total
+          brokerage: Number(invest_brokerage).toFixed(2),
+          cash: (Number(invest_total) + this.income_total).toFixed(2)
         }
       },
       cashAllSure () {
@@ -228,8 +242,11 @@
             this.cash_modal = false;
             this.cash_modal_sure = false;
             this.loading = false;
-            this.$Message.success("提现成功！");
+            this.cash_all_success = true
             this.cash_pwd = "";
+            setTimeout(() => {
+              this.cash_all_success = false
+            }, 2000)
             let msg = {
               is_update: true
             }

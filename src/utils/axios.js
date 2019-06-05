@@ -8,6 +8,7 @@ import {getCookie, setCookie} from "./cookie"
 
 // import { Message } from "iview"
 import {mylocalStorage} from "./request_api";
+import router from "./../router/index"
 // import { LoadingBar } from "iview"
 
 let instance = axios.create({
@@ -49,17 +50,24 @@ instance.interceptors.response.use(
 	},
 	error => {
 		if (error.response) {
-			console.log(error.response, "dd")
 			let data = {
 				status: error.response.status,
 				msg: error.response.data.message
 			}
 			if (data.status === 401) {
         iview.Message.error(data.msg)
-				if (mylocalStorage.getItem("type") === "admin") {
-					window.location = "/admin"
+        mylocalStorage.setItem('username', "");
+        mylocalStorage.setItem('user_id', "");
+        mylocalStorage.setItem('session_id', "");
+        mylocalStorage.setItem('code', "");
+				if (mylocalStorage.getItem("type") === "manager") {
+          router.push({
+            path: "/manager"
+          });
 				} else {
-					window.location = "/login"
+          router.push({
+            path: "/"
+          });
 				}
 				
 			}

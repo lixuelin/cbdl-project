@@ -13,6 +13,16 @@ const Register = () => import("@/views/register")
 const Forget = () => import("@/views/forget")
 const Invest = () => import("@/views/invest")
 
+const Manager = () => import("@/views/manager")
+const Admin = () => import("@/views/admin/home")
+const InvestmentFlow = () => import("@/views/admin/investment_flow")
+const InvestmentSummary = () => import("@/views/admin/investment_summary")
+const BonusFlow = () => import("@/views/admin/bonus_flow")
+const BonusSummary = () => import("@/views/admin/bonus_summary")
+const WithdrawFlow = () => import("@/views/admin/withdraw_flow")
+const WithdrawSummary = () => import("@/views/admin/withdraw_summary")
+const UserManagement = () => import("@/views/admin/user_management")
+
 // Vue.use(Router)
 
 export default new VueRouter({
@@ -67,10 +77,56 @@ export default new VueRouter({
           name: 'register',
           component: Register
         },
+        {
+          path: '/forget',
+          name: 'forget',
+          component: Forget
+        },
+        {
+          path: "/manager",
+          name: "manager",
+          component: Manager
+        },
       {
-        path: '/forget',
-        name: 'forget',
-        component: Forget
+        path: "/admin",
+        component: Admin,
+        children: [
+          {
+            path: "/",
+            name: "investment_flow",
+            component: InvestmentFlow,
+          },
+          {
+            path: "/admin/investment_summary",
+            name: "investment_summary",
+            component: InvestmentSummary,
+          },
+          {
+            path: "/admin/bonus_flow",
+            name: "bonus_flow",
+            component: BonusFlow,
+          },
+          {
+            path: "/admin/bonus_summary",
+            name: "bonus_summary",
+            component: BonusSummary,
+          },
+          {
+            path: "/admin/withdraw_flow",
+            name: "withdraw_flow",
+            component: WithdrawFlow,
+          },
+          {
+            path: "/admin/withdraw_summary",
+            name: "withdraw_summary",
+            component: WithdrawSummary,
+          },
+          {
+            path: "/admin/user_management",
+            name: "user_management",
+            component: UserManagement,
+          }
+        ]
       }
     ]
 })

@@ -21,7 +21,7 @@
           <div class="login-form-btns">
             <div class="login-form-btns-submit">
               <FormItem>
-                <Button type="primary" @click="handleSubmit('formInline')">登陆</Button>
+                <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
               </FormItem>
             </div>
             <div class="login-form-btns-other">
@@ -51,7 +51,7 @@
             { required: true, message: '请输入您的用户名', trigger: 'blur' }
           ],
           password: [
-            { required: true, message: '请输入登陆密码.', trigger: 'blur' },
+            { required: true, message: '请输登录密码.', trigger: 'blur' },
             { type: 'string', min: 6, message: '密码长度最少6位', trigger: 'blur' }
           ]
         }
@@ -74,20 +74,30 @@
         loginRequest(data).then(res => {
           let data = res.data;
           if (data.status === 200) {
-            mylocalStorage["username"] = data.data["username"];
-            mylocalStorage["user_id"] = data.data["user_id"];
-            mylocalStorage["session_id"] = data.data["token"];
-            mylocalStorage["code"] = data.data["code"];
-            mylocalStorage["type"] = "web";
-            setCookie("session_id", data.data["token"]);
-            this.$Message.success('登陆成功!');
-            window.location.href = "/"
+            console.log(data, "ddd")
+
+            console.log(data.data["role_id"])
+            if (data.data["role_id"] === 3) {
+              mylocalStorage["username"] = data.data["username"];
+              mylocalStorage["user_id"] = data.data["user_id"];
+              mylocalStorage["session_id"] = data.data["token"];
+              mylocalStorage["code"] = data.data["code"];
+              mylocalStorage["type"] = "web";
+              setCookie("session_id", data.data["token"]);
+              this.$Message.success('登录成功!')
+              window.location.href = "/"
+            } else {
+              this.formInline.username = "";
+              this.formInline.password = "";
+              this.$Message.warning('用户登录权限错误!')
+            }
+
           } else {
-            this.$Message.error('登陆失败!');
+            this.$Message.error('登录失败!');
           }
         }).catch(err => {
           console.log(err);
-          this.$Message.error('登陆失败!');
+          this.$Message.error('登录失败!');
         });
       },
       gotoRegister() {

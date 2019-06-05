@@ -51,8 +51,6 @@
     }
 
     &-flow {
-
-
         &-table {
             display: flex;
             &-box {
@@ -69,5 +67,24 @@
             .paddingCont(15px);
             justify-content: center;
         }
+    }
+
+    &-verify {
+      .paddingCont(20px 15px);
+      & input {
+        height: 36px;
+        border: 1px solid #f0f2f5;
+        .border_radius();
+      }
+      &-line {
+        display: flex;
+        .paddingCont(10px 0);
+        line-height: 36px;
+        font-size: 14px;
+
+        & label {
+          flex-basis: 120px;
+        }
+      }
     }
 }

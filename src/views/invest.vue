@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="invest-module">
-      <h3>选择支付方式</h3>
+      <h3>支付方式</h3>
       <div class="invest-module-way">
         <ul>
           <template v-for="(item, index) in invest_check_pay">
@@ -50,7 +50,25 @@
     </div>
     <div class="invest-sure">
       <div class="invest-sure-btn">
-        <Button type="primary" icon="md-checkmark-circle" :loading="modal_loading" @click="sureInvest">投资</Button>
+        <!--<Button type="primary" icon="md-checkmark-circle" :loading="invest_show_way" @click="invest_show_way=true">投资</Button>-->
+        <Modal v-model="invest_show_way" width="220">
+          <p slot="header">
+            <span>投资</span>
+          </p>
+          <div>
+            <p>请您将投资款转账到公司账户，收到后将计算收益：</p>
+            <div class="invest-sure-count">
+              <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="company">公司账户：深圳市鑫鼎翔电子商务有限公司</p>
+              <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_add">开户行：中国农业银行深圳中心区支行</p>
+              <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_code">银行账号：41005000040046406</p>
+            </div>
+          </div>
+          <div slot="footer">
+            <i-button type="primary" long :loading="loading" @click="sureInvest">
+              <span>确定</span>
+            </i-button>
+          </div>
+        </Modal>
         <Modal v-model="modal2" width="220">
           <p slot="header">
             <span>投资</span>
@@ -102,6 +120,7 @@
 </template>
 
 <script>
+  import Clipboard from "clipboard"
   import foot from "./../components/foot"
   import {mylocalStorage, userInvest} from "./../utils/request_api";
 
@@ -109,25 +128,29 @@
     name: "invest",
     data () {
       return {
+        invest_show_way: false,
         modal2: false,
         modal_loading: false,
         invest_msg: "",
         banner: {
           speed: 1500
         },
+        company: "深圳市鑫鼎翔电子商务有限公司",
+        bank_code: "41005000040046406",
+        bank_add: "中国农业银行深圳中心区支行",
         checked_money: {
-          index: 0,
-          money: 1000
+          index: null,
+          money: null
         },
         invest_check_money: [
           1000, 5000, 10000, 30000
         ],
         checked_pay: {
-          index: 0,
-          pay: "微信"
+          index: null,
+          pay: "转账"
         },
         invest_check_pay: [
-          "微信", "支付宝"
+          "银行转账", "支付宝"
         ]
       }
     },
@@ -142,6 +165,41 @@
       checkInvestPay (index) {
         this.checked_pay.index = index;
         this.checked_pay.pay = this.invest_check_pay[index];
+        if (index === 0) {
+          this.checked_pay.index = 0;
+          this.checked_pay.pay = this.invest_check_pay[0];
+          if (this.checked_money.index === null) {
+            this.$Message.warning("请先选择投资金额！")
+            return
+          }
+          this.invest_show_way=true
+        }
+        if (index === 1) {
+          this.$Message.warning("支付宝付款正在对接中！")
+          this.checked_pay.index = 0;
+          this.checked_pay.pay = this.invest_check_pay[0];
+        }
+      },
+      ctrlCBtn(){
+        let clipboard = new Clipboard('.ctrlBtn');
+        clipboard.on('success', e => {
+          this.$Message.warning("已复制至剪贴板");
+          setTimeout(()=>{
+            //  self.$emit("closeshare")
+          },2000)
+          e.clearSelection();
+          // 释放内存
+          clipboard.destroy()
+        });
+        //失败回调
+        clipboard.on('error', e => {
+          this.$Message.warning("该浏览器不支持一键复制,请手动复制");
+          setTimeout(()=>{
+            this.$emit("closeshare")
+          },2000)
+          // 释放内存
+          clipboard.destroy()
+        });
       },
       sureInvest () {
         let data = {
@@ -149,24 +207,31 @@
           money: this.checked_money.money,
           pay: this.checked_pay.pay
         }
-        console.log(mylocalStorage.getItem("user_id"), "dd")
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
           this.$Message.warning("请先登录后操作！")
           return
         }
+
         this.modal_loading = true;
         userInvest(data).then(response => {
-          console.log(response)
           let code = response.status;
-          console.log(code)
           this.modal_loading = false;
           if (code === 200) {
-            this.modal_common("恭喜您，投资成功！")
+            if(this.checked_pay.index !== 0) {
+              this.modal_common("恭喜您，投资成功！")
+            } else {
+              this.invest_show_way = false;
+            }
           } else {
-            this.modal_common("抱歉投资失败！")
+            if(this.checked_pay.index !== 0) {
+              this.modal_common("抱歉投资失败！")
+            } else {
+              this.invest_show_way = false;
+            }
           }
         }).catch(error => {
           this.modal_common ("请求失败！")
+          this.modal2 = false;
           console.log(error, "error")
         });
       },

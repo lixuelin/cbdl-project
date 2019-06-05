@@ -16,7 +16,7 @@
           </div>
           <div>
             <p class="bonus-head-total-other-num">{{bonus.todayTotal}}</p>
-            <p class="bonus-head-total-other-tip">昨日奖金</p>
+            <p class="bonus-head-total-other-tip">我的总投资</p>
           </div>
         </div>
         <div class="bonus-head-total-handler">
@@ -37,14 +37,16 @@
             <div class="bonus-body-next-part">
               用户账号
             </div>
-            <div class="bonus-body-next-grid">
-              投资金额
-            </div>
-            <div class="bonus-body-next-grid">
-              投资时间
-            </div>
-            <div class="bonus-body-next-grid">
-              我的奖金
+            <div class="bonus-body-next-flex">
+              <div class="bonus-body-next-grid">
+                奖金计算金额
+              </div>
+              <div class="bonus-body-next-grid">
+                投资时间
+              </div>
+              <div class="bonus-body-next-grid">
+                我的奖金
+              </div>
             </div>
           </li>
           <template v-for="item in next_list">
@@ -55,16 +57,22 @@
                   <p @click="showNext(item)">查看他的下层</p>
                 </div>
               </div>
-              <div class="bonus-body-next-grid">
-                <div>
-                  <p class="bonus-body-next-grid-num">{{item.invest_num}}</p>
-                </div>
-              </div>
-              <div class="bonus-body-next-grid">
-                <p>{{item.create_time}}</p>
-              </div>
-              <div class="bonus-body-next-grid">
-                <p class="bonus-body-next-grid-num">{{item.bonus_num}}</p>
+              <div class="bonus-body-next-cont">
+                  <template v-for="invest in item.invest_list">
+                      <div class="bonus-body-next-cont-flex">
+                        <div class="bonus-body-next-grid">
+                          <div>
+                            <p class="bonus-body-next-grid-num">{{invest.invest_num}}</p>
+                          </div>
+                        </div>
+                        <div class="bonus-body-next-grid">
+                          <p>{{invest.create_time}}</p>
+                        </div>
+                        <div class="bonus-body-next-grid">
+                          <p class="bonus-body-next-grid-num">{{invest.bonus_num}}</p>
+                        </div>
+                    </div>
+                  </template>
               </div>
             </li>
           </template>
@@ -109,7 +117,7 @@
       <div class="bonus-body-next-list">
         <div class="bonus-body-next-list-cont">
           <span>用户账号</span>
-          <span>投资金额</span>
+          <span>奖金计算金额</span>
           <span>投资时间</span>
           <span>我的奖金</span>
         </div>
@@ -161,7 +169,29 @@
         show_next: false,
         modal_loading: false,
         cash_pwd: "",
-        next_list: [],
+        next_list: [{
+          household: "李学麟",
+          invest_list: [{
+            invest_num: "345",
+            create_time: "23434",
+            bonus_num: "dfds"
+          },
+            {
+              invest_num: "345",
+              create_time: "23434",
+              bonus_num: "dfds"
+            },
+            {
+              invest_num: "345",
+              create_time: "23434",
+              bonus_num: "dfds"
+            },
+            {
+              invest_num: "345",
+              create_time: "23434",
+              bonus_num: "dfds"
+            }]
+        }],
         next_invest: []
       }
     },
@@ -171,7 +201,6 @@
       foot
     },
     mounted () {
-      this.next_list = []
       this.bonusTotal()
       this.getList()
     },
@@ -274,9 +303,7 @@
         }
         queryBonusNextList(data).then(response => {
           let data = response.data.data.list;
-          console.log(data, "das")
           if (data.length !== 0) {
-            console.log(uniqBy(data), "fhgf")
             this.next_invest = data
           }
           else {
