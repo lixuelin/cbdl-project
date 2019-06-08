@@ -25,7 +25,7 @@
       <div class="b-home-main-means" v-if="true">
         <div class="b-home-main-means-total">
           <p class="b-home-main-means-tip">
-            <span>总资产</span>
+            <span>总本金</span>
             <span class="b-home-main-means-hide">
                             <Icon type="eye-disabled"></Icon>
               <!--<Icon type="ios-eye"></Icon>-->

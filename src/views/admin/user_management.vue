@@ -205,6 +205,8 @@
 						                click: () => {
 							                this.resetBankModal = true;
 							                this.resetBankCurrent = params.row;
+							                this.formValidate.card = params.row.card;
+                              this.formValidate.cardCheck = params.row.card;
 						                }
 					                }
 				                }, '修改银行信息'),
@@ -345,6 +347,7 @@
 			        this.resetCashCurrent = null;
 			        this.resetCashModal = false;
                     this.$Message.success("提现密码修改成功！")
+              this.queryUserList()
 		        }).catch(err => {
 			        console.log(err)
 			        this.$Message.error("提现密码修改失败！")
@@ -359,18 +362,17 @@
 		        };
 		        this.modal_loading = true;
 		        updateLoginPwd(data).then(res => {
-			        console.log(res, "dss")
 			        this.resetCashCurrent = null;
 			        this.resetCashModal = false;
-			        this.$Message.success("提现密码修改成功！")
+			        this.$Message.success("登录密码修改成功！")
+              this.queryUserList()
 		        }).catch(err => {
 			        console.log(err)
-			        this.$Message.error("提现密码修改失败！")
+			        this.$Message.error("登录密码修改失败！")
 		        })
 	        },
 	        handleSubmit (name) {
 		        this.$refs[name].validate((valid) => {
-			        console.log(valid, 'dd')
 			        this.is_validate = valid
 			        if (valid) {
 				        this.resetBankInfo();
@@ -383,13 +385,12 @@
 		        let data = this.formValidate;
 		        data.user_id = this.resetBankCurrent.id;
 		        this.modal_loading = true;
-		        console.log(data, "data");
 		        updateBankInfo(data).then(res => {
-			        console.log(res, "dss")
 			        this.resetCashCurrent = null;
 			        this.resetBankModal = false;
 			        this.modal_loading = false;
 			        this.$Message.success("银行信息修改成功！")
+              this.queryUserList()
 		        }).catch(err => {
 			        console.log(err)
 			        this.$Message.error("银行信息修改失败！")
