@@ -126,15 +126,29 @@ export function verify_cash(data) {
 
 /**
  *
- * 后台获取每天奖金数据接口
- *
- */
+* 后台获取每天奖金数据接口
+*
+*/
 
 export function queryAdminBonusList(data) {
-	return all("get", "/bonus/admin_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
-		+ "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
-		+ "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household)
+  return all("get", "/bonus/admin_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
+    + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
+    + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
+    + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household)
+}
+
+
+/**
+*
+* 后台获取每天奖金数据接口
+*
+*/
+
+export function queryAdminSecondBonusList(data) {
+  return all("get", "/bonus/admin_second_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
+    + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
+    + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
+    + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household)
 }
 
 

@@ -304,7 +304,7 @@
           let data = response.data.data;
           this.total.endVal = data[0].total;
           this.income.endVal = data[1].total;
-          this.bonus.endVal = 0;
+          this.bonus.endVal = data[2].total;
           console.log(this.bonus)
         }).catch(error => {
           console.log(error);

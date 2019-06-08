@@ -69,7 +69,7 @@
                           <p>{{invest.create_time}}</p>
                         </div>
                         <div class="bonus-body-next-grid">
-                          <p class="bonus-body-next-grid-num">{{invest.bonus_num}}</p>
+                          <p class="bonus-body-next-grid-num">{{invest.income_num}}</p>
                         </div>
                     </div>
                   </template>
@@ -112,7 +112,7 @@
     </Modal>
     <Modal v-model="show_next" width="220">
       <p slot="header">
-        <span>查看ta的下层</span>
+        <span>查看{{next_household}}的下层</span>
       </p>
       <div class="bonus-body-next-list">
         <div class="bonus-body-next-list-cont">
@@ -171,27 +171,9 @@
         cash_pwd: "",
         next_list: [{
           household: "李学麟",
-          invest_list: [{
-            invest_num: "345",
-            create_time: "23434",
-            bonus_num: "dfds"
-          },
-            {
-              invest_num: "345",
-              create_time: "23434",
-              bonus_num: "dfds"
-            },
-            {
-              invest_num: "345",
-              create_time: "23434",
-              bonus_num: "dfds"
-            },
-            {
-              invest_num: "345",
-              create_time: "23434",
-              bonus_num: "dfds"
-            }]
+          invest_list: []
         }],
+        next_household: "",
         next_invest: []
       }
     },
@@ -221,7 +203,7 @@
           return
         }
         queryBonusList(data).then(response => {
-          let data = response.data.data.list;
+          let data = response.data.data.bonus_list;
           console.log(data, "das")
           if (data.length !== 0) {
             this.next_list = data
@@ -295,9 +277,10 @@
       },
       showNext(item) {
         let data = {
-          user_id: item.lower_id
+          user_id: item.id
         }
-        this.show_next = true
+        this.next_household = item.household;
+        this.show_next = true;
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
           return
         }

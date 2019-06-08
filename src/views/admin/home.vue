@@ -17,7 +17,7 @@
                 </div>
                 <div class="admin-home-article-head-user">
                     <div class="admin-home-article-head-user-box">
-                        <p>李学麟</p>
+                        <p>{{username}}</p>
                         <p @click="goOut">退出</p>
                     </div>
                 </div>
@@ -39,9 +39,17 @@
 
     export default {
         name: "admin-home",
+        data () {
+            return {
+                username: ""
+            }
+        },
         components: {
             Header,
             "menu-view": sideMenu
+        },
+        mounted () {
+            this.username = mylocalStorage.getItem("username");
         },
         methods: {
 	        goOut() {

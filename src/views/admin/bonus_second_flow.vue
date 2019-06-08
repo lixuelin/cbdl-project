@@ -18,27 +18,32 @@
                     <span>下层姓名：</span> <Input v-model="search.lower_username" placeholder="请输入下层姓名" clearable style="width: 200px" />
                 </div>
                 <div class="admin-main-search-box-fields">
-                  <span>分享人投资金额：</span>
-                  <Select v-model="search.invest_num" placeholder="全部" style="width:200px">
-                    <Option value="all">全部</Option>
-                    <Option value="1000">1000</Option>
-                    <Option value="5000">5000</Option>
-                    <Option value="10000">10000</Option>
-                    <Option value="30000">30000</Option>
-                  </Select>
+                    <span>下下层账号：</span> <Input v-model="search.lower_lower_username" placeholder="请输入下下层账号" clearable style="width: 200px" />
                 </div>
                 <div class="admin-main-search-box-fields">
-                  <span>分享时间：</span>
-                  <DatePicker type="daterange" show-week-numbers
-                              placement="bottom-end"
-                              placeholder="Select date"
-                              @on-change="changeDate"
-                              style="width: 200px">
-                  </DatePicker>
+                    <span>下下层姓名：</span> <Input v-model="search.lower_lower_household" placeholder="请输入下下层姓名" clearable style="width: 200px" />
                 </div>
             </div>
             <div class="admin-main-search-box">
-
+                <div class="admin-main-search-box-fields">
+                    <span>分享人投资金额：</span>
+                    <Select v-model="search.invest_num" placeholder="全部" style="width:200px">
+                        <Option value="all">全部</Option>
+                        <Option value="1000">1000</Option>
+                        <Option value="5000">5000</Option>
+                        <Option value="10000">10000</Option>
+                        <Option value="30000">30000</Option>
+                    </Select>
+                </div>
+                <div class="admin-main-search-box-fields">
+                    <span>分享时间：</span>
+                    <DatePicker type="daterange" show-week-numbers
+                                placement="bottom-end"
+                                placeholder="Select date"
+                                @on-change="changeDate"
+                                style="width: 200px">
+                    </DatePicker>
+                </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
                         <Button type="primary" @click="getBonusList">搜索</Button>
@@ -59,7 +64,7 @@
 </template>
 
 <script>
-	import {queryAdminBonusList} from "./../../utils/admin_api";
+	import {queryAdminSecondBonusList} from "./../../utils/admin_api";
     import pageTitle from "./../../components/title"
     export default {
         name: "bonus_flow",
@@ -68,18 +73,20 @@
                 title: "奖金日流水",
                 search: {
                     username: "",
-	                  household: "",
-	                  lower_username: "",
-	                  lower_household: "",
-	                  invest_num: "",
+	                household: "",
+	                lower_username: "",
+	                lower_household: "",
+	                lower_lower_username: "",
+	                lower_lower_household: "",
+	                invest_num: "",
                     start_time: "",
                     end_time: ""
                 },
-                pageInfo: {
-                    total: 10,
-                    currentPage: 1,
-                    currentPageSize: 10,
-                },
+	            pageInfo: {
+		            total: 10,
+		            currentPage: 1,
+		            currentPageSize: 10,
+	            },
                 columns: [
                     {
                         title: '分享人账号',
@@ -93,26 +100,34 @@
                         title: '分享人获得奖金',
                         key: 'bonus_num'
                     },
-                    {
-                      title: '奖金比例',
-                      key: 'bonus_rate'
-                    },
-                    {
-                      title: '下层账号',
-                      key: 'lower_username'
-                    },
-                    {
-                      title: '下层姓名',
-                      key: 'lower_household'
-                    },
-                    {
-                      title: '奖金计算金额',
-                      key: 'invest_num'
-                    },
-                    {
-                      title: '分享投资时间',
-                      key: 'create_time'
-                    }
+                  {
+                      title: "奖金比例",
+                      key: "bonus_rate"
+                  },
+	                {
+		                title: '下层账号',
+		                key: 'lower_username'
+	                },
+	                {
+		                title: '下层姓名',
+		                key: 'lower_household'
+	                },
+	                {
+		                title: '下下层分享人账号',
+		                key: 'lower_lower_username'
+	                },
+	                {
+		                title: '下下层分享人姓名',
+		                key: 'lower_lower_household'
+	                },
+	                {
+		                title: '下下层分享人投资金额',
+		                key: 'invest_num'
+	                },
+	                {
+		                title: '下下层分享投资时间',
+		                key: 'create_time'
+	                }
                 ],
                 data: []
             }
@@ -138,15 +153,17 @@
 				    household: this.search.household,
 				    lower_username: this.search.lower_username,
 				    lower_household: this.search.lower_household,
+				    lower_lower_username: this.search.lower_lower_username,
+				    lower_lower_household: this.search.lower_lower_household,
 				    invest_num: this.search.invest_num,
 				    start_time: this.search.start_time,
 				    end_time: this.search.end_time,
 				    currentPage: this.pageInfo.currentPage,
 				    pageSize: this.pageInfo.currentPageSize
 			    }
-			    queryAdminBonusList(data).then(response => {
+          queryAdminSecondBonusList(data).then(response => {
 			    	console.log(response, "res")
-            this.data = response.data.data.bonus;
+                    this.data = response.data.data.bonus;
 				    this.pageInfo.total = response.data.data.total;
 			    }).catch(error => {
 				    this.$Message.error("获取提现列表失败！")

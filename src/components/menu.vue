@@ -42,8 +42,12 @@
                         title: "奖金管理",
                         child: [
                             {
-                                name: "奖金日流水",
+                                name: "奖金第一层流水",
                                 path: "/admin/bonus_flow"
+                            },
+                            {
+                              name: "奖金第二层流水",
+                              path: "/admin/bonus_second_flow"
                             },
                             {
                                 name: "奖金汇总",

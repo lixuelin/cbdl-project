@@ -18,6 +18,7 @@ const Admin = () => import("@/views/admin/home")
 const InvestmentFlow = () => import("@/views/admin/investment_flow")
 const InvestmentSummary = () => import("@/views/admin/investment_summary")
 const BonusFlow = () => import("@/views/admin/bonus_flow")
+const BonusSecondFlow = () => import("@/views/admin/bonus_second_flow")
 const BonusSummary = () => import("@/views/admin/bonus_summary")
 const WithdrawFlow = () => import("@/views/admin/withdraw_flow")
 const WithdrawSummary = () => import("@/views/admin/withdraw_summary")
@@ -105,6 +106,11 @@ export default new VueRouter({
             path: "/admin/bonus_flow",
             name: "bonus_flow",
             component: BonusFlow,
+          },
+          {
+            path: "/admin/bonus_second_flow",
+            name: "bonus_second_flow",
+            component: BonusSecondFlow,
           },
           {
             path: "/admin/bonus_summary",
