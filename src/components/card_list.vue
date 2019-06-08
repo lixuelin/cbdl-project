@@ -106,7 +106,7 @@
                 },
                 cash_info: {
                 	total: 1000,
-                    brokerage: 0,
+                  brokerage: 0,
 	                cash: 0
                 },
                 cash_invest: null,
@@ -137,14 +137,13 @@
 	            } else if (invest.income_status === 1) {
 		            data.total = invest.invest_num + Number(invest.income_num);
 		            data.brokerage = 0;
-		            data.cash = invest.invest_num;
-                }
+		            data.cash = invest.invest_num + Number(invest.income_num) ;
+              }
 	            return data;
             },
 	        cashMoney(invest){
 	        	this.cash_list_modal = true;
 		        // this.modal_loading = true;
-            console.log(invest, "ddd")
 		        this.cash_info = this.countCash(invest);
 		        this.cash_invest = invest
             },
