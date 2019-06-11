@@ -175,7 +175,7 @@
           this.invest_show_way=true
         }
         if (index === 1) {
-          this.$Message.warning("支付宝付款正在对接中！")
+          this.$Message.warning("支付宝功能正在维护中！")
           this.checked_pay.index = 0;
           this.checked_pay.pay = this.invest_check_pay[0];
         }

@@ -15,19 +15,11 @@
             </div>
             <div class="admin-main-search-box">
                 <div class="admin-main-search-box-fields">
-                    <span>提现类型：</span>
+                    <span>提现状态：</span>
                     <Select v-model="search.cash_type" placeholder="全部"  style="width:200px">
                         <Option value="all">全部</Option>
-                        <Option value="本金">本金+收益</Option>
-                        <Option value="奖金">奖金</Option>
-                    </Select>
-                </div>
-                <div class="admin-main-search-box-fields">
-                    <span>提现路径：</span>
-                    <Select v-model="search.cash_pay" placeholder="全部"  style="width:200px">
-                        <Option value="all">全部</Option>
-                        <Option value="微信">微信</Option>
-                        <Option value="支付宝">支付宝</Option>
+                        <Option value="0">未提现</Option>
+                        <Option value="1">提现成功</Option>
                     </Select>
                 </div>
                 <div class="admin-main-search-box-fields">
@@ -39,16 +31,17 @@
                                 style="width: 200px">
                     </DatePicker>
                 </div>
+                <div class="admin-main-search-box-fields">
+                  <span>到账时间：</span>
+                  <DatePicker type="daterange" show-week-numbers
+                              placement="bottom-end"
+                              placeholder="Select date"
+                              style="width: 200px">
+                  </DatePicker>
+                </div>
             </div>
             <div class="admin-main-search-box">
-                <div class="admin-main-search-box-fields">
-                    <span>到账时间：</span>
-                    <DatePicker type="daterange" show-week-numbers
-                                placement="bottom-end"
-                                placeholder="Select date"
-                                style="width: 200px">
-                    </DatePicker>
-                </div>
+
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
                         <Button type="primary" @click="getCashList">搜索</Button>

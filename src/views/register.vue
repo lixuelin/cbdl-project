@@ -21,7 +21,7 @@
           所属银行：<span>{{formValidate.bank_name}}</span>
         </FormItem>
         <FormItem label=" " prop="household">
-          <Input v-model="formValidate.household" placeholder="请输入姓名"></Input>
+          <Input v-model="formValidate.household" placeholder="请输入持卡人姓名"></Input>
         </FormItem>
         <FormItem label=" " prop="cashPwd">
           <Input type="password" v-model="formValidate.cashPwd" placeholder="请输入提现密码"></Input>

@@ -25,11 +25,11 @@
                     </Select>
                 </div>
                 <div class="admin-main-search-box-fields">
-                    <span>支付方式：</span>
+                    <span>审核状态：</span>
                     <Select v-model="search.invest_pay" placeholder="全部"  style="width:200px">
                         <Option value="">全部</Option>
-                        <Option value="微信">微信</Option>
-                        <Option value="支付宝">支付宝</Option>
+                        <Option value="0">未审核</Option>
+                        <Option value="1">已到账</Option>
                     </Select>
                 </div>
                 <div class="admin-main-search-box-fields">

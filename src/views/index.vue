@@ -288,7 +288,7 @@
         wxapi.ShareAppMessage(option)
       },
       wxShare () {
-        this.$Message.warning("分享接口还在申请中，稍等！！")
+        this.$Message.warning("分享功能正在维护中！！")
       },
       goToInvest () {
         this.$router.push({"name": "invest"});
