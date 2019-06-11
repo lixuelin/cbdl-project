@@ -141,6 +141,16 @@ export function checkLoginPwd(data) {
 
 /**
  *
+ * 查询是否存在用户接口
+ *
+ */
+
+export function queryUserMsg(data) {
+  return all("post", "/user/find_user", data)
+}
+
+/**
+ *
  * 用户修改提现密码匹配接口
  *
  */

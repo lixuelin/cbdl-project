@@ -202,7 +202,7 @@
           {
             "name": "修改密码",
             "type": "iconfont icon-icon_eye",
-            "route": "/login"
+            "route": "/change_pwd"
           }
         ]
       }

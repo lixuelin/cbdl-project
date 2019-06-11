@@ -40,13 +40,15 @@
 
 <script>
   import {mylocalStorage, checkLoginPwd, updateLoginPwd, checkCashPwd, updateCashPwd} from "./../utils/request_api";
+  import {delCookie} from "./../utils/cookie";
   export default {
     name: "change-pwd",
     data () {
       const validateoldPassWord = (rule, value, callback) => {
-        if (this.formValidate.cashPwd !== '') {
+        if (this.formValidate.oldPassWord !== '') {
           let reg = /^[a-zA-Z0-9]{6,30}$/;
           let is_reg = reg.test(value)
+          console.log(this.formValidate, "form")
           if (is_reg) {
             this.validateLoginPwd(callback);
           } else {
@@ -75,9 +77,9 @@
       return {
         checkType: 0,
         formValidate: {
-          oldPassWord: "121314",
-          password: '121314',
-          passwordCheck: '121314',
+          oldPassWord: "",
+          password: '',
+          passwordCheck: '',
         },
         is_validate: false,
         ruleValidate: {
@@ -101,12 +103,12 @@
         this.$refs[name].validate((valid) => {
           this.is_validate = valid
           if (valid) {
-            if(this.type === 0) {
+            console.log(this.checkType, "ddd")
+            if(this.checkType === 0) {
               this.changeLoginPwd()
             } else {
               this.changeCashPwd()
             }
-
           } else {
             this.$Message.error('Fail!');
           }
@@ -115,9 +117,9 @@
       validateLoginPwd (callback) {
         let data = {
           user_id: mylocalStorage.getItem("user_id"),
-          cash_pwd: this.formValidate.oldCashPwd
+          cash_pwd: this.formValidate.oldPassWord
         }
-        if (this.type=== 0) {
+        if (this.checkType=== 0) {
           this.checkLogin(data, callback)
         } else {
           this.checkCash(data, callback)
@@ -126,14 +128,15 @@
       },
       checkCash(data, callback) {
         checkCashPwd(data).then(response => {
+          console.log(response)
           if(response.data.data.is_exist) {
             callback();
           } else {
-            this.formValidate.oldCashPwd = "";
+            this.formValidate.oldPassWord = "";
             callback(new Error('原始提现密码输入错误!'));
           }
         }).catch(error => {
-          this.formValidate.oldCashPwd = "";
+          this.formValidate.oldPassWord = "";
           this.$Message.error("原始提现密码验证失败");
           console.log(error)
         });
@@ -142,22 +145,24 @@
         let data = this.formValidate;
         data.user_id = mylocalStorage.getItem("user_id");
         updateCashPwd(data).then(res => {
-          console.log(res, "dss")
+          this.$Message.success('提现密码修改成功!');
         }).catch(err => {
           console.log(err)
+          this.$Message.error('提现密码修改失败!');
         })
       },
       checkLogin(data, callback) {
         checkLoginPwd(data).then(response => {
+          console.log(response, "ddd")
           if(response.data.data.is_exist) {
             callback();
           } else {
-            this.formValidate.oldCashPwd = "";
-            callback(new Error('原始提现密码输入错误!'));
+            this.formValidate.oldPassWord = "";
+            callback(new Error('原始登录密码输入错误!'));
           }
         }).catch(error => {
-          this.formValidate.oldCashPwd = "";
-          this.$Message.error("原始提现密码验证失败");
+          this.formValidate.oldPassWord = "";
+          this.$Message.error("原始登录密码验证失败");
           console.log(error)
         });
       },
@@ -165,11 +170,17 @@
         let data = this.formValidate;
         data.user_id = mylocalStorage.getItem("user_id");
         updateLoginPwd(data).then(res => {
-          console.log(res, "dss")
-          this.$Message.success('修改成功!');
+          this.$Message.success('登录密码修改成功!');
+          mylocalStorage.setItem("user_id", "")
+          mylocalStorage.setItem("session_id", "")
+          mylocalStorage.setItem("username", "")
+          mylocalStorage.setItem("code", "")
+          delCookie("session_id")
+          setTimeout(() => {
+            this.$router.push({path: "/login"})
+          }, 1000)
         }).catch(err => {
-          this.$Message.error('Fail!');
-          console.log(err)
+          this.$Message.error('登录密码修改失败!');
         })
       }
     }
