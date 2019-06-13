@@ -171,6 +171,16 @@ export function updateLoginPwd(data) {
 
 /**
  *
+ * 用户修改提现密码匹配接口
+ *
+ */
+
+export function findNext(data) {
+  return all("get", "/user/find_next?user_id="+ data.user_id)
+}
+
+/**
+ *
  * 用户投资提现单个接口
  *
  */

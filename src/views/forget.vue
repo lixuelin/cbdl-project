@@ -26,10 +26,10 @@
       <div class="admin-main-verify">
         <Form ref="user_pwd" :model="user_pwd" :rules="pwdValidate" :label-width="20">
           <FormItem label=" " prop="password">
-            <Input type="text" v-model="user_pwd.password" placeholder="请设置最新密码"></Input>
+            <Input type="password" v-model="user_pwd.password" placeholder="请设置最新密码"></Input>
           </FormItem>
           <FormItem label=" " prop="passwordCheck">
-            <Input type="text" v-model="user_pwd.passwordCheck" placeholder="请重新输入密码"></Input>
+            <Input type="password" v-model="user_pwd.passwordCheck" placeholder="请重新输入密码"></Input>
           </FormItem>
         </Form>
       </div>

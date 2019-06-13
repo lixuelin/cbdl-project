@@ -107,7 +107,7 @@
           <div class="b-home-main-ma-box">
             <p>QQ</p>
             <div>
-              <img src="./../assets/image/1557665249.png">
+              <img src="./../assets/image/qq.jpg">
             </div>
           </div>
         </div>

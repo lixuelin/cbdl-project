@@ -26,6 +26,7 @@
           <template v-else>
             <Button type="primary" size="default" @click="draw_modal = true">提现</Button>
           </template>
+          <Button size="primary" @click="showNextUser">查看他的下层</Button>
         </div>
       </div>
     </header>
@@ -110,6 +111,36 @@
         </Modal>
       </div>
     </Modal>
+    <Modal v-model="next_user" width="220">
+      <p slot="header">
+        <span>一级下层</span>
+      </p>
+      <div class="bonus-body-next-list">
+        <template v-for="item in first_user_list">
+          <div class="bonus-body-next-list-cont">
+            <span @click="showNextNextUser(item)">{{item.household}}</span>
+          </div>
+        </template>
+      </div>
+      <div slot="footer">
+        <Button type="primary" size="default" long  @click="next_user=false">确定</Button>
+      </div>
+    </Modal>
+    <Modal v-model="next_next_user" width="220">
+      <p slot="header">
+        <span>二级下层</span>
+      </p>
+      <div class="bonus-body-next-list">
+        <template v-for="item in second_user_list">
+          <div class="bonus-body-next-list-cont">
+            <span>{{item.household}}</span>
+          </div>
+        </template>
+      </div>
+      <div slot="footer">
+        <Button type="primary" size="default" long @click="next_next_user=false">确定</Button>
+      </div>
+    </Modal>
     <Modal v-model="show_next" width="220">
       <p slot="header">
         <span>查看{{next_household}}的下层</span>
@@ -146,7 +177,8 @@
     mylocalStorage,
     queryBonusList,
     queryBonusNextList,
-    queryBonusTotal
+    queryBonusTotal,
+    findNext
   } from "../utils/request_api";
   import cut from "./../components/cut"
   import foot from "./../components/foot"
@@ -174,7 +206,11 @@
           invest_list: []
         }],
         next_household: "",
-        next_invest: []
+        next_invest: [],
+        next_user: false,
+        first_user_list: [],
+        next_next_user: false,
+        second_user_list: []
       }
     },
     components: {
@@ -197,7 +233,6 @@
         }
         this.getBonusList(data)
       },
-
       getBonusList(data) {
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
           return
@@ -296,6 +331,39 @@
           this.$Message.error("奖金列表获取失败！")
         })
       },
+      showNextUser() {
+        let data = {
+          user_id: mylocalStorage.getItem("user_id")
+        }
+        findNext(data).then(response => {
+          let data = response.data.data
+          if (data.length === 0) {
+            this.$Message.warning("当前用户没有下级")
+          } else {
+            this.next_user = true
+            this.first_user_list = data
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      showNextNextUser(item) {
+        let data = {
+          user_id: item.lower_id
+        }
+        findNext(data).then(response => {
+          let data = response.data.data
+          if (data.length === 0) {
+            this.$Message.warning("当前用户没有下级")
+          } else {
+            this.next_next_user = true
+            this.second_user_list = data
+          }
+
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
 </script>

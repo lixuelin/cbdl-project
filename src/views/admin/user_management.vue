@@ -68,7 +68,7 @@
                 </Form>
             </div>
             <div slot="footer">
-                <Button type="primary" size="large" long :loading="modal_loading" @click="handleSubmit('formValidate')">确认修改</Button>
+                <Button type="primary" size="large" long @click="handleSubmit('formValidate')">确认修改</Button>
             </div>
         </Modal>
         <Modal v-model="resetCashModal" width="360">
@@ -80,7 +80,7 @@
                 <p>请确定重置吗？</p>
             </div>
             <div slot="footer">
-                <Button type="primary" size="large" long :loading="modal_loading" @click="resetCashPwd">重置</Button>
+                <Button type="primary" size="large" long @click="resetCashPwd">重置</Button>
             </div>
         </Modal>
         <Modal v-model="resetLoginModal" width="360">
@@ -92,7 +92,7 @@
                 <p>请确定重置吗？</p>
             </div>
             <div slot="footer">
-                <Button type="primary" size="large" long :loading="modal_loading" @click="resetLoginPwd">重置</Button>
+                <Button type="primary" size="large" long @click="resetLoginPwd">重置</Button>
             </div>
         </Modal>
     </div>
@@ -346,7 +346,7 @@
 			        console.log(res, "dss")
 			        this.resetCashCurrent = null;
 			        this.resetCashModal = false;
-                    this.$Message.success("提现密码修改成功！")
+                this.$Message.success("提现密码修改成功！")
               this.queryUserList()
 		        }).catch(err => {
 			        console.log(err)
@@ -362,8 +362,8 @@
 		        };
 		        this.modal_loading = true;
 		        updateLoginPwd(data).then(res => {
-			        this.resetCashCurrent = null;
-			        this.resetCashModal = false;
+			        this.resetLoginCurrent = null;
+			        this.resetLoginModal = false;
 			        this.$Message.success("登录密码修改成功！")
               this.queryUserList()
 		        }).catch(err => {
