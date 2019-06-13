@@ -26,7 +26,7 @@
           <template v-else>
             <Button type="primary" size="default" @click="draw_modal = true">提现</Button>
           </template>
-          <Button size="primary" @click="showNextUser">查看他的下层</Button>
+          <Button size="primary" @click="showNextUser">查看团队成员</Button>
         </div>
       </div>
     </header>
@@ -118,7 +118,9 @@
       <div class="bonus-body-next-list">
         <template v-for="item in first_user_list">
           <div class="bonus-body-next-list-cont">
-            <span @click="showNextNextUser(item)">{{item.household}}</span>
+            <span >{{item.household}}</span>
+            <button></button>
+            <Button type="primary" size="small" @click="showNextNextUser(item)">查看下层</Button>
           </div>
         </template>
       </div>
