@@ -55,7 +55,7 @@
               <div class="bonus-body-next-part bonus-body-next-name">
                 <div>
                   <p>{{item.household}}</p>
-                  <p @click="showNext(item)">查看他的下层</p>
+                  <p @click="showNext(item)">团队分享</p>
                 </div>
               </div>
               <div class="bonus-body-next-cont">
@@ -120,7 +120,7 @@
           <div class="bonus-body-next-list-cont">
             <span >{{item.household}}</span>
             <button></button>
-            <Button type="primary" size="small" @click="showNextNextUser(item)">查看下层</Button>
+            <Button type="primary" size="small" @click="showNextNextUser(item)">团队分享</Button>
           </div>
         </template>
       </div>
