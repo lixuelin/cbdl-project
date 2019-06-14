@@ -113,7 +113,7 @@
     </Modal>
     <Modal v-model="next_user" width="220">
       <p slot="header">
-        <span>一级下层</span>
+        <span>我的团队</span>
       </p>
       <div class="bonus-body-next-list">
         <template v-for="item in first_user_list">
@@ -130,7 +130,7 @@
     </Modal>
     <Modal v-model="next_next_user" width="220">
       <p slot="header">
-        <span>二级下层</span>
+        <span>团队分享</span>
       </p>
       <div class="bonus-body-next-list">
         <template v-for="item in second_user_list">
@@ -241,7 +241,6 @@
         }
         queryBonusList(data).then(response => {
           let data = response.data.data.bonus_list;
-          console.log(data, "das")
           if (data.length !== 0) {
             this.next_list = data
           }
@@ -260,8 +259,8 @@
           return
         }
         queryBonusTotal(data).then(response => {
-          console.log(response)
           this.bonus = response.data.data;
+          console.log(this.bonus, "bonus")
         }).catch(error => {
           this.$Message.error("奖金获取失败")
           console.log(error)
