@@ -41,7 +41,7 @@
 						</div>
 						<div class="bonus-body-next-flex">
 							<div class="bonus-body-next-grid">
-								奖金计算金额
+								当前收益金额
 							</div>
 							<div class="bonus-body-next-grid">
 								投资时间
@@ -59,22 +59,16 @@
 									<p @click="showNext(item)">团队分享</p>
 								</div>
 							</div>
-							<div class="bonus-body-next-cont">
-								<template v-for="invest in item.invest_list">
-									<div class="bonus-body-next-cont-flex">
-										<div class="bonus-body-next-grid">
-											<div>
-												<p class="bonus-body-next-grid-num">{{invest.invest_num}}</p>
-											</div>
-										</div>
-										<div class="bonus-body-next-grid">
-											<p>{{invest.create_time}}</p>
-										</div>
-										<div class="bonus-body-next-grid">
-											<p class="bonus-body-next-grid-num">{{invest.income_num}}</p>
-										</div>
-									</div>
-								</template>
+							<div class="bonus-body-next-grid">
+								<div>
+									<p class="bonus-body-next-grid-num">{{item.invest_num}}</p>
+								</div>
+							</div>
+							<div class="bonus-body-next-grid">
+								<p>{{item.create_time}}</p>
+							</div>
+							<div class="bonus-body-next-grid">
+								<p class="bonus-body-next-grid-num">{{item.bonus_num}}</p>
 							</div>
 						</li>
 					</template>
@@ -206,10 +200,7 @@
                 show_next: false,
                 modal_loading: false,
                 cash_pwd: "",
-                next_list: [{
-                    household: "李学麟",
-                    invest_list: []
-                }],
+                next_list: [],
                 next_household: "",
                 next_invest: [],
                 next_user: false,
@@ -249,6 +240,7 @@
                     } else {
                         this.next_list = [];
                     }
+                    console.log(this.next_list, "dd");
                 }).catch(error => {
                     this.$Message.error("奖金列表获取失败！");
                 });
@@ -315,7 +307,7 @@
             },
             showNext(item) {
                 let data = {
-                    user_id: item.id
+                    user_id: item.user_id
                 };
                 this.next_household = item.household;
                 this.show_next = true;
