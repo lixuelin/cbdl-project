@@ -9,9 +9,9 @@
  */
 
 export function setCookie(cname, value, expire) {
-	let date = new Date();
-	date.setSeconds(date.getSeconds() + expire);
-	document.cookie = cname + "=" + escape(value) + "; expires=" + date.toGMTString();
+    let date = new Date();
+    date.setSeconds(date.getSeconds() + expire);
+    document.cookie = cname + "=" + escape(value) + "; expires=" + date.toGMTString();
 }
 
 /**
@@ -19,18 +19,18 @@ export function setCookie(cname, value, expire) {
  */
 
 export function getCookie(cname, value, expire) {
-	if (document.cookie.length > 0) {
-		let cstart = document.cookie.indexOf(cname + "=");
-		if (cstart !== -1) {
-			cstart = cstart + cname.length + 1;
-			let cend = document.cookie.indexOf(";", cstart);
-			if (cend === -1) {
-				cend = document.cookie.length
-			}
-			return document.cookie.substring(cstart, cend);
-		}
-	}
-	return "";
+    if (document.cookie.length > 0) {
+        let cstart = document.cookie.indexOf(cname + "=");
+        if (cstart !== -1) {
+            cstart = cstart + cname.length + 1;
+            let cend = document.cookie.indexOf(";", cstart);
+            if (cend === -1) {
+                cend = document.cookie.length;
+            }
+            return document.cookie.substring(cstart, cend);
+        }
+    }
+    return "";
 }
 
 /**
@@ -38,5 +38,5 @@ export function getCookie(cname, value, expire) {
  */
 
 export function delCookie(cname) {
-	setCookie(cname, "", -1);
+    setCookie(cname, "", -1);
 }

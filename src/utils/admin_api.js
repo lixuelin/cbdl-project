@@ -4,7 +4,7 @@
  *
  */
 
-import {all} from "./../utils/axios"
+import { all } from "./../utils/axios";
 
 export const mylocalStorage = window.localStorage;
 
@@ -15,7 +15,7 @@ export const mylocalStorage = window.localStorage;
  */
 
 export function loginRequest(data) {
-	return all("post", "/admin_login", data)
+    return all("post", "/admin_login", data);
 }
 
 /**
@@ -25,9 +25,9 @@ export function loginRequest(data) {
  */
 
 export function queryUsers(data) {
-	return all("get", "/user/list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&username="+data.username + "&card=" + data.card + "&bank_name=" + data.bank_name
-		+ "&household=" + data.household + "&start_time=" + data.start_time + "&end_time=" + data.end_time)
+    return all("get", "/user/list?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&username=" + data.username + "&card=" + data.card + "&bank_name=" + data.bank_name
+        + "&household=" + data.household + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
 }
 
 /**
@@ -37,7 +37,7 @@ export function queryUsers(data) {
  */
 
 export function queryBanks() {
-	return all("get", "/user/bank_list")
+    return all("get", "/user/bank_list");
 }
 
 
@@ -48,7 +48,7 @@ export function queryBanks() {
  */
 
 export function updateBankInfo(data) {
-	return all("post", "/user/update_bank", data)
+    return all("post", "/user/update_bank", data);
 }
 
 
@@ -59,10 +59,10 @@ export function updateBankInfo(data) {
  */
 
 export function queryInvestList(data) {
-	return all("get", "/invest/admin_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&username="+data.username + "&card=" + data.card + "&bank_name=" + data.bank_name + "&household="
-		+ data.household + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&invest_num="
-		+ data.invest_num + "&cash_status=" + data.cash_status + "&invest_pay=" + data.invest_pay)
+    return all("get", "/invest/admin_list?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&username=" + data.username + "&card=" + data.card + "&bank_name=" + data.bank_name + "&household="
+        + data.household + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&invest_num="
+        + data.invest_num + "&cash_status=" + data.cash_status + "&invest_pay=" + data.invest_pay);
 }
 
 /**
@@ -72,9 +72,8 @@ export function queryInvestList(data) {
  */
 
 export function updateVerify(data) {
-  return all("post", "/invest/verify_num", data)
+    return all("post", "/invest/verify_num", data);
 }
-
 
 
 /**
@@ -84,8 +83,8 @@ export function updateVerify(data) {
  */
 
 export function queryInvestEveryDay(data) {
-	return all("get", "/invest/every_day_invest?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time )
+    return all("get", "/invest/every_day_invest?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
 }
 
 /**
@@ -95,8 +94,8 @@ export function queryInvestEveryDay(data) {
  */
 
 export function queryIncomeEveryDay(data) {
-	return all("get", "/income/every_day_income?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time)
+    return all("get", "/income/every_day_income?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
 }
 
 /**
@@ -106,10 +105,10 @@ export function queryIncomeEveryDay(data) {
  */
 
 export function queryCashList(data) {
-	return all("get", "/cash?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
-		+ "&household=" + data.household + "&cash_num=" + data.cash_num + "&cash_type=" + data.cash_type
-		+ "&cash_pay=" + data.cash_pay)
+    return all("get", "/cash?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
+        + "&household=" + data.household + "&cash_num=" + data.cash_num + "&cash_type=" + data.cash_type
+        + "&cash_pay=" + data.cash_pay);
 }
 
 /**
@@ -119,36 +118,35 @@ export function queryCashList(data) {
  */
 
 export function verify_cash(data) {
-  return all("post", "/cash/verify_cash", data)
+    return all("post", "/cash/verify_cash", data);
 }
-
 
 
 /**
  *
-* 后台获取每天奖金数据接口
-*
-*/
+ * 后台获取每天奖金数据接口
+ *
+ */
 
 export function queryAdminBonusList(data) {
-  return all("get", "/bonus/admin_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-    + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
-    + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
-    + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household)
+    return all("get", "/bonus/admin_list?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
+        + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
+        + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household);
 }
 
 
 /**
-*
-* 后台获取每天奖金数据接口
-*
-*/
+ *
+ * 后台获取每天奖金数据接口
+ *
+ */
 
 export function queryAdminSecondBonusList(data) {
-  return all("get", "/bonus/admin_second_list?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-    + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
-    + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
-    + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household)
+    return all("get", "/bonus/admin_second_list?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&username=" + data.username
+        + "&household=" + data.household + "&lower_username=" + data.lower_username + "&lower_household=" + data.lower_household
+        + "&lower_lower_username=" + data.lower_lower_username + "&lower_lower_household=" + data.lower_lower_household);
 }
 
 
@@ -159,8 +157,8 @@ export function queryAdminSecondBonusList(data) {
  */
 
 export function queryCashEveryDay(data) {
-	return all("get", "/cash/every_day_cash?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&cash_num=" + data.cash_num )
+    return all("get", "/cash/every_day_cash?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&cash_num=" + data.cash_num);
 }
 
 /**
@@ -170,8 +168,8 @@ export function queryCashEveryDay(data) {
  */
 
 export function queryCashEveryDayBonus(data) {
-	return all("get", "/cash/every_day_cash_bonus?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&cash_num=" + data.cash_num )
+    return all("get", "/cash/every_day_cash_bonus?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time + "&cash_num=" + data.cash_num);
 }
 
 
@@ -182,8 +180,8 @@ export function queryCashEveryDayBonus(data) {
  */
 
 export function queryBonusEveryDay(data) {
-	return all("get", "/bonus/every_data_bonus?currentPage="+data.currentPage + "&pageSize="+data.pageSize
-		+ "&start_time=" + data.start_time + "&end_time=" + data.end_time)
+    return all("get", "/bonus/every_data_bonus?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
 }
 
 /**
@@ -193,6 +191,6 @@ export function queryBonusEveryDay(data) {
  */
 
 export function downloadEveryExecl() {
-	return all("get", "/invest/download_invest")
+    return all("get", "/invest/download_invest");
 }
 

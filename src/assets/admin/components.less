@@ -3,9 +3,11 @@
 .paddingCont(@spaceCont: 0 15px) {
     padding: @spaceCont;
 }
+
 .marginCont(@spaceCont: 0 15px) {
     margin: @spaceCont;
 }
+
 .border_radius (@radius: 5px) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
@@ -53,6 +55,7 @@
     &-flow {
         &-table {
             display: flex;
+
             &-box {
                 flex: 1;
                 padding-right: 15px;
@@ -62,6 +65,7 @@
                 }
             }
         }
+
         &-page {
             display: flex;
             .paddingCont(15px);
@@ -70,21 +74,23 @@
     }
 
     &-verify {
-      .paddingCont(20px 15px);
-      & input {
-        height: 36px;
-        border: 1px solid #f0f2f5;
-        .border_radius();
-      }
-      &-line {
-        display: flex;
-        .paddingCont(10px 0);
-        line-height: 36px;
-        font-size: 14px;
+        .paddingCont(20px 15px);
 
-        & label {
-          flex-basis: 120px;
+        & input {
+            height: 36px;
+            border: 1px solid #f0f2f5;
+            .border_radius();
         }
-      }
+
+        &-line {
+            display: flex;
+            .paddingCont(10px 0);
+            line-height: 36px;
+            font-size: 14px;
+
+            & label {
+                flex-basis: 120px;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@
 .paddingCont(@spaceCont: 0 15px) {
     padding: @spaceCont;
 }
+
 .marginCont(@spaceCont: 0 15px) {
     margin: @spaceCont;
 }
@@ -126,6 +127,7 @@
 
             &-source {
                 line-height: 200%;
+
                 & p:first-child {
                     color: #5c92ff;
                 }
@@ -157,6 +159,7 @@
     & ul {
         .marginCont();
     }
+
     & li {
         display: flex;
         line-height: 42px;
@@ -173,6 +176,7 @@
         & span {
             padding-right: 5px;
         }
+
         //.paddingCont();
     }
 }
@@ -194,6 +198,7 @@
     &-title {
         display: flex;
         .paddingCont(15px 0 5px);
+
         & h4 {
             flex: 1;
             .paddingCont(0 0 0 5px);
@@ -269,7 +274,7 @@
         .shadow_box();
     }
 
-    &-head{
+    &-head {
         display: flex;
 
         &-time {
@@ -325,7 +330,7 @@
                 & p {
                     flex: 1;
 
-                    &:last-child{
+                    &:last-child {
                         display: flex;
                         justify-content: flex-end;
                     }
@@ -339,6 +344,7 @@
 
             &-password {
                 padding-top: 15px;
+
                 & ul {
                     display: flex;
                 }
@@ -376,10 +382,11 @@
             flex: 1;
         }
 
-        &-right p{
+        &-right p {
             text-align: right;
         }
     }
+
     &-version {
         text-align: center;
     }

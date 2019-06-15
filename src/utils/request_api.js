@@ -5,9 +5,9 @@
  */
 
 
-import {all} from "./axios"
+import { all } from "./axios";
 
-export const mylocalStorage = window.localStorage
+export const mylocalStorage = window.localStorage;
 
 /**
  * 用户注册接口
@@ -15,7 +15,7 @@ export const mylocalStorage = window.localStorage
  */
 
 export function registerRequest(data) {
-	return all("post", "/register", data)
+    return all("post", "/register", data);
 }
 
 
@@ -25,7 +25,7 @@ export function registerRequest(data) {
  */
 
 export function registerRequestUserName(data) {
-	return all("get", "/register?username=" + data.username)
+    return all("get", "/register?username=" + data.username);
 }
 
 /**
@@ -34,7 +34,7 @@ export function registerRequestUserName(data) {
  */
 
 export function queryBank(data) {
-	return all("get", "/user/bank?user_id=" + data.user_id)
+    return all("get", "/user/bank?user_id=" + data.user_id);
 }
 
 /**
@@ -43,7 +43,7 @@ export function queryBank(data) {
  */
 
 export function loginRequest(data) {
-	return all("post", "/login", data)
+    return all("post", "/login", data);
 }
 
 
@@ -54,7 +54,7 @@ export function loginRequest(data) {
  */
 
 export function userInvest(data) {
-	return all("post", "/invest", data)
+    return all("post", "/invest", data);
 }
 
 /**
@@ -64,7 +64,7 @@ export function userInvest(data) {
  */
 
 export function queryInvestTotal(data) {
-	return all("get", "/invest/total?user_id=" + data.user_id)
+    return all("get", "/invest/total?user_id=" + data.user_id);
 }
 
 /**
@@ -74,7 +74,7 @@ export function queryInvestTotal(data) {
  */
 
 export function queryIncomeTotal(data) {
-	return all("get", "/income/total?user_id=" + data.user_id)
+    return all("get", "/income/total?user_id=" + data.user_id);
 }
 
 /**
@@ -84,7 +84,7 @@ export function queryIncomeTotal(data) {
  */
 
 export function queryInvestList(data) {
-	return all("get", "/invest/list?user_id=" + data.user_id)
+    return all("get", "/invest/list?user_id=" + data.user_id);
 }
 
 /**
@@ -94,7 +94,7 @@ export function queryInvestList(data) {
  */
 
 export function queryBonusTotal(data) {
-	return all("get", "/bonus/total?user_id=" + data.user_id)
+    return all("get", "/bonus/total?user_id=" + data.user_id);
 }
 
 
@@ -105,7 +105,7 @@ export function queryBonusTotal(data) {
  */
 
 export function queryBonusList(data) {
-	return all("get", "/bonus/list?user_id=" + data.user_id)
+    return all("get", "/bonus/list?user_id=" + data.user_id);
 }
 
 
@@ -116,7 +116,7 @@ export function queryBonusList(data) {
  */
 
 export function queryBonusNextList(data) {
-	return all("get", "/bonus/next_list?user_id=" + data.user_id)
+    return all("get", "/bonus/next_list?user_id=" + data.user_id);
 }
 
 /**
@@ -126,7 +126,7 @@ export function queryBonusNextList(data) {
  */
 
 export function checkCashPwd(data) {
-	return all("post", "/user/cash_pwd", data)
+    return all("post", "/user/cash_pwd", data);
 }
 
 /**
@@ -136,7 +136,7 @@ export function checkCashPwd(data) {
  */
 
 export function checkLoginPwd(data) {
-	return all("post", "/user/login_pwd", data)
+    return all("post", "/user/login_pwd", data);
 }
 
 /**
@@ -146,7 +146,7 @@ export function checkLoginPwd(data) {
  */
 
 export function queryUserMsg(data) {
-  return all("post", "/user/find_user", data)
+    return all("post", "/user/find_user", data);
 }
 
 /**
@@ -156,7 +156,7 @@ export function queryUserMsg(data) {
  */
 
 export function updateCashPwd(data) {
-	return all("post", "/user/update_cash_pwd", data)
+    return all("post", "/user/update_cash_pwd", data);
 }
 
 /**
@@ -166,7 +166,7 @@ export function updateCashPwd(data) {
  */
 
 export function updateLoginPwd(data) {
-	return all("post", "/user/update_login_pwd", data)
+    return all("post", "/user/update_login_pwd", data);
 }
 
 /**
@@ -176,7 +176,7 @@ export function updateLoginPwd(data) {
  */
 
 export function findNext(data) {
-  return all("get", "/user/find_next?user_id="+ data.user_id)
+    return all("get", "/user/find_next?user_id=" + data.user_id);
 }
 
 /**
@@ -186,7 +186,7 @@ export function findNext(data) {
  */
 
 export function IncomeCashOne(data) {
-	return all("post", "/income/cash_one", data)
+    return all("post", "/income/cash_one", data);
 }
 
 /**
@@ -196,7 +196,7 @@ export function IncomeCashOne(data) {
  */
 
 export function IncomeCashAll(data) {
-	return all("post", "/income/cash_all", data)
+    return all("post", "/income/cash_all", data);
 }
 
 /**
@@ -206,5 +206,5 @@ export function IncomeCashAll(data) {
  */
 
 export function bonusCashMoney(data) {
-	return all("post", "/bonus/cash", data)
+    return all("post", "/bonus/cash", data);
 }

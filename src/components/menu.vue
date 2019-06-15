@@ -1,29 +1,29 @@
 <template>
-    <div class="admin-menu">
-        <Menu :theme="theme2" :accordion="true">
-            <template v-for="(item, index) in menu">
-                <Submenu :name="index">
-                    <template slot="title">
-                        <Icon type="ios-paper" />
-                        <span>{{item.title}}</span>
-                    </template>
-                    <template v-for="(child, i) in item.child">
-                        <MenuItem :name="index+ '-'+ i" :to="child.path">
-                            <span>{{child.name}}</span>
-                        </MenuItem>
-                    </template>
-                </Submenu>
-            </template>
-        </Menu>
-    </div>
+	<div class="admin-menu">
+		<Menu :theme="theme2" :accordion="true">
+			<template v-for="(item, index) in menu">
+				<Submenu :name="index">
+					<template slot="title">
+						<Icon type="ios-paper"/>
+						<span>{{item.title}}</span>
+					</template>
+					<template v-for="(child, i) in item.child">
+						<MenuItem :name="index+ '-'+ i" :to="child.path">
+							<span>{{child.name}}</span>
+						</MenuItem>
+					</template>
+				</Submenu>
+			</template>
+		</Menu>
+	</div>
 </template>
 
 <script>
     export default {
         name: "admin-menu",
-        data () {
+        data() {
             return {
-                theme2: 'light',
+                theme2: "light",
                 menu: [
                     {
                         title: "投资管理",
@@ -46,8 +46,8 @@
                                 path: "/admin/bonus_flow"
                             },
                             {
-                              name: "奖金第二层流水",
-                              path: "/admin/bonus_second_flow"
+                                name: "奖金第二层流水",
+                                path: "/admin/bonus_second_flow"
                             },
                             {
                                 name: "奖金汇总",
@@ -74,7 +74,7 @@
                             {
                                 name: "用户管理",
                                 path: "/admin/user_management"
-                            },
+                            }
                             // {
                             //     name: "角色管理",
                             //     path: "/pages/user_management"
@@ -82,16 +82,16 @@
                         ]
                     }
                 ]
-            }
+            };
         },
         methods: {
-            goto (child) {
-                console.log(child)
+            goto(child) {
+                console.log(child);
             }
         }
-    }
+    };
 </script>
 
 <style lang="less" scoped>
-    @import "./../assets/admin/home";
+	@import "./../assets/admin/home";
 </style>
