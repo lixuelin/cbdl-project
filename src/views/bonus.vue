@@ -31,7 +31,7 @@
       </div>
     </header>
     <div class="bonus-body">
-      <h3>我的团队分享</h3>
+      <h3>我的团队</h3>
       <div class="bonus-body-next">
         <ul>
           <li>
@@ -145,7 +145,7 @@
     </Modal>
     <Modal v-model="show_next" width="220">
       <p slot="header">
-        <span>查看{{next_household}}的下层</span>
+        <span>查看{{next_household}}的团队</span>
       </p>
       <div class="bonus-body-next-list">
         <div class="bonus-body-next-list-cont">
@@ -339,7 +339,7 @@
         findNext(data).then(response => {
           let data = response.data.data
           if (data.length === 0) {
-            this.$Message.warning("当前用户没有下级")
+            this.$Message.warning("当前用户没有团队")
           } else {
             this.next_user = true
             this.first_user_list = data
@@ -355,7 +355,7 @@
         findNext(data).then(response => {
           let data = response.data.data
           if (data.length === 0) {
-            this.$Message.warning("当前用户没有下级")
+            this.$Message.warning("当前用户没有团队")
           } else {
             this.next_next_user = true
             this.second_user_list = data
