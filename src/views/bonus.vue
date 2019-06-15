@@ -2,12 +2,13 @@
   <div class="bonus">
     <header class="bonus-head">
       <div class="bonus-head-img">
-        <img src="./../assets/image/bonus_bg.png" alt="">
+	      <img alt="" src="./../assets/image/bonus_bg.png">
       </div>
       <div class="bonus-head-total">
         <p>总奖金</p>
         <div class="bonus-head-total-cont">
-          <countTo :startVal='total.startVal' :endVal='bonus.total' :duration='total.speed' :decimals="total.float"></countTo>
+	        <countTo :decimals="total.float" :duration='total.speed' :endVal='bonus.total'
+	                 :startVal='total.startVal'></countTo>
         </div>
         <div class="bonus-head-total-other">
           <div>
@@ -21,12 +22,12 @@
         </div>
         <div class="bonus-head-total-handler">
           <template v-if="bonus.total < 100">
-            <Button size="default" disabled="">不足100元不可提现</Button>
+	          <Button disabled="" size="default">不足100元不可提现</Button>
           </template>
           <template v-else>
-            <Button type="primary" size="default" @click="draw_modal = true">提现</Button>
+	          <Button @click="draw_modal = true" size="default" type="primary">提现</Button>
           </template>
-          <Button size="primary" @click="showNextUser">查看团队成员</Button>
+	        <Button @click="showNextUser" size="primary">查看团队成员</Button>
         </div>
       </div>
     </header>
@@ -59,21 +60,21 @@
                 </div>
               </div>
               <div class="bonus-body-next-cont">
-                  <template v-for="invest in item.invest_list">
-                      <div class="bonus-body-next-cont-flex">
-                        <div class="bonus-body-next-grid">
-                          <div>
-                            <p class="bonus-body-next-grid-num">{{invest.invest_num}}</p>
-                          </div>
-                        </div>
-                        <div class="bonus-body-next-grid">
-                          <p>{{invest.create_time}}</p>
-                        </div>
-                        <div class="bonus-body-next-grid">
-                          <p class="bonus-body-next-grid-num">{{invest.income_num}}</p>
-                        </div>
-                    </div>
-                  </template>
+	              <template v-for="invest in item.invest_list">
+		              <div class="bonus-body-next-cont-flex">
+			              <div class="bonus-body-next-grid">
+				              <div>
+					              <p class="bonus-body-next-grid-num">{{invest.invest_num}}</p>
+				              </div>
+			              </div>
+			              <div class="bonus-body-next-grid">
+				              <p>{{invest.create_time}}</p>
+			              </div>
+			              <div class="bonus-body-next-grid">
+				              <p class="bonus-body-next-grid-num">{{invest.income_num}}</p>
+			              </div>
+		              </div>
+	              </template>
               </div>
             </li>
           </template>
@@ -94,7 +95,7 @@
         <p class="bonus-head-total-handler-tips">资金返回至投资时使用的微信或支付宝零钱内</p>
       </div>
       <div slot="footer">
-        <Button type="success" size="default" long @click="draw_modal_sure = true">确定</Button>
+	      <Button @click="draw_modal_sure = true" long size="default" type="success">确定</Button>
         <Modal v-model="draw_modal_sure" width="220">
           <p slot="header">
             <span>提现</span>
@@ -102,11 +103,11 @@
           <div>
             <p>请输入提现密码：</p>
             <div class="bonus-head-total-handler-password">
-              <i-input v-model="cash_pwd" type="password" placeholder="请输入提现密码" style="width: 220px"></i-input>
+	            <i-input placeholder="请输入提现密码" style="width: 220px" type="password" v-model="cash_pwd"></i-input>
             </div>
           </div>
           <div slot="footer">
-            <Button type="success" size="default" long :loading="modal_loading" @click="cashBonusSure">确定</Button>
+	          <Button :loading="modal_loading" @click="cashBonusSure" long size="default" type="success">确定</Button>
           </div>
         </Modal>
       </div>
@@ -118,14 +119,14 @@
       <div class="bonus-body-next-list">
         <template v-for="item in first_user_list">
           <div class="bonus-body-next-list-cont">
-            <span >{{item.household}}</span>
+	          <span>{{item.household}}</span>
             <button></button>
-            <Button type="primary" size="small" @click="showNextNextUser(item)">团队分享</Button>
+	          <Button @click="showNextNextUser(item)" size="small" type="primary">团队分享</Button>
           </div>
         </template>
       </div>
       <div slot="footer">
-        <Button type="primary" size="default" long  @click="next_user=false">确定</Button>
+	      <Button @click="next_user=false" long size="default" type="primary">确定</Button>
       </div>
     </Modal>
     <Modal v-model="next_next_user" width="220">
@@ -140,7 +141,7 @@
         </template>
       </div>
       <div slot="footer">
-        <Button type="primary" size="default" long @click="next_next_user=false">确定</Button>
+	      <Button @click="next_next_user=false" long size="default" type="primary">确定</Button>
       </div>
     </Modal>
     <Modal v-model="show_next" width="220">
@@ -164,15 +165,15 @@
         </template>
       </div>
       <div slot="footer">
-        <Button type="primary" size="default" long :loading="modal_loading" @click="show_next=false">确定</Button>
+	      <Button :loading="modal_loading" @click="show_next=false" long size="default" type="primary">确定</Button>
       </div>
     </Modal>
   </div>
 </template>
 
 <script>
-  import countTo from 'vue-count-to';
-  import {uniqBy} from "lodash"
+  import countTo from "vue-count-to";
+  import { uniqBy } from "lodash";
   import {
     bonusCashMoney,
     checkCashPwd,
@@ -182,12 +183,12 @@
     queryBonusTotal,
     findNext
   } from "../utils/request_api";
-  import cut from "./../components/cut"
-  import foot from "./../components/foot"
-
+  import cut from "./../components/cut";
+  import foot from "./../components/foot";
+  
   export default {
     name: "bonus",
-    data () {
+    data() {
       return {
         bonus: {
           total: 0
@@ -213,70 +214,69 @@
         first_user_list: [],
         next_next_user: false,
         second_user_list: []
-      }
+      };
     },
     components: {
       "hr-view": cut,
       countTo,
       foot
     },
-    mounted () {
-      this.bonusTotal()
-      this.getList()
+    mounted() {
+      this.bonusTotal();
+      this.getList();
     },
     methods: {
-      getList () {
-        let user_id = mylocalStorage.getItem("user_id")
-        let data ={
+      getList() {
+        let user_id = mylocalStorage.getItem("user_id");
+        let data = {
           user_id
         };
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
-        this.getBonusList(data)
+        this.getBonusList(data);
       },
       getBonusList(data) {
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
         queryBonusList(data).then(response => {
           let data = response.data.data.bonus_list;
           if (data.length !== 0) {
-            this.next_list = data
-          }
-          else {
-            this.next_list = []
+            this.next_list = data;
+          } else {
+            this.next_list = [];
           }
         }).catch(error => {
-          this.$Message.error("奖金列表获取失败！")
-        })
+          this.$Message.error("奖金列表获取失败！");
+        });
       },
       bonusTotal() {
-        let data ={
+        let data = {
           user_id: mylocalStorage.getItem("user_id")
-        }
+        };
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
         queryBonusTotal(data).then(response => {
           this.bonus = response.data.data;
-          console.log(this.bonus, "bonus")
+          console.log(this.bonus, "bonus");
         }).catch(error => {
-          this.$Message.error("奖金获取失败")
-          console.log(error)
+          this.$Message.error("奖金获取失败");
+          console.log(error);
         });
       },
-      cashBonusSure () {
+      cashBonusSure() {
         this.modal_loading = true;
-        let user_id = mylocalStorage.getItem("user_id")
+        let user_id = mylocalStorage.getItem("user_id");
         if (this.cash_pwd === "") {
-          return this.$Message.error("密码不能为空！")
+          return this.$Message.error("密码不能为空！");
         }
-
+    
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
-
+    
         let data = {
           user_id,
           cash_pwd: this.cash_pwd
@@ -286,21 +286,21 @@
           if (is_exist) {
             this.cashBonus(user_id);
           } else {
-            this.$Message.error("密码错误！")
+            this.$Message.error("密码错误！");
           }
         }).catch(error => {
-          console.log(error)
+          console.log(error);
         });
       },
       cashBonus(user_id) {
-        let data ={
+        let data = {
           user_id
         };
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
         bonusCashMoney(data).then(response => {
-          console.log(response)
+          console.log(response);
           this.modal_loading = false;
           this.draw_modal = false;
           this.draw_modal_sure = false;
@@ -308,65 +308,64 @@
           this.$Message.success("提现成功！");
         }).catch(error => {
           this.$Message.error("提现失败！");
-          console.log(error)
-        })
+          console.log(error);
+        });
       },
       showNext(item) {
         let data = {
           user_id: item.id
-        }
+        };
         this.next_household = item.household;
         this.show_next = true;
         if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-          return
+          return;
         }
         queryBonusNextList(data).then(response => {
           let data = response.data.data.list;
           if (data.length !== 0) {
-            this.next_invest = data
-          }
-          else {
-            this.next_invest = []
+            this.next_invest = data;
+          } else {
+            this.next_invest = [];
           }
         }).catch(error => {
-          this.$Message.error("奖金列表获取失败！")
-        })
+          this.$Message.error("奖金列表获取失败！");
+        });
       },
       showNextUser() {
         let data = {
           user_id: mylocalStorage.getItem("user_id")
-        }
+        };
         findNext(data).then(response => {
-          let data = response.data.data
+          let data = response.data.data;
           if (data.length === 0) {
-            this.$Message.warning("当前用户没有团队")
+            this.$Message.warning("当前用户没有团队");
           } else {
-            this.next_user = true
-            this.first_user_list = data
+            this.next_user = true;
+            this.first_user_list = data;
           }
         }).catch(error => {
-          console.log(error)
-        })
+          console.log(error);
+        });
       },
       showNextNextUser(item) {
         let data = {
           user_id: item.lower_id
-        }
+        };
         findNext(data).then(response => {
-          let data = response.data.data
+          let data = response.data.data;
           if (data.length === 0) {
-            this.$Message.warning("当前用户没有团队")
+            this.$Message.warning("当前用户没有团队");
           } else {
-            this.next_next_user = true
-            this.second_user_list = data
+            this.next_next_user = true;
+            this.second_user_list = data;
           }
-
+  
         }).catch(error => {
-          console.log(error)
-        })
+          console.log(error);
+        });
       }
     }
-  }
+  };
 </script>
 
 <style lang="less" scoped>
