@@ -171,7 +171,7 @@
                     }
                     this.team_share.pageInfo.userTotal = response.data.data.total;
                 }).catch(error => {
-                    this.$Message.error("获取每日团队奖金失败");
+                    this.$Message.error("获取每日团队分享奖金失败");
                 });
             },
             search_bonus() {
