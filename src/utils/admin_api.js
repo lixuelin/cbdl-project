@@ -175,12 +175,24 @@ export function queryCashEveryDayBonus(data) {
 
 /**
  *
- * 后台获取每天投资数据接口
+ * 后台获取每天奖金数据接口
  *
  */
 
 export function queryBonusEveryDay(data) {
     return all("get", "/bonus/every_data_bonus?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
+        + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
+}
+
+
+/**
+ *
+ * 后台获取每天奖金数据接口
+ *
+ */
+
+export function queryNextBonusEveryDay(data) {
+    return all("get", "/bonus/every_data_next_bonus?currentPage=" + data.currentPage + "&pageSize=" + data.pageSize
         + "&start_time=" + data.start_time + "&end_time=" + data.end_time);
 }
 
