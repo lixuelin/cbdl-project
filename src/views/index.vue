@@ -234,6 +234,7 @@
                 mylocalStorage.setItem("session_id", "");
                 mylocalStorage.setItem("username", "");
                 mylocalStorage.setItem("code", "");
+                mylocalStorage.setItem("type", "");
                 delCookie("session_id");
                 this.reload();
                 this.$router.push({ path: "/", query: { timestamp: new Date().getTime() } });

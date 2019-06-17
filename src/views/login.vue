@@ -75,9 +75,6 @@
                 loginRequest(data).then(res => {
                     let data = res.data;
                     if (data.status === 200) {
-                        console.log(data, "ddd");
-                        
-                        console.log(data.data["role_id"]);
                         if (data.data["role_id"] === 3) {
                             mylocalStorage["username"] = data.data["username"];
                             mylocalStorage["user_id"] = data.data["user_id"];

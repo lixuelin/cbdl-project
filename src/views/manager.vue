@@ -56,7 +56,7 @@
                         mylocalStorage["username"] = data.data["username"];
                         mylocalStorage["user_id"] = data.data["user_id"];
                         mylocalStorage["session_id"] = data.data["token"];
-                        mylocalStorage["type"] = "admin";
+                        mylocalStorage["type"] = "manager";
                         setCookie("session_id", data.data["token"]);
                         this.$Message.success("登录成功!");
                         this.$router.push({ "path": "/admin" });
