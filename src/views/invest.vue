@@ -216,20 +216,17 @@
                 
                 this.modal_loading = true;
                 userInvest(data).then(response => {
+                    console.log(response, "dd");
                     let code = response.status;
+                    console.log(code, "code ");
                     this.modal_loading = false;
                     if (code === 200) {
-                        if (this.checked_pay.index !== 0) {
-                            this.modal_common("投资成功，10分钟内未到账请联系客服!");
-                        } else {
-                            this.invest_show_way = false;
-                        }
+                        console.log(this.checked_pay.index, "index");
+                        this.modal_common("投资成功，10分钟内未到账请联系客服!");
+                        this.invest_show_way = false;
                     } else {
-                        if (this.checked_pay.index !== 0) {
-                            this.modal_common("抱歉投资失败！");
-                        } else {
-                            this.invest_show_way = false;
-                        }
+                        this.modal_common("抱歉投资失败！");
+                        this.invest_show_way = false;
                     }
                 }).catch(error => {
                     this.modal_common("请求失败！");
@@ -241,18 +238,11 @@
                 this.modal2 = true;
                 this.modal_loading = true;
                 this.invest_msg = msg;
-                setTimeout(() => {
-                    this.modal_loading = false;
-                    this.modal2 = false;
-                    // this.$Message.success(this.invest_msg);
-                }, 2000);
             },
             del() {
-                // this.modal_loading = true;
                 setTimeout(() => {
-                    // this.modal_loading = false;
                     this.modal2 = false;
-                }, 2000);
+                }, 500);
             }
         }
     };

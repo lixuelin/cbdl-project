@@ -119,6 +119,7 @@
                 invest_list: [],
                 cash_pwd: "",
                 income_total: 0,
+                invest_num: 0,
                 loading: false
             };
         },
@@ -184,6 +185,7 @@
                 console.log(invest);
                 let data = {};
                 if (invest.income_status === 0) {
+                    this.invest_num = invest.invest_num;
                     data.total = Number(invest.invest_num) + Number(invest.income_num);
                     data.brokerage = Number(invest.invest_num) * 0.01;
                     data.cash = Number(invest.invest_num) - (Number(invest.invest_num) * 0.01);
@@ -241,7 +243,11 @@
             },
             cashAllInvest(user_id) {
                 let data = {
-                    user_id: user_id
+                    user_id: Number(user_id),
+                    cash_num: Number(this.cash_info.cash).toFixed(1),
+                    brokerage: Number(this.cash_info.brokerage).toFixed(1),
+                    income_num: Number(this.income_total).toFixed(1),
+                    invest_num: this.invest_num
                 };
                 IncomeCashAll(data).then(response => {
                     let cash_status = response.data.data.success;

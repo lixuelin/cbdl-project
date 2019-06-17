@@ -44,7 +44,7 @@
 								收益金额
 							</div>
 							<div class="bonus-body-next-grid">
-								投资时间
+								更新时间
 							</div>
 							<div class="bonus-body-next-grid">
 								我的奖金
@@ -148,7 +148,7 @@
 				<div class="bonus-body-next-list-cont">
 					<span>用户账号</span>
 					<span>收益金额</span>
-					<span>投资时间</span>
+					<span>更新时间</span>
 					<span>我的奖金</span>
 				</div>
 				<template v-for="item in next_invest">
