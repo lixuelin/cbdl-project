@@ -220,7 +220,7 @@
                     this.modal_loading = false;
                     if (code === 200) {
                         if (this.checked_pay.index !== 0) {
-                            this.modal_common("恭喜您，投资成功！");
+                            this.modal_common("投资成功，10分钟内未到账请联系客服!");
                         } else {
                             this.invest_show_way = false;
                         }

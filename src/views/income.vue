@@ -257,6 +257,7 @@
                         let msg = {
                             is_update: true
                         };
+                        this.$Message.success("提现成功，2小时内未到账请联系客服!");
                         this.queryList();
                         this.queryTotal();
                     }

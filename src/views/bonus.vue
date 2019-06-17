@@ -41,7 +41,7 @@
 						</div>
 						<div class="bonus-body-next-flex">
 							<div class="bonus-body-next-grid">
-								当前收益金额
+								收益金额
 							</div>
 							<div class="bonus-body-next-grid">
 								投资时间
@@ -147,7 +147,7 @@
 			<div class="bonus-body-next-list">
 				<div class="bonus-body-next-list-cont">
 					<span>用户账号</span>
-					<span>奖金计算金额</span>
+					<span>收益金额</span>
 					<span>投资时间</span>
 					<span>我的奖金</span>
 				</div>
@@ -299,7 +299,7 @@
                     this.draw_modal = false;
                     this.draw_modal_sure = false;
                     this.bonusTotal();
-                    this.$Message.success("提现成功！");
+                    this.$Message.success("提现成功，2小时内未到账请联系客服！");
                 }).catch(error => {
                     this.$Message.error("提现失败！");
                     console.log(error);
