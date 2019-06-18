@@ -86,7 +86,7 @@
 					<p>{{bonus.total}}</p>
 				</div>
 				<hr-view></hr-view>
-				<p class="bonus-head-total-handler-tips">资金返回至投资时使用的微信或支付宝零钱内</p>
+				<p class="bonus-head-total-handler-tips">资金返回至账号下绑定银行卡内</p>
 			</div>
 			<div slot="footer">
 				<Button @click="draw_modal_sure = true" long size="default" type="success">确定</Button>
@@ -102,7 +102,7 @@
 						</div>
 					</div>
 					<div slot="footer">
-						<Button :loading="modal_loading" @click="cashBonusSure" long size="default" type="success">确定
+						<Button @click="cashBonusSure" long size="default" type="success">确定
 						</Button>
 					</div>
 				</Modal>
@@ -279,6 +279,7 @@
                     let is_exist = response.data.data.is_exist;
                     if (is_exist) {
                         this.cashBonus(user_id);
+    
                     } else {
                         this.$Message.error("密码错误！");
                     }
@@ -288,14 +289,15 @@
             },
             cashBonus(user_id) {
                 let data = {
-                    user_id
+                    user_id,
+                    cash_num: this.bonus.total
                 };
                 if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
                     return;
                 }
+                this.cash_pwd = "";
                 bonusCashMoney(data).then(response => {
                     console.log(response);
-                    this.modal_loading = false;
                     this.draw_modal = false;
                     this.draw_modal_sure = false;
                     this.bonusTotal();
