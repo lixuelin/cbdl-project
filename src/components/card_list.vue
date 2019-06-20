@@ -69,7 +69,7 @@
 				</div>
 			</div>
 			<div slot="footer">
-				<Button type="success" size="default" long :loading="loading" @click="cashSure">确定</Button>
+				<Button type="success" size="default" long @click="cashSure">确定</Button>
 			</div>
 		</Modal>
 		<Modal v-model="cash_success" width="220">

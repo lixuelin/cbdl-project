@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<div slot="footer">
-				<i-button type="primary" long :loading="loading" @click="cashAllSure">
+				<i-button type="primary" long @click="cashAllSure">
 					<span>确定</span>
 				</i-button>
 			</div>

@@ -42,7 +42,7 @@
 
 <script>
     import BIN from "bankcardinfo";
-    import { registerRequest, registerRequestUserName } from "./../utils/request_api";
+    import { registerRequest, registerRequestUserName, registeInviteCode } from "./../utils/request_api";
     
     export default {
         name: "register",
@@ -138,6 +138,12 @@
                     callback();
                 }
             };
+    
+            const validateInviteCode = (rule, value, callback) => {
+                if (value !== "") {
+                    this.getInviteCode(value, callback);
+                }
+            };
             
             return {
                 formValidate: {
@@ -192,7 +198,8 @@
                         { validator: validateCashPwdCheck, trigger: "blur" }
                     ],
                     beInviteCode: [
-                        { required: false, type: "string" }
+                        { required: false, type: "string" },
+                        { validator: validateInviteCode, trigger: "blur" }
                     ]
                 }
             };
@@ -218,6 +225,21 @@
                 }).catch(err => {
                     console.log(err);
                     this.$Message.error("注册失败!");
+                });
+            },
+            getInviteCode(value, callback) {
+                let data = {
+                    code: value
+                };
+                registeInviteCode(data).then(response => {
+                    let is_exist = response.data.is_exist;
+                    if (!is_exist) {
+                        callback(new Error("邀请码不存在请重新输入！"));
+                    } else {
+                        callback();
+                    }
+                }).catch(error => {
+                    this.$Message.error("验证码请求失败！");
                 });
             }
         }

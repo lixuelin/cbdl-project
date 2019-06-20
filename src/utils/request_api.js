@@ -29,6 +29,15 @@ export function registerRequestUserName(data) {
 }
 
 /**
+ * 用户注册之用户名称唯一验证接口
+ *
+ */
+
+export function registeInviteCode(data) {
+    return all("get", "/register/invite?code=" + data.code);
+}
+
+/**
  * 用户银行接口
  *
  */
