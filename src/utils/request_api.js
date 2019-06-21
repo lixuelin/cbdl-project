@@ -38,6 +38,15 @@ export function registeInviteCode(data) {
 }
 
 /**
+ * 用户注册之用户名称唯一验证接口
+ *
+ */
+
+export function registeBankCard(data) {
+    return all("get", "/register/card?card=" + data.card);
+}
+
+/**
  * 用户银行接口
  *
  */

@@ -84,7 +84,6 @@
 				<!--</div>-->
 			</div>
 			<div class="b-home-main-menu">
-				<menu-view :menu="menu" :isLogin="is_login"></menu-view>
 				<div class="b-home-main-menu-help">
 					<ul>
 						<li @click="gotoHelp">
@@ -95,6 +94,7 @@
 						</li>
 					</ul>
 				</div>
+				<menu-view :menu="menu" :isLogin="is_login"></menu-view>
 			</div>
 			<Modal v-model="modal2" width="220">
 				<p slot="header">

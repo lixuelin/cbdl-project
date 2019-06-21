@@ -42,7 +42,12 @@
 
 <script>
     import BIN from "bankcardinfo";
-    import { registerRequest, registerRequestUserName, registeInviteCode } from "./../utils/request_api";
+    import {
+        registerRequest,
+        registerRequestUserName,
+        registeInviteCode,
+        registeBankCard
+    } from "./../utils/request_api";
     
     export default {
         name: "register",
@@ -89,13 +94,13 @@
             };
             const validateCard = (rule, value, callback) => {
                 if (this.formValidate.card !== "") {
+                    console.log(value, "dddd");
                     BIN.getBankBin(this.formValidate.card)
                         .then((data) => {
-                            console.log(data, "bank");
                             this.formValidate.bank_name = data.bankName;
                             this.formValidate.bank_code = data.bankCode;
                             this.formValidate.card_type = data.cardTypeName;
-                            callback();
+                            this.getBankCard(value, callback);
                         })
                         .catch((err) => {
                             callback(new Error("银行卡号输入错误，请重新输入！"));
@@ -232,7 +237,8 @@
                     code: value
                 };
                 registeInviteCode(data).then(response => {
-                    let is_exist = response.data.is_exist;
+                    console.log(response.data.data, "ddds");
+                    let is_exist = response.data.data.is_exist;
                     if (!is_exist) {
                         callback(new Error("邀请码不存在请重新输入！"));
                     } else {
@@ -240,6 +246,21 @@
                     }
                 }).catch(error => {
                     this.$Message.error("验证码请求失败！");
+                });
+            },
+            getBankCard(value, callback) {
+                let data = {
+                    card: value
+                };
+                registeBankCard(data).then(response => {
+                    let is_exist = response.data.data.is_exist;
+                    if (is_exist) {
+                        callback(new Error("银行卡已经被使用，请重新输入！"));
+                    } else {
+                        callback();
+                    }
+                }).catch(error => {
+                    this.$Message.error("银行卡请求失败！");
                 });
             }
         }
