@@ -59,10 +59,21 @@
 					<div>
 						<p>请您将投资款转账到公司账户，收到后将计算收益：</p>
 						<div class="invest-sure-count">
-							<p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="company">公司账户：深圳市鑫鼎翔电子商务有限公司</p>
-							<p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_add">开户行：中国农业银行深圳中心区支行</p>
+							<p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="company">
+								<span>账户：</span>
+								<span>深圳市鑫鼎翔电子商务有限公司</span>
+								<Button type="primary" size="small" data-clipboard-text="深圳市鑫鼎翔电子商务有限公司">复制</Button>
+							</p>
+							<p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_add">
+								<span>开户行：</span>
+								<span>中国农业银行深圳中心区支行</span>
+								<Button type="primary" size="small" data-clipboard-text="中国农业银行深圳中心区支行">复制</Button>
+							</p>
 							<p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_code">
-								银行账号：41005000040046406</p>
+								<span>银行账号：</span>
+								<span>41005000040046406</span>
+								<Button type="primary" size="small" data-clipboard-text="41005000040046406">复制</Button>
+							</p>
 						</div>
 					</div>
 					<div slot="footer">

@@ -57,6 +57,7 @@
                 mylocalStorage.setItem("session_id", "");
                 mylocalStorage.setItem("username", "");
                 mylocalStorage.setItem("type", "");
+                mylocalStorage.setItem("role_id", "");
                 delCookie("session_id");
                 this.$router.push({ path: "/manager" });
             }

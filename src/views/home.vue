@@ -39,7 +39,7 @@
                     {
                         "name": "首页",
                         "type": "iconfont icon-home",
-                        "route": "/"
+                        "route": "/home"
                     },
                     {
                         "name": "收益",

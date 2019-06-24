@@ -83,7 +83,7 @@
                             mylocalStorage["type"] = "web";
                             setCookie("session_id", data.data["token"]);
                             this.$Message.success("登录成功!");
-                            window.location.href = "/";
+                            this.$router.push({ "path": "/home" });
                         } else {
                             this.formInline.username = "";
                             this.formInline.password = "";

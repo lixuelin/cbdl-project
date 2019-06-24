@@ -30,6 +30,11 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
+            name: "login",
+            component: Login
+        },
+        {
+            path: "/home",
             component: Home,
             children: [
                 {
@@ -68,11 +73,7 @@ export default new VueRouter({
                 }
             ]
         },
-        {
-            path: "/login",
-            name: "login",
-            component: Login
-        },
+    
         {
             path: "/register",
             name: "register",

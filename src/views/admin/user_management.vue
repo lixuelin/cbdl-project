@@ -103,7 +103,7 @@
 
 <script>
     import BIN from "bankcardinfo";
-    import { queryUsers, updateBankInfo, queryBanks } from "./../../utils/admin_api";
+    import { mylocalStorage, queryUsers, updateBankInfo, queryBanks } from "./../../utils/admin_api";
     import { updateCashPwd, updateLoginPwd } from "./../../utils/request_api";
     import pageTitle from "./../../components/title";
     
@@ -297,6 +297,10 @@
         mounted() {
             this.queryBankList();
             this.queryUserList();
+            let role_id = mylocalStorage.getItem("role_id");
+            if (Number(role_id) === 2) {
+                this.columns.pop();
+            }
         },
         methods: {
             changePage(page) {
