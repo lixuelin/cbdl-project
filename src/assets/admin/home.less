@@ -97,3 +97,37 @@
     }
 
 }
+
+.admin-index {
+    &-count {
+        display: flex;
+        .marginCont(15px);
+
+        & li {
+            flex: 1;
+            margin-right: 15px;
+            border: 1px solid rgba(255, 255, 255, .6);
+            color: #fff;
+            .border_radius();
+
+            & h4 {
+                .paddingCont(5px 15px);
+                font-size: 16px;
+            }
+
+            &
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &-num {
+            .paddingCont(15px);
+            text-align: center;
+
+            & span {
+                font-size: 26px;
+            }
+        }
+    }
+}

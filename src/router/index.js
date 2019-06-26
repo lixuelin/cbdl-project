@@ -15,6 +15,7 @@ const Invest = () => import("@/views/invest");
 
 const Manager = () => import("@/views/manager");
 const Admin = () => import("@/views/admin/home");
+const AdminIndex = () => import("@/views/admin/index");
 const InvestmentFlow = () => import("@/views/admin/investment_flow");
 const InvestmentSummary = () => import("@/views/admin/investment_summary");
 const BonusFlow = () => import("@/views/admin/bonus_flow");
@@ -95,6 +96,11 @@ export default new VueRouter({
             children: [
                 {
                     path: "/",
+                    name: "admin_index",
+                    component: AdminIndex
+                },
+                {
+                    path: "/admin/investment_flow",
                     name: "investment_flow",
                     component: InvestmentFlow
                 },

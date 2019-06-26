@@ -26,11 +26,20 @@
                 theme2: "light",
                 menu: [
                     {
+                        title: "首页",
+                        child: [
+                            {
+                                name: "数据统计",
+                                path: "/admin"
+                            }
+                        ]
+                    },
+                    {
                         title: "投资管理",
                         child: [
                             {
                                 name: "投资日流水",
-                                path: "/admin"
+                                path: "/admin/investment_flow"
                             },
                             {
                                 name: "投资汇总",

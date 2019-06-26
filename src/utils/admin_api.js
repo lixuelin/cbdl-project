@@ -206,3 +206,15 @@ export function downloadEveryExecl() {
     return all("get", "/invest/download_invest");
 }
 
+
+/**
+ *
+ * 导出投资流水数据接口
+ *
+ */
+
+export function queryCount() {
+    return all("get", "/manager");
+}
+
+
