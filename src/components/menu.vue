@@ -19,21 +19,15 @@
 </template>
 
 <script>
+    import { mylocalStorage } from "../utils/admin_api";
+    
     export default {
         name: "admin-menu",
         data() {
             return {
                 theme2: "light",
                 menu: [
-                    {
-                        title: "首页",
-                        child: [
-                            {
-                                name: "数据统计",
-                                path: "/admin"
-                            }
-                        ]
-                    },
+    
                     {
                         title: "投资管理",
                         child: [
@@ -92,6 +86,20 @@
                     }
                 ]
             };
+        },
+        mounted() {
+            let role_id = mylocalStorage.getItem("role_id");
+            if (Number(role_id) === 1) {
+                this.menu.unshift({
+                    title: "首页",
+                    child: [
+                        {
+                            name: "数据统计",
+                            path: "/admin"
+                        }
+                    ]
+                });
+            }
         },
         methods: {
             goto(child) {

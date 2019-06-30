@@ -49,7 +49,6 @@
                 if (this.formValidate.oldPassWord !== "") {
                     let reg = /^[a-zA-Z0-9]{6,30}$/;
                     let is_reg = reg.test(value);
-                    console.log(this.formValidate, "form");
                     if (is_reg) {
                         this.validateLoginPwd(callback);
                     } else {
@@ -104,7 +103,6 @@
                 this.$refs[name].validate((valid) => {
                     this.is_validate = valid;
                     if (valid) {
-                        console.log(this.checkType, "ddd");
                         if (this.checkType === 0) {
                             this.changeLoginPwd();
                         } else {
@@ -129,7 +127,6 @@
             },
             checkCash(data, callback) {
                 checkCashPwd(data).then(response => {
-                    console.log(response);
                     if (response.data.data.is_exist) {
                         callback();
                     } else {
@@ -154,7 +151,6 @@
             },
             checkLogin(data, callback) {
                 checkLoginPwd(data).then(response => {
-                    console.log(response, "ddd");
                     if (response.data.data.is_exist) {
                         callback();
                     } else {

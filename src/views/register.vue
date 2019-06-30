@@ -94,7 +94,6 @@
             };
             const validateCard = (rule, value, callback) => {
                 if (this.formValidate.card !== "") {
-                    console.log(value, "dddd");
                     BIN.getBankBin(this.formValidate.card)
                         .then((data) => {
                             this.formValidate.bank_name = data.bankName;
@@ -237,7 +236,6 @@
                     code: value
                 };
                 registeInviteCode(data).then(response => {
-                    console.log(response.data.data, "ddds");
                     let is_exist = response.data.data.is_exist;
                     if (!is_exist) {
                         callback(new Error("邀请码不存在请重新输入！"));

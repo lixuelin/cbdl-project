@@ -212,7 +212,6 @@
                 this.getCashList();
             },
             changeDate(date) {
-                console.log(date);
                 this.search.start_time = date[0];
                 this.search.end_time = date[1];
             },
@@ -229,7 +228,6 @@
                     pageSize: this.pageInfo.currentPageSize
                 };
                 queryCashList(data).then(response => {
-                    console.log(response, "dd");
                     this.cashList = response.data.data.cashList;
                     this.pageInfo.total = response.data.data.total;
                 }).catch(error => {
@@ -242,7 +240,6 @@
                     id: this.cash_id
                 };
                 verify_cash(data).then(response => {
-                    console.log(response);
                     this.$Message.success("修改成功");
                     this.change_cash = false;
                     this.getCashList();

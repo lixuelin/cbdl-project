@@ -114,7 +114,6 @@
                 if (this.formValidate.card !== "") {
                     BIN.getBankBin(this.formValidate.card)
                         .then((data) => {
-                            console.log(data, "bank");
                             this.formValidate.bank_name = data.bankName;
                             this.formValidate.bank_code = data.bankCode;
                             this.formValidate.card_type = data.cardTypeName;
@@ -239,7 +238,6 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.row);
                                             this.resetCashModal = true;
                                             this.resetCashCurrent = params.row;
                                         }
@@ -308,7 +306,6 @@
                 this.queryUserList();
             },
             changeDate(date) {
-                console.log(date);
                 this.search.start_time = date[0];
                 this.search.end_time = date[1];
             },
@@ -333,7 +330,6 @@
             },
             queryBankList() {
                 queryBanks().then(response => {
-                    console.log(response);
                     this.bankList = response.data.data;
                 }).catch(error => {
                     this.$Message.error("获取银行信息失败！");
@@ -349,7 +345,6 @@
                 };
                 this.modal_loading = true;
                 updateCashPwd(data).then(res => {
-                    console.log(res, "dss");
                     this.resetCashCurrent = null;
                     this.resetCashModal = false;
                     this.$Message.success("提现密码修改成功！");

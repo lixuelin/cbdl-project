@@ -173,7 +173,6 @@
                                                 this.change_invest = true;
                                                 this.invest_info.invest_num = params.row.invest_num;
                                                 this.invest_info.invest_id = params.row.id;
-                                                console.log(params.row, this.invest_info, "dd");
                                             }
                                         }
                                     }, "未审核")
@@ -277,7 +276,6 @@
                     invest_pay: this.search.invest_pay,
                     cash_status: this.search.cash_status
                 };
-                console.log(data, "dd");
                 queryInvestList(data).then(response => {
                     this.invests = response.data.data.invests;
                     this.pageInfo.total = response.data.data.total;

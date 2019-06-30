@@ -227,12 +227,9 @@
                 
                 this.modal_loading = true;
                 userInvest(data).then(response => {
-                    console.log(response, "dd");
                     let code = response.status;
-                    console.log(code, "code ");
                     this.modal_loading = false;
                     if (code === 200) {
-                        console.log(this.checked_pay.index, "index");
                         this.modal_common("投资成功，10分钟内未到账请联系客服!");
                         this.invest_show_way = false;
                     } else {

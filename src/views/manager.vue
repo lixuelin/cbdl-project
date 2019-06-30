@@ -37,7 +37,6 @@
             };
         },
         mounted() {
-            console.log(document.documentElement.clientHeight, "height");
         },
         methods: {
             login() {
@@ -60,7 +59,12 @@
                         mylocalStorage["role_id"] = data.data["role_id"];
                         setCookie("session_id", data.data["token"]);
                         this.$Message.success("登录成功!");
-                        this.$router.push({ "path": "/admin" });
+                        if (data.data["role_id"] === 2) {
+                            this.$router.push({ "path": "/admin/investment_flow" });
+                        } else {
+                            this.$router.push({ "path": "/admin" });
+                        }
+                        
                     } else {
                         this.$Message.error("登录失败!");
                     }

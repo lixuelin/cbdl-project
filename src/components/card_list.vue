@@ -194,7 +194,6 @@
                         };
                         this.$emit("changeInvestList", msg);
                     }
-                    console.log(response);
                 }).catch(error => {
                     this.$Message.error("提现失败！");
                     console.log(error);

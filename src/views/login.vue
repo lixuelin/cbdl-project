@@ -63,7 +63,6 @@
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         let data = this.formInline;
-                        console.log(data, "data");
                         this.loginUser(data);
                         
                     } else {

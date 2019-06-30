@@ -144,7 +144,6 @@
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     this.is_validate = valid;
-                    console.log(this.is_validate, "ddd");
                     if (valid) {
                         this.getUserMsg();
                     }

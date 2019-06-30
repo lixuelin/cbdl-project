@@ -111,7 +111,8 @@
                 cash_info: {
                     total: 0,
                     brokerage: 0,
-                    cash: 0
+                    cash: 0,
+                    invest_num: 0
                 },
                 cash_all_success: false,
                 cash_modal: false,
@@ -145,7 +146,6 @@
                     return;
                 }
                 queryIncomeTotal(data).then(response => {
-                    console.log(response.data);
                     if (response.data.status === 200) {
                         let data = response.data.data;
                         this.income_total = data[1].total;
@@ -182,14 +182,12 @@
                 });
             },
             countCash(invest) {
-                console.log(invest);
                 let data = {};
                 if (invest.income_status === 0) {
                     this.invest_num = invest.invest_num;
                     data.total = Number(invest.invest_num) + Number(invest.income_num);
                     data.brokerage = Number(invest.invest_num) * 0.01;
                     data.cash = Number(invest.invest_num) - (Number(invest.invest_num) * 0.01);
-                    console.log(data, "dd");
                 } else if (invest.income_status === 1) {
                     data.total = invest.invest_num + Number(invest.income_num);
                     data.brokerage = 0;
@@ -217,7 +215,8 @@
                 this.cash_info = {
                     total: this.total.endVal,
                     brokerage: Number(invest_brokerage).toFixed(2),
-                    cash: (Number(invest_total) + this.income_total).toFixed(2)
+                    cash: (Number(invest_total) + this.income_total).toFixed(2),
+                    invest_num: invest_total.toFixed(2)
                 };
             },
             cashAllSure() {
@@ -247,7 +246,7 @@
                     cash_num: Number(this.cash_info.cash).toFixed(1),
                     brokerage: Number(this.cash_info.brokerage).toFixed(1),
                     income_num: Number(this.income_total).toFixed(1),
-                    invest_num: this.invest_num
+                    invest_num: Number(this.cash_info.invest_num).toFixed(1)
                 };
                 IncomeCashAll(data).then(response => {
                     let cash_status = response.data.data.success;

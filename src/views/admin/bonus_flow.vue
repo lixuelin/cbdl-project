@@ -150,7 +150,6 @@
                     pageSize: this.pageInfo.currentPageSize
                 };
                 queryAdminBonusList(data).then(response => {
-                    console.log(response, "res");
                     this.data = response.data.data.bonus;
                     this.pageInfo.total = response.data.data.total;
                 }).catch(error => {

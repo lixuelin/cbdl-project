@@ -240,7 +240,6 @@
                     } else {
                         this.next_list = [];
                     }
-                    console.log(this.next_list, "dd");
                 }).catch(error => {
                     this.$Message.error("奖金列表获取失败！");
                 });
@@ -254,7 +253,6 @@
                 }
                 queryBonusTotal(data).then(response => {
                     this.bonus = response.data.data;
-                    console.log(this.bonus, "bonus");
                 }).catch(error => {
                     this.$Message.error("奖金获取失败");
                     console.log(error);
@@ -297,7 +295,6 @@
                 }
                 this.cash_pwd = "";
                 bonusCashMoney(data).then(response => {
-                    console.log(response);
                     this.draw_modal = false;
                     this.draw_modal_sure = false;
                     this.bonusTotal();

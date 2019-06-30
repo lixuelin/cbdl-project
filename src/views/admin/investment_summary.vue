@@ -131,7 +131,6 @@
                 this.getIncomeEveryday();
             },
             changeDate(date) {
-                console.log(date);
                 this.search.start_time = date[0];
                 this.search.end_time = date[1];
             },
@@ -143,7 +142,6 @@
                     pageSize: this.invest_pageInfo.currentPageSize
                 };
                 queryInvestEveryDay(data).then(response => {
-                    console.log(response);
                     this.invests = response.data.data.invests;
                     this.invest_pageInfo.total = response.data.data.total;
                 }).catch(error => {
@@ -159,7 +157,6 @@
                     pageSize: this.income_pageInfo.currentPageSize
                 };
                 queryIncomeEveryDay(data).then(response => {
-                    console.log(response);
                     this.incomes = response.data.data.incomes;
                     this.income_pageInfo.total = response.data.data.total;
                 }).catch(error => {
