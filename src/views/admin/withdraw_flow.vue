@@ -131,6 +131,10 @@
                         key: "cash_type"
                     },
                     {
+                        title: "投资时间",
+                        key: "invest_time"
+                    },
+                    {
                         title: "操作",
                         key: "action",
                         width: 100,
@@ -172,14 +176,6 @@
                             
                         }
                     },
-                    // {
-                    //     title: '到账时间',
-                    //     key: 'get_time'
-                    // },
-                    // {
-                    //   title: '提现路径',
-                    //   key: 'cash_pay'
-                    // },
                     {
                         title: "银行卡号",
                         key: "card"

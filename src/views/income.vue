@@ -200,6 +200,7 @@
                 let count = this.invest_list.map(invest => {
                     return this.countCash(invest);
                 });
+    
                 let invest_total = sumBy(count, invest => {
                     if (invest) {
                         return invest.cash;
@@ -211,12 +212,20 @@
                         return invest.brokerage;
                     }
                 });
+    
+                let init_invest = this.invest_list.filter(invest => {
+                    return invest.income_status !== 2;
+                });
+    
+                let invest_time = init_invest[init_invest.length - 1].create_time;
+                console.log(invest_time, "invest");
                 
                 this.cash_info = {
                     total: this.total.endVal,
                     brokerage: Number(invest_brokerage).toFixed(2),
                     cash: (Number(invest_total) + this.income_total).toFixed(2),
-                    invest_num: invest_total.toFixed(2)
+                    invest_num: invest_total.toFixed(2),
+                    invest_time: invest_time
                 };
             },
             cashAllSure() {
@@ -246,7 +255,8 @@
                     cash_num: Number(this.cash_info.cash).toFixed(1),
                     brokerage: Number(this.cash_info.brokerage).toFixed(1),
                     income_num: Number(this.income_total).toFixed(1),
-                    invest_num: Number(this.cash_info.invest_num).toFixed(1)
+                    invest_num: Number(this.cash_info.invest_num).toFixed(1),
+                    invest_time: this.cash_info.invest_time
                 };
                 IncomeCashAll(data).then(response => {
                     let cash_status = response.data.data.success;

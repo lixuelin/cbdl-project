@@ -30,7 +30,7 @@
 				<div class="admin-main-search-box-fields">
 					<span>审核状态：</span>
 					<Select v-model="search.invest_pay" placeholder="全部" style="width:200px">
-						<Option value="">全部</Option>
+						<Option value="all">全部</Option>
 						<Option value="0">未审核</Option>
 						<Option value="1">已到账</Option>
 					</Select>
@@ -38,9 +38,9 @@
 				<div class="admin-main-search-box-fields">
 					<span>是否提现：</span>
 					<Select v-model="search.cash_status" placeholder="全部" style="width:200px">
-						<Option value="">全部</Option>
-						<Option value="已提现">已提现</Option>
-						<Option value="未提现">未提现</Option>
+						<Option value="all">全部</Option>
+						<Option value="1">已提现</Option>
+						<Option value="0">未提现</Option>
 					</Select>
 				</div>
 			</div>
@@ -201,6 +201,10 @@
                     {
                         title: "收益状态",
                         key: "income_status"
+                    },
+                    {
+                        title: "提现金额",
+                        key: "stop_income"
                     },
                     {
                         title: "提现状态",

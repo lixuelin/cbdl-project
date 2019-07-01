@@ -179,7 +179,8 @@
                     invest_num: this.cash_invest.invest_num,
                     brokerage: this.cash_info.brokerage,
                     cash_num: this.cash_info.cash,
-                    income_num: this.cash_invest.income_num
+                    income_num: this.cash_invest.income_num,
+                    invest_time: this.cash_invest.create_time
                 };
                 IncomeCashOne(data).then(response => {
                     let cash_status = response.data.data.success;
