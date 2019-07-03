@@ -25,6 +25,9 @@
 						<template v-if="item.income_status === 2">
 							<Button type="primary" size="small" disabled="">提现</Button>
 						</template>
+						<template v-else-if="item.income_status === -1">
+							<Button type="success" size="small" @click="cashMoney(item)">待提现</Button>
+						</template>
 						<template v-else>
 							<Button type="primary" size="small" @click="cashMoney(item)">提现</Button>
 						</template>
