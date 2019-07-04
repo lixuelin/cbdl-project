@@ -7,7 +7,12 @@
 						<span>{{item.create_time}}</span>
 					</div>
 					<div class="card-head-status">
-						<span class="card-head-status-cont">{{income_status[item.income_status]}}</span>
+						<template v-if="item.income_status === -1">
+							<span class="card-head-status-cont">停止收益</span>
+						</template>
+						<template v-else>
+							<span class="card-head-status-cont">{{income_status[item.income_status]}}</span>
+						</template>
 						<Icon type="ios-help-circle-outline" @click="goToHelp"/>
 					</div>
 				</header>
