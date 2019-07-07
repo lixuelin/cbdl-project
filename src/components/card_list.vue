@@ -143,10 +143,14 @@
                     data.total = Number(invest.invest_num) + Number(invest.income_num);
                     data.brokerage = (Number(invest.invest_num) * 0.01).toFixed(2);
                     data.cash = Number(invest.invest_num) - (Number(invest.invest_num) * 0.01);
-                } else if (invest.income_status === 1) {
+                } else if (invest.income_status === 1 || invest.income_status === -1) {
                     data.total = invest.invest_num + Number(invest.income_num);
                     data.brokerage = 0;
                     data.cash = invest.invest_num + Number(invest.income_num);
+                } else {
+                    data.total = 0;
+                    data.brokerage = 0;
+                    data.cash = 0;
                 }
                 return data;
             },
