@@ -56,7 +56,7 @@
 							<div class="bonus-body-next-part bonus-body-next-name">
 								<div>
 									<p>{{item.household}}</p>
-									<p @click="showNext(item)">团队分享</p>
+									<p class="showIteam" @click="showNext(item)">团队分享</p>
 								</div>
 							</div>
 							<div class="bonus-body-next-grid">
@@ -102,7 +102,7 @@
 						</div>
 					</div>
 					<div slot="footer">
-						<Button @click="cashBonusSure" long size="default" type="success">确定
+						<Button :loading="modal_loading" @click="cashBonusSure" long size="default" type="success">确定
 						</Button>
 					</div>
 				</Modal>
@@ -161,7 +161,7 @@
 				</template>
 			</div>
 			<div slot="footer">
-				<Button :loading="modal_loading" @click="show_next=false" long size="default" type="primary">确定</Button>
+				<Button @click="show_next=false" long size="default" type="primary">确定</Button>
 			</div>
 		</Modal>
 	</div>
@@ -259,7 +259,7 @@
                 });
             },
             cashBonusSure() {
-                this.modal_loading = true;
+    
                 let user_id = mylocalStorage.getItem("user_id");
                 if (this.cash_pwd === "") {
                     return this.$Message.error("密码不能为空！");
@@ -273,6 +273,7 @@
                     user_id,
                     cash_pwd: this.cash_pwd
                 };
+                this.modal_loading = true;
                 checkCashPwd(data).then(response => {
                     let is_exist = response.data.data.is_exist;
                     if (is_exist) {
@@ -298,6 +299,7 @@
                     this.draw_modal = false;
                     this.draw_modal_sure = false;
                     this.bonusTotal();
+                    this.this.modal_loading = false;
                     this.$Message.success("提现成功，2小时内未到账请联系客服！");
                 }).catch(error => {
                     this.$Message.error("提现失败！");
@@ -363,4 +365,8 @@
 
 <style lang="less" scoped>
 	@import "./../assets/css/bonus";
+	
+	.showIteam {
+		color: #3679ff;
+	}
 </style>

@@ -77,7 +77,7 @@
 				</div>
 			</div>
 			<div slot="footer">
-				<Button type="success" size="default" long @click="cashSure">确定</Button>
+				<Button type="success" size="default" long :loading="cash_loading" @click="cashSure">确定</Button>
 			</div>
 		</Modal>
 		<Modal v-model="cash_success" width="220">
@@ -120,7 +120,8 @@
                 },
                 cash_invest: null,
                 cash_pwd: "",
-                loading: false
+                loading: false,
+                cash_loading: false
             };
         },
         props: ["investList"],
@@ -170,6 +171,7 @@
                     user_id,
                     cash_pwd: this.cash_pwd
                 };
+                this.cash_loading = true;
                 checkCashPwd(data).then(response => {
                     let is_exist = response.data.data.is_exist;
                     if (is_exist) {
@@ -194,6 +196,7 @@
                     income_num: this.cash_invest.income_num,
                     invest_time: this.cash_invest.create_time
                 };
+                console.log(data, "data");
                 IncomeCashOne(data).then(response => {
                     let cash_status = response.data.data.success;
                     if (cash_status) {
@@ -202,6 +205,7 @@
                         this.cash_success = true;
                         this.loading = false;
                         this.cash_pwd = "";
+                        this.cash_loading = false;
                         let msg = {
                             is_update: true
                         };

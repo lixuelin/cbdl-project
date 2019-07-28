@@ -97,6 +97,11 @@
                     start_time: "",
                     end_time: ""
                 },
+                user_info: {
+                    user_id: null,
+                    invest_id: null,
+                    cash_type: null
+                },
                 cash_id: null,
                 cash_num: 0,
                 change_cash: false,
@@ -155,6 +160,9 @@
                                                 this.change_cash = true;
                                                 this.cash_num = params.row.cash_num;
                                                 this.cash_id = params.row.id;
+                                                this.user_info.user_id = params.row.user_id;
+                                                this.user_info.invest_id = params.row.invest_id;
+                                                this.user_info.cash_type = params.row.cash_type;
                                             }
                                         }
                                     }, "确认提现")
@@ -233,8 +241,12 @@
             },
             verifyCash() {
                 let data = {
-                    id: this.cash_id
+                    id: this.cash_id,
+                    user_id: this.user_info.user_id,
+                    invest_id: this.user_info.invest_id,
+                    cash_type: this.user_info.cash_type
                 };
+                console.log(data, "data");
                 verify_cash(data).then(response => {
                     this.$Message.success("修改成功");
                     this.change_cash = false;

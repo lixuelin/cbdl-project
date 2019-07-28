@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<div slot="footer">
-				<i-button type="primary" long @click="cashAllSure">
+				<i-button type="primary" long :loading="loading" @click="cashAllSure">
 					<span>确定</span>
 				</i-button>
 			</div>
@@ -231,7 +231,6 @@
                 };
             },
             cashAllSure() {
-                this.loading = true;
                 let user_id = mylocalStorage.getItem("user_id");
                 if (this.cash_pwd === "") {
                     return this.$Message.error("密码不能为空！");
@@ -240,6 +239,7 @@
                     user_id,
                     cash_pwd: this.cash_pwd
                 };
+                this.loading = true;
                 checkCashPwd(data).then(response => {
                     let is_exist = response.data.data.is_exist;
                     if (is_exist) {
