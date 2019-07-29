@@ -75,7 +75,7 @@
 			</p>
 			<div class="">
 				<p>提现成功</p>
-				<p>资金将在2个小时内到账，如有疑问请咨询客服</p>
+				<p>资金将在24小时内到账，如有疑问请咨询客服</p>
 			</div>
 			<div slot="footer">
 				<Button type="success" size="default" long @click="cash_all_success=false">确定</Button>

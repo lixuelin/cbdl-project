@@ -232,6 +232,10 @@
                     },
                     {
                         title: "投资时间",
+                        key: "verify_time"
+                    },
+                    {
+                        title: "创建时间",
                         key: "create_time"
                     }
                 
