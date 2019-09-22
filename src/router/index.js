@@ -1,35 +1,70 @@
 // import Vue from 'vue'
 // import Router from 'vue-router'
 
-const Home = () => import("@/views/home");
-const Login = () => import("@/views/login");
-const Index = () => import("@/views/index");
-const Bonus = () => import("@/views/bonus");
-const Income = () => import("@/views/income");
-const Help = () => import("@/views/help");
-const Bank = () => import("@/views/bank");
-const ChangePwd = () => import("@/views/change_pwd");
-const Register = () => import("@/views/register");
-const Forget = () => import("@/views/forget");
-const Invest = () => import("@/views/invest");
+const Home = () =>
+    import ("@/views/home");
+const Login = () =>
+    import ("@/views/login");
+const Index = () =>
+    import ("@/views/index");
+const Bonus = () =>
+    import ("@/views/bonus");
+const Income = () =>
+    import ("@/views/income");
+const Help = () =>
+    import ("@/views/help");
+const Bank = () =>
+    import ("@/views/bank");
+const ChangePwd = () =>
+    import ("@/views/change_pwd");
+const Register = () =>
+    import ("@/views/register");
+const Forget = () =>
+    import ("@/views/forget");
+const Invest = () =>
+    import ("@/views/invest");
+const Financial = () =>
+    import ("@/views/financial");
+const Balance = () =>
+    import ("@/views/balance");
+const Deposit = () =>
+    import ("@/views/balance/deposit");
+const DepositNote = () =>
+    import ("@/views/balance/deposit_note");
+const CashOut = () =>
+    import ("@/views/balance/cash_out");
+const CashOutNote = () =>
+    import ("@/views/balance/cash_out_note");
 
-const Manager = () => import("@/views/manager");
-const Admin = () => import("@/views/admin/home");
-const AdminIndex = () => import("@/views/admin/index");
-const InvestmentFlow = () => import("@/views/admin/investment_flow");
-const InvestmentSummary = () => import("@/views/admin/investment_summary");
-const BonusFlow = () => import("@/views/admin/bonus_flow");
-const BonusSecondFlow = () => import("@/views/admin/bonus_second_flow");
-const BonusSummary = () => import("@/views/admin/bonus_summary");
-const WithdrawFlow = () => import("@/views/admin/withdraw_flow");
-const WithdrawSummary = () => import("@/views/admin/withdraw_summary");
-const UserManagement = () => import("@/views/admin/user_management");
+const Manager = () =>
+    import ("@/views/manager");
+const Admin = () =>
+    import ("@/views/admin/home");
+const AdminIndex = () =>
+    import ("@/views/admin/index");
+const InvestmentFlow = () =>
+    import ("@/views/admin/investment_flow");
+const InvestmentSummary = () =>
+    import ("@/views/admin/investment_summary");
+const BonusFlow = () =>
+    import ("@/views/admin/bonus_flow");
+const BonusSecondFlow = () =>
+    import ("@/views/admin/bonus_second_flow");
+const BonusSummary = () =>
+    import ("@/views/admin/bonus_summary");
+const WithdrawFlow = () =>
+    import ("@/views/admin/withdraw_flow");
+const WithdrawSummary = () =>
+    import ("@/views/admin/withdraw_summary");
+const UserManagement = () =>
+    import ("@/views/admin/user_management");
+const AdminDeposit = () =>
+    import ("@/views/admin/deposit");
 
 // Vue.use(Router)
 
 export default new VueRouter({
-    routes: [
-        {
+    routes: [{
             path: "/",
             name: "login",
             component: Login
@@ -37,8 +72,7 @@ export default new VueRouter({
         {
             path: "/home",
             component: Home,
-            children: [
-                {
+            children: [{
                     path: "/",
                     name: "index",
                     component: Index
@@ -71,10 +105,39 @@ export default new VueRouter({
                     path: "/invest",
                     name: "invest",
                     component: Invest
+                },
+                {
+                    path: "/financial",
+                    name: "financial",
+                    component: Financial
+                },
+                {
+                    path: "/balance",
+                    name: "balance",
+                    component: Balance
+                },
+                {
+                    path: "/deposit",
+                    name: "deposit",
+                    component: Deposit
+                },
+                {
+                    path: "/deposit_note",
+                    name: "deposit_note",
+                    component: DepositNote
+                },
+                {
+                    path: "/cash_out",
+                    name: "cash_out",
+                    component: CashOut
+                },
+                {
+                    path: "/cash_note",
+                    name: "cash_note",
+                    component: CashOutNote
                 }
             ]
         },
-    
         {
             path: "/register",
             name: "register",
@@ -93,8 +156,7 @@ export default new VueRouter({
         {
             path: "/admin",
             component: Admin,
-            children: [
-                {
+            children: [{
                     path: "/",
                     name: "admin_index",
                     component: AdminIndex
@@ -138,6 +200,11 @@ export default new VueRouter({
                     path: "/admin/user_management",
                     name: "user_management",
                     component: UserManagement
+                },
+                {
+                    path: "/admin/deposit",
+                    name: "admin_deposit",
+                    component: AdminDeposit
                 }
             ]
         }

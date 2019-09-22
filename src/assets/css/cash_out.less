@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.cash-out {
+    padding: 15px 0;
+
+    &-bank {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+    }
+    &-content {
+        padding: 10px 15px;
+        background: #fff;
+
+        &-box {
+            display: flex;
+            & p {
+                flex: 1;
+                &:last-child {
+                    text-align: right;
+                    color: #f00;
+                }
+            }
+        }
+
+        &-tip {
+            font-size: 10px;
+        }
+
+        &-text {
+            border-bottom: 1px solid #999;
+            & input {
+                height: 40px;
+                font-size: 20px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    &-money {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    &-account {
+        padding: 10px 15px;
+        line-height: 160%;
+        background: #fff;
+
+        &-way {
+            padding-left: 10px;
+        }
+
+        &-tip {
+            font-size: 12px;
+        }
+    }
+
+    &-commit {
+        margin: 15px 0;
+        padding: 0 15px;
+    }
+}

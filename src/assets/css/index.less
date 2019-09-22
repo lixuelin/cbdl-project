@@ -82,7 +82,26 @@
             .shadow_box();
 
             &-tip {
+                position: relative;
+                padding: 0 10px;
+                font-size: 10px;
                 color: #646d7f;
+
+                & span {
+                    font-size: 10px;
+                }
+
+                &::before{
+                    position: absolute;
+                    left: 2px;
+                    top: 50%;
+                    content: "";
+                    width: 4px;
+                    height: 4px;
+                    background: #3679ff;
+                    .border_radius(4px);
+                    transform: translateY(-50%)
+                }
             }
 
             &-hide i {

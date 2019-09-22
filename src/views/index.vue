@@ -25,10 +25,10 @@
 			<div class="b-home-main-means" v-if="true">
 				<div class="b-home-main-means-total">
 					<p class="b-home-main-means-tip">
-						<span>总本金</span>
+						<span>总资产</span>
 						<span class="b-home-main-means-hide">
                             <Icon type="eye-disabled"></Icon>
-							<!--<Icon type="ios-eye"></Icon>-->
+							<!-- <Icon type="ios-eye"></Icon> -->
                         </span>
 					</p>
 					<h3>
@@ -37,6 +37,13 @@
 					</h3>
 				</div>
 				<div class="b-home-main-means-class">
+                    <div class="b-home-main-means-class-money">
+						<p class="b-home-main-means-tip">余额</p>
+						<h4>
+							<countTo :startVal='balance.startVal' :endVal='balance.endVal' :duration='balance.speed'
+							         :decimals="balance.float"></countTo>
+						</h4>
+					</div>
 					<div class="b-home-main-means-class-money">
 						<p class="b-home-main-means-tip">投资收益</p>
 						<h4>
@@ -151,6 +158,12 @@
                     startVal: 0,
                     endVal: 0,
                     duration: 100,
+                    float: 2
+                },
+                balance: {
+                    startVal: 0,
+                    endVal: 0,
+                    duration: 300,
                     float: 2
                 },
                 income: {
@@ -298,16 +311,18 @@
             goToInvest() {
                 this.$router.push({ "name": "invest" });
             },
-            queryTotal() {
+            async queryTotal() {
                 let data = {
                     user_id: mylocalStorage.getItem("user_id")
                 };
                 if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
                     return;
                 }
+                let res = await this.$Http.queryBalanceCount(data);
+                this.balance.endVal = res.data.count;
                 queryInvestTotal(data).then(response => {
                     let data = response.data.data;
-                    this.total.endVal = data[0].total;
+                    this.total.endVal = data[0].total + this.balance.endVal;
                     this.income.endVal = data[1].total;
                     this.bonus.endVal = data[2].total;
                 }).catch(error => {

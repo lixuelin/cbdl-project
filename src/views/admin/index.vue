@@ -2,7 +2,7 @@
 	<div class="admin-index">
 		<ul class="admin-index-count">
 			<template v-for="item in count_list">
-				<li :style="{background: item.bgColor}">
+				<li :style="{background: item.bgColor}" :key="item">
 					<h4>{{item.name}}</h4>
 					<div class="admin-index-count-num">
 						<!--<span>{{item.total}}</span>-->

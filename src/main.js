@@ -6,6 +6,7 @@ import router from "./router";
 // import iView from 'iview';
 import "./assets/css/reset.less";
 import "./assets/css/common.less";
+import Http from "./utils/http";
 
 // import 'iview/dist/styles/iview.css';
 
@@ -13,6 +14,8 @@ Vue.prototype.$menu = {
     index: 0,
     name: "首页"
 };
+
+Vue.prototype.$Http = Http;
 
 // Vue.use(iView);
 
@@ -26,6 +29,8 @@ router.afterEach(route => {
 });
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$Http = Http;
 
 /* eslint-disable no-new */
 new Vue({

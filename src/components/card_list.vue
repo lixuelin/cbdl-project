@@ -1,7 +1,7 @@
 <template>
 	<div class="card" v-if="is_show_list">
-		<template v-for="(item, index) in investList">
-			<div class="card-box">
+		<template v-for="item in investList">
+			<div class="card-box" :key="item">
 				<header class="card-head">
 					<div class="card-head-time">
 						<span>{{item.create_time}}</span>

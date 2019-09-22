@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.financial {
+    &-banner {
+        & img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &-title {
+        padding: 15px 15px;
+        font-size: 16px;
+    }
+
+    &-card {
+        padding: 0 10px 25px;
+
+        & li {
+            display: flex;
+            padding: 10px;
+            margin-bottom: 15px;
+            line-height: 170%;
+            background: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+            & div {
+                flex: 1;
+            }
+        }
+
+        &-rate {
+            font-size: 16px;
+            font-weight: 700;
+            color: #f00;
+        }
+        
+        &-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        &-tip {
+            font-size: 12px;
+            color: #999;
+        }
+    }
+}

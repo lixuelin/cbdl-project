@@ -16,7 +16,7 @@
 			<div class="invest-module-bank">
 				<ul>
 					<template v-for="(item, index) in invest_check_money">
-						<li @click="checkInvestMoney(index)">
+						<li @click="checkInvestMoney(index)" :key="item">
 							<div
 								:class="{'invest-module-bank-num': true,'invest-module-bank-checked': index === checked_money.index}">
 								<span>{{item}}</span>
@@ -31,7 +31,7 @@
 			<div class="invest-module-way">
 				<ul>
 					<template v-for="(item, index) in invest_check_pay">
-						<li @click="checkInvestPay(index)">
+						<li @click="checkInvestPay(index)" :key="item">
 							<div :class="{'invest-module-pay': true,
                             'invest-module-wx': index === 0,
                             'invest-module-ali': index === 1,
