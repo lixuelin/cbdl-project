@@ -47,11 +47,6 @@
                         "route": "/financial"
                     },
                     {
-                        "name": "收益",
-                        "type": "iconfont icon-funds-line",
-                        "route": "/income"
-                    },
-                    {
                         "name": "奖金",
                         "type": "iconfont icon-Dollar",
                         "route": "/bonus"

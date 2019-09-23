@@ -28,7 +28,11 @@ const requestApi = {
     queryBankInfo: { // 查询用户银行信息
         method: "get",
         url: "/user/bank"
-    }
+    },
+    queryFinancial: { // 查询理财
+        method: "get",
+        url: "/financial"
+    },
 };
 
 module.exports = requestApi;

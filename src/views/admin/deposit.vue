@@ -201,7 +201,7 @@ export default {
         },
         changePage(page) {
             this.pageInfo.currentPage = page;
-            this.getInvestList();
+            this.getBalance();
         },
         changeDate(date) {
             this.search.start_time = date[0];

@@ -141,6 +141,7 @@
         name: "invest",
         data() {
             return {
+				financial_id: 1,
                 invest_show_way: false,
                 modal2: false,
                 modal_loading: false,
@@ -166,7 +167,12 @@
                     "银行转账", "支付宝"
                 ]
             };
-        },
+		},
+		created() {
+			if(this.$route.params.financial_id && this.$route.params.financial_id===2) {
+				this.invest_check_money.pop()
+			}
+		},
         components: {
             foot
         },
@@ -218,7 +224,8 @@
                 let data = {
                     user_id: mylocalStorage.getItem("user_id"),
                     money: this.checked_money.money,
-                    pay: this.checked_pay.pay
+					pay: this.checked_pay.pay,
+					financial_id: this.financial_id
                 };
                 if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
                     this.$Message.warning("请先登录后操作！");

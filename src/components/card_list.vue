@@ -28,13 +28,13 @@
 					</div>
 					<div class="card-body-handler">
 						<template v-if="item.income_status === 2">
-							<Button type="primary" size="small" disabled="">提现</Button>
+							<Button type="primary" size="small" disabled="">回收</Button>
 						</template>
 						<template v-else-if="item.income_status === -1">
-							<Button type="success" size="small" @click="cashMoney(item)">待提现</Button>
+							<Button type="success" size="small" @click="cashMoney(item)">待回收</Button>
 						</template>
 						<template v-else>
-							<Button type="primary" size="small" @click="cashMoney(item)">提现</Button>
+							<Button type="primary" size="small" @click="cashMoney(item)">回收</Button>
 						</template>
 					</div>
 				</article>
@@ -177,11 +177,11 @@
                     if (is_exist) {
                         this.cashInvestMoney(user_id);
                     } else {
-                        this.loading = false;
+                        this.cash_loading = false;
                         this.$Message.error("密码错误！");
                     }
                 }).catch(error => {
-                    this.loading = false;
+                    this.cash_loading = false;
                     console.log(error);
                 });
                 
@@ -196,8 +196,8 @@
                     income_num: this.cash_invest.income_num,
                     invest_time: this.cash_invest.create_time
                 };
-                console.log(data, "data");
                 IncomeCashOne(data).then(response => {
+                    console.log(response, "ddd")
                     let cash_status = response.data.data.success;
                     if (cash_status) {
                         this.cash_list_modal = false;
@@ -213,6 +213,7 @@
                     }
                 }).catch(error => {
                     this.$Message.error("提现失败！");
+                    this.cash_loading = false;
                     console.log(error);
                 });
             }
