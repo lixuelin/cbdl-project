@@ -74,6 +74,7 @@ instance.interceptors.response.use(res => {
     if (res.config.headers.authorization) {
         setCookie("session_id", res.config.headers.authorization);
     }
+    console.log(res.data)
     return res.data;
 }, error => {
     if (error.response) {

@@ -36,8 +36,7 @@ export default {
         async getFinancial() {
             let res = await this.$Http.queryFinancial()
             this.financial_list = res.data;
-        },
-        gotoInvest(item) {
+        },        gotoInvest(item) {
             this.$router.push({name:"invest", 
                 params: {
                     financial_id: item.id

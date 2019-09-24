@@ -33,6 +33,22 @@ const requestApi = {
         method: "get",
         url: "/financial"
     },
+    queryInvestList: { // 查询投资列表
+        method: "get",
+        url: "/invest/list"
+    },
+    queryIncomeCount: { // 查询投资总计
+        method: "get",
+        url: "/income/total"
+    },
+    changeTradePwd: { // 检验交易密码
+        method: "post",
+        url: "/user/cash_pwd"
+    },
+    createInvest: { // 检验交易密码
+        method: "post",
+        url: "/invest"
+    },
 };
 
 module.exports = requestApi;

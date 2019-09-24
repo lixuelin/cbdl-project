@@ -91,6 +91,36 @@
             }
         }
 
+        &-count {
+            display: flex;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            background: #fff;
+            .border_radius(5px);
+            .shadow_box();
+
+            & div {
+                flex: 1;    
+                border-right: 1px solid #eee;
+                text-align: center;
+
+                & span {
+                    font-size: 12px;
+                }
+
+                & p {
+                    font-size: 18px;
+                    color: #5c92ff;
+                }
+
+                &:last-child{
+                    border-right: none;
+                }
+            }
+
+
+        }
+
         &-pay {
             position: relative;
             display: flex;
@@ -127,7 +157,6 @@
     }
 
     &-sure {
-        margin-top: 30px;
         margin-bottom: 15px;
         .paddingCont();
         text-align: center;

@@ -28,13 +28,13 @@
 					</div>
 					<div class="card-body-handler">
 						<template v-if="item.income_status === 2">
-							<Button type="primary" size="small" disabled="">回收</Button>
+							<Button type="primary" size="small" disabled="">收回</Button>
 						</template>
 						<template v-else-if="item.income_status === -1">
-							<Button type="success" size="small" @click="cashMoney(item)">待回收</Button>
+							<Button type="success" size="small" @click="cashMoney(item)">收回</Button>
 						</template>
 						<template v-else>
-							<Button type="primary" size="small" @click="cashMoney(item)">回收</Button>
+							<Button type="primary" size="small" @click="cashMoney(item)">收回</Button>
 						</template>
 					</div>
 				</article>
@@ -42,7 +42,7 @@
 		</template>
 		<Modal v-model="cash_list_modal" width="220">
 			<p slot="header">
-				<span>提现</span>
+				<span>收回</span>
 			</p>
 			<div>
 				<div class="card-body-handler-draw">
@@ -60,7 +60,7 @@
 					<p>实际到账：</p>
 					<p>{{cash_info.cash}}</p>
 				</div>
-				<p class="card-body-handler-tips">资金返回至注册时填写的银行卡内</p>
+				<p class="card-body-handler-tips">资金返回至余额内</p>
 			</div>
 			<div slot="footer">
 				<Button type="success" size="default" long @click="cash_list_modal_sure = true">确定</Button>
@@ -85,7 +85,7 @@
 				<span>提现</span>
 			</p>
 			<div class="">
-				<p>提现成功</p>
+				<p>收回成功</p>
 				<p>资金将在2小时日内到账，如有疑问请咨询客服</p>
 			</div>
 			<div slot="footer">
