@@ -167,6 +167,14 @@ export default {
                     }
                 },
                 {
+                    title: "银行名称",
+                    key: "bank_name"
+                },
+                {
+                    title: "银行卡号",
+                    key: "card"
+                },
+                {
                     title: "金额类型",
                     key: "type"
                 },
