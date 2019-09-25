@@ -135,7 +135,7 @@ export default {
             let data = {
                 user_id: mylocalStorage.getItem("user_id"),
                 balance_num: Number(this.cash_num),
-                balance_type: 2
+                balance_type: 3
             };
             if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
                 this.$Message.warning("请先登录后操作！");

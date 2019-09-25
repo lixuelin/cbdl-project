@@ -29,7 +29,7 @@ export default {
         async getBalanceNote () {
             let data = {
                 user_id: mylocalStorage.getItem("user_id"),
-                balance_type: 3
+                balance_type: 2
             }
 
             if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
