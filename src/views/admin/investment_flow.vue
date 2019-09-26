@@ -1,6 +1,20 @@
 <template>
 	<div id="investment_flow" class="admin-main">
 		<title-view :title="title"></title-view>
+        <div class="investment_flow_financial">
+            <div>
+                <span>生态2号</span>
+                <p>¥{{financial.total}}</p>
+            </div>
+            <div>
+                <span>剩余投资</span>
+                <p>¥{{financial.surplus}}</p>
+            </div>
+            <div>
+                <span>已投资</span>
+                <p>¥{{financial.invest_num}}</p>
+            </div>
+        </div>
 		<div class="admin-main-search">
 			<div class="admin-main-search-box">
 				<div class="admin-main-search-box-fields">
@@ -241,15 +255,23 @@
                 
                 ],
                 invests: [],
-                bankList: []
+                bankList: [],
+                financial: {
+                    total: 0,
+                    invest_num: 0,
+                    surplus: 0
+                }
             };
         },
         components: {
             "title-view": pageTitle
         },
-        mounted() {
+        created() {
             this.queryBankList();
             this.getInvestList();
+            this.getFinancialNum();
+        },
+        mounted() {
         },
         methods: {
             changePage(page) {
@@ -262,6 +284,12 @@
             },
             download() {
                 window.location = "/invest/download_invest";
+            },
+           async getFinancialNum() {
+                let res = await this.$Http.queryFinancialNum();
+                this.financial.total = res.data.financial_count;
+                this.financial.invest_num = res.data.invests;
+                this.financial.surplus = res.data.financial_count - res.data.invests;
             },
             queryBankList() {
                 queryBanks().then(response => {
@@ -320,5 +348,6 @@
 </script>
 
 <style lang="less" scoped>
-	@import "./../../assets/admin/components";
+    @import "./../../assets/admin/components";
+    @import "./../../assets/admin/invest";
 </style>

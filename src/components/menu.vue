@@ -76,6 +76,10 @@
                             {
                                 name: "充值记录",
                                 path: "/admin/deposit"
+                            },
+                            {
+                                name: "余额收益",
+                                path: "/admin/balance_flow"
                             }
                         ]
                     },

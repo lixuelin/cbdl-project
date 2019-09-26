@@ -60,6 +60,8 @@ const UserManagement = () =>
     import ("@/views/admin/user_management");
 const AdminDeposit = () =>
     import ("@/views/admin/deposit");
+const BalanceFlow = () =>
+    import ("@/views/admin/balance_flow");
 
 // Vue.use(Router)
 
@@ -205,6 +207,11 @@ export default new VueRouter({
                     path: "/admin/deposit",
                     name: "admin_deposit",
                     component: AdminDeposit
+                },
+                {
+                    path: "/admin/balance_flow",
+                    name: "balance_flow",
+                    component: BalanceFlow
                 }
             ]
         }
