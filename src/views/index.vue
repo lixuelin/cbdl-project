@@ -61,15 +61,22 @@
 				</div>
 			</div>
 			<div class="b-home-main-newcomer">
-				<p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
-				<p class="b-home-main-newcomer-year">月收益</p>
-				<div class="b-home-main-newcomer-tip">
-					<p>投资期限最长1个月</p>
-					<p>随时提现，到账速度快</p>
-				</div>
-				<div class="b-home-main-newcomer-btn">
-					<i-button type="primary" @click="goToInvest">立即投资</i-button>
-				</div>
+                <div class="b-home-main-newcomer-box">  
+                    <h3>生态1号</h3>
+                    <p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
+                    <p class="b-home-main-newcomer-year">月收益</p>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>投资期限最长1个月</p>
+                    </div>
+                </div>
+				<div class="b-home-main-newcomer-box">
+                    <h3>生态2号</h3>
+                    <p class="b-home-main-newcomer-invest">5.3%-6.1%</p>
+                    <p class="b-home-main-newcomer-year">15天收益</p>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>投资期限最长15天</p>
+                    </div>
+                </div>
 			</div>
 			<!-- <div class="b-home-main-share"> -->
 				<!-- <div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>

@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="cash-out-commit">
-            <Button type="success" long @click="sureCash" :disabled="isTextSure">确认提现</Button>
+            <Button type="success" long @click="sureCash">确认提现</Button>
         </div>
         <foot></foot>
     </div>
@@ -88,8 +88,10 @@ export default {
             let num = this.cash_num;
             if (isNaN(num) || num === ""){
                 this.$Message.warning("请输入准确的数值");
+                this.isTextSure = true;
             } else if(Number(num) > Number(this.balance_num)){
                 this.$Message.warning("提现金额大于当前可用余额！");
+                this.isTextSure = true;
             } else {
                 this.isTextSure = false;
             }
@@ -132,6 +134,11 @@ export default {
             }
         },
         async sureCash () {
+            if (this.isTextSure) {
+                this.$Message.error("请输入准确的数值");
+                return
+            }
+            
             let data = {
                 user_id: mylocalStorage.getItem("user_id"),
                 balance_num: Number(this.cash_num),

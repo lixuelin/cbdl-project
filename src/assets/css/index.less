@@ -132,11 +132,20 @@
         }
 
         &-newcomer {
+            display: flex;
             .paddingCont(15px);
             background: #fff;
             .border_radius();
             .shadow_box();
             text-align: center;
+
+            &-box {
+                flex: 1;
+                border-right: 1px solid #eee;
+                &:last-child {
+                    border-right: none;
+                }
+            }
 
             &-invest {
                 color: #3679ff;
@@ -280,9 +289,9 @@
                         padding-right: 5px;
                     }
 
-                    &:last-child {
-                        border-bottom: none;
-                    }
+                    // &:last-child {
+                    //     border-bottom: none;
+                    // }
                 }
             }
         }

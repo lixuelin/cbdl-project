@@ -19,7 +19,7 @@
 						         :decimals="total.float"></countTo>
                 </p>
                 <div class="balance-property-content-btn">
-                    <button @click="goToDeposit">充值</button>
+                    <button @click="goToDeposit">转账</button>
                     <button @click="goToCash">提现</button>
                 </div>
             </div>
@@ -53,7 +53,7 @@ export default {
             },
             menu: [
                     {
-                        "name": "充值记录",
+                        "name": "转账记录",
                         "type": "iconfont icon-credit-card",
                         "route": "/deposit_note"
                     },
@@ -93,7 +93,7 @@ export default {
         },
         goToCash () {
             this.$router.push({path: "/cash_out", query: {
-                num: this.total.endVal
+                num: this.total.endVal.toFixed(1)
             }})
         }
     }

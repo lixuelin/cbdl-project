@@ -1,21 +1,21 @@
 <template>
     <div class="deposit">
         <div class="deposit-content">
-            <p class="deposit-content-tip">充值金额</p>
+            <p class="deposit-content-tip">转账金额</p>
             <div class="deposit-content-text">
                 <span>¥</span>
-                <input type="text" v-model="deposit_num" @blur="valativeNum" @focus="textNum" placeholder="请输入充值金额">
+                <input type="text" v-model="deposit_num" @blur="valativeNum" @focus="textNum" placeholder="请输入转账金额">
             </div>
-            <p class="deposit-content-tip">充值金额为100的倍数</p>
+            <p class="deposit-content-tip">转账金额为100的倍数</p>
         </div>
         <div class="deposit-pay">
             <div class="deposit-pay-way">
                 <p>付款方式</p>
-                <div class="deposit-pay-way-choose">中国建设银行（尾号6573）</div>
+                <div class="deposit-pay-way-choose">{{bank.bank_name}}（尾号{{bank.card}}）</div>
             </div>
         </div>
         <div class="deposit-commit">
-            <Button type="success" long @click="deposit" :disabled="isTextSure">立即充值</Button>
+            <Button type="success" long @click="deposit">立即转账</Button>
         </div>
         <foot></foot>
         <Modal v-model="deposit_show_modal" width="220">
@@ -67,18 +67,24 @@ export default {
             bank_code: "41005000040046406",
             bank_add: "中国农业银行深圳中心区支行",
             loading: false,
+            bank: {}
         }
     },
     components: {
         foot
+    },
+    created(){
+        this.getBankInfo()
     },
     methods: {
         valativeNum(){
             let num = this.deposit_num;
             if (isNaN(num) || num === ""){
                 this.$Message.error("请输入准确的数值");
+                this.isTextSure = true;
             } else if (this.isFloat(Number(num)/100)) {
-                this.$Message.error("请充值金额为100的倍数");
+                this.$Message.error("请转账金额为100的倍数");
+                this.isTextSure = true;
             } else {
                 this.isTextSure = false;
             }
@@ -90,7 +96,25 @@ export default {
             return n + ".0" != n;
         },
         deposit () {
+            if (this.isTextSure) {
+                this.$Message.error("请输入准确的数值");
+                return
+            }
             this.deposit_show_modal = true
+        },
+        async getBankInfo () {
+            let data = {
+                user_id: mylocalStorage.getItem("user_id")
+            }
+
+            let res = await this.$Http.queryBankInfo(data);
+
+            if (res.status === 200) {
+                this.bank = res.data[0];
+                this.bank.card = this.bank.card.substring(this.bank.card.length-4);
+            } else {
+                this.$Message.error("请求银行卡信息失败！");
+            }
         },
         ctrlCBtn() {
             let clipboard = new Clipboard(".ctrlBtn");
@@ -114,6 +138,7 @@ export default {
             });
         },
         async sureDeposit() {
+            
             let data = {
                 user_id: mylocalStorage.getItem("user_id"),
                 balance_num: Number(this.deposit_num),
@@ -126,13 +151,13 @@ export default {
             this.loading = true;
             let res = await this.$Http.createBalance(data);
             if (res.status === 200) {
-                this.$Message.success("充值成功！");
+                this.$Message.success("转账成功！");
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.deposit_num = "";
                 this.isTextSure = true;
             } else {
-                this.$Message.error("充值失败！");
+                this.$Message.error("转账失败！");
                 this.loading = false;
                 this.deposit_show_modal = false;
             }
