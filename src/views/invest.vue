@@ -218,7 +218,6 @@
 					financial_id: this.financial_id
 				}
 				let res = await this.$Http.queryIncomeCount(data);
-
 				this.total.invest = res.data[0].total;
 				this.total.income = res.data[1].total;
 			},

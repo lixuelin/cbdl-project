@@ -38,7 +38,7 @@
 				</div>
 				<div class="b-home-main-means-class">
                     <div class="b-home-main-means-class-money">
-						<p class="b-home-main-means-tip">余额</p>
+						<p class="b-home-main-means-tip">余额 <span v-if="balance.income">+ {{balance.income}}</span></p>
 						<h4>
 							<countTo :startVal='balance.startVal' :endVal='balance.endVal' :duration='balance.speed'
 							         :decimals="balance.float"></countTo>
@@ -164,7 +164,8 @@
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2
+                    float: 2,
+                    income: 0
                 },
                 income: {
                     startVal: 0,
@@ -320,6 +321,7 @@
                 }
                 let res = await this.$Http.queryBalanceCount(data);
                 this.balance.endVal = res.data.count;
+                this.balance.income = res.data.income;
                 queryInvestTotal(data).then(response => {
                     let data = response.data.data;
                     this.total.endVal = data[0].total + this.balance.endVal;
