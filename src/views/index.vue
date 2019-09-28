@@ -310,7 +310,9 @@
                 this.$Message.warning("分享功能正在维护中！！");
             },
             goToInvest() {
-                this.$router.push({ "name": "invest" });
+                this.$router.push({ "name": "invest", params: {
+                    financial_id: 2
+                }});
             },
             async queryTotal() {
                 let data = {
