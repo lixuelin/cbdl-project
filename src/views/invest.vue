@@ -130,7 +130,7 @@
                     pay: "转账"
                 },
                 invest_check_pay: [
-                    "余额转账", "支付宝"
+                    "余额转账"
 				],
 				invest_list: []
             };

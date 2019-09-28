@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <menu-view :menu="menu" :isLogin="is_login"></menu-view>
+        <menu-view class="balance-menu" :menu="menu" :isLogin="is_login"></menu-view>
         <foot></foot>
     </div>
 </template>
