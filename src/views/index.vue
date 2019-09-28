@@ -71,8 +71,8 @@
 					<i-button type="primary" @click="goToInvest">立即投资</i-button>
 				</div>
 			</div>
-			<div class="b-home-main-share">
-				<div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>
+			<!-- <div class="b-home-main-share"> -->
+				<!-- <div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>
 				<div class="b-home-main-share-btn">
 					<div @click="wxShare">
 						<p class="b-home-main-share-btn-icon">
@@ -80,7 +80,7 @@
 						</p>
 						<span class="b-home-main-share-btn-word">微信</span>
 					</div>
-				</div>
+				</div> -->
 				<!--<div class="b-home-main-share-btn" >-->
 				<!--<div @click="wxShare">-->
 				<!--<p class="b-home-main-share-btn-icon">-->
@@ -89,7 +89,7 @@
 				<!--<span class="b-home-main-share-btn-word">朋友圈</span>-->
 				<!--</div>-->
 				<!--</div>-->
-			</div>
+			<!-- </div> -->
 			<div class="b-home-main-menu">
 				<div class="b-home-main-menu-help">
 					<ul>
