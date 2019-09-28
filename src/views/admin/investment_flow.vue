@@ -167,6 +167,10 @@
                         key: "verify_num"
                     },
                     {
+                        title: "理财类型",
+                        key: "financial_type"
+                    },
+                    {
                         title: "操作",
                         key: "action",
                         width: 100,
