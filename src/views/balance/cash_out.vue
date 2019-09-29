@@ -165,7 +165,7 @@ export default {
         },
         sureCash () {
             let num = this.cash_num;
-            if (isNaN(num) || num === ""){
+            if (isNaN(num) || num === "" || num === 0){
                 this.$Message.warning("请输入准确的数值");
                 return this.isTextSure = true;
                 
