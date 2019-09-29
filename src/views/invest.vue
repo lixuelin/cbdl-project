@@ -68,7 +68,7 @@
 		</div>
 		<div class="invest-module">
 			<h3>投资笔数</h3>
-			<card-view :investList="invest_list" @changeInvestList="isUpdateInvest"></card-view>
+			<card-view :investList="invest_list" :financial="financial_id" @changeInvestList="isUpdateInvest"></card-view>
 		</div>
 		<foot></foot>
 		<Modal v-model="show_text_trade" width="220">

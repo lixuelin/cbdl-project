@@ -124,7 +124,7 @@
                 cash_loading: false
             };
         },
-        props: ["investList"],
+        props: ["investList", "financial"],
         components: {
             "hr-view": cut
         },
@@ -194,10 +194,10 @@
                     brokerage: this.cash_info.brokerage,
                     cash_num: this.cash_info.cash,
                     income_num: this.cash_invest.income_num,
-                    invest_time: this.cash_invest.create_time
+                    invest_time: this.cash_invest.create_time,
+                    financial_id: this.financial
                 };
                 IncomeCashOne(data).then(response => {
-                    console.log(response, "ddd")
                     let cash_status = response.data.data.success;
                     if (cash_status) {
                         this.cash_list_modal = false;
