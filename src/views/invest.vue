@@ -132,7 +132,8 @@
                 invest_check_pay: [
                     "余额转账"
 				],
-				invest_list: []
+				invest_list: [],
+				is_sure: false
             };
 		},
 		created() {
@@ -143,6 +144,7 @@
 			this.getBalance();
 			this.getInvestList();
 			this.getInvestCount();
+			this.isSureInvest()
 		},
         components: {
 			"card-view": card,
@@ -163,7 +165,12 @@
                         this.$Message.warning("请先选择投资金额！");
                         return;
 					}
-					console.log(this.checked_money.money, "ddddd")
+					
+					if(!this.is_sure) {
+						this.$Message.warning("当前有投资申请正在等待审核，请稍后再试！");
+                        return;
+					}
+
                     if (Number(this.checked_money.money) < this.balance_count) {
 						this.show_text_trade = true;
 					} else {
@@ -196,6 +203,13 @@
                     // 释放内存
                     clipboard.destroy();
                 });
+			},
+			async isSureInvest() {
+				let data = {
+					user_id: mylocalStorage.getItem("user_id")
+				}
+				let res = await this.$Http.queryBalanceLastInvest(data)
+				this.is_sure = res.data.is_sure;
 			},
 			async getBalance() {
 				let data = {
