@@ -57,19 +57,19 @@
                             }
                         ]
                     },
-                    {
-                        title: "提现管理",
-                        child: [
-                            {
-                                name: "提现日流水",
-                                path: "/admin/withdraw_flow"
-                            },
-                            {
-                                name: "提现汇总",
-                                path: "/admin/withdraw_summary"
-                            }
-                        ]
-                    },
+                    // {
+                    //     title: "提现管理",
+                    //     child: [
+                    //         {
+                    //             name: "提现日流水",
+                    //             path: "/admin/withdraw_flow"
+                    //         },
+                    //         {
+                    //             name: "提现汇总",
+                    //             path: "/admin/withdraw_summary"
+                    //         }
+                    //     ]
+                    // },
                     {
                         title: "充值中心",
                         child: [
