@@ -23,7 +23,7 @@
             </div>
             <div class="cash-out-content-text">
                 <span>¥</span>
-                <input type="text" v-model="cash_num" @focus="textNum" @blur="valativeNum" placeholder="请输入提现金额">
+                <input type="text" v-model="cash_num" @focus="textNum" placeholder="请输入提现金额">
             </div>
         </div>
         <p class="cash-out-money">可用余额：{{balance_num}}</p>
@@ -38,6 +38,22 @@
             <Button type="success" long @click="sureCash">确认提现</Button>
         </div>
         <foot></foot>
+        <Modal v-model="show_text_trade" width="220">
+			<p slot="header">
+				<span>投资</span>
+			</p>
+			<div>
+				<p>请输入交易密码：</p>
+				<div class="card-body-handler-password">
+					<i-input v-model="cash_pwd" type="password" placeholder="请输入交易密码" style="width: 220px"></i-input>
+				</div>
+			</div>
+			<div slot="footer">
+				<i-button type="primary" long :loading="loading" @click="trade_Sure">
+					<span>确定</span>
+				</i-button>
+			</div>
+		</Modal>
     </div>
 </template>
 
@@ -64,6 +80,8 @@ export default {
             company: "深圳市鑫鼎翔电子商务有限公司",
             bank_code: "41005000040046406",
             bank_add: "中国农业银行深圳中心区支行",
+            show_text_trade: false,
+            cash_pwd: ""
         }
     },
     components: {
@@ -72,6 +90,7 @@ export default {
     created () {
         this.balance_num = this.$route.query.num;
         this.getBankInfo();
+        this.queryTotal();
     },
     methods: {
         bankBg(bank) {
@@ -88,12 +107,13 @@ export default {
             let num = this.cash_num;
             if (isNaN(num) || num === ""){
                 this.$Message.warning("请输入准确的数值");
-                this.isTextSure = true;
+                return this.isTextSure = true;
+                
             } else if(Number(num) > Number(this.balance_num)){
                 this.$Message.warning("提现金额大于当前可用余额！");
-                this.isTextSure = true;
+                return this.isTextSure = true;
             } else {
-                this.isTextSure = false;
+                return this.isTextSure = false;
             }
         },
         textNum() {
@@ -133,12 +153,47 @@ export default {
                 this.$Message.error("请求银行卡信息失败！");
             }
         },
-        async sureCash () {
-            if (this.isTextSure) {
-                this.$Message.error("请输入准确的数值");
-                return
+        async queryTotal() {
+            let data = {
+                user_id: mylocalStorage.getItem("user_id")
+            };
+            if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                return;
             }
-            
+            let res = await this.$Http.queryBalanceCount(data);
+            this.balance_num = res.data.count.toFixed(1);
+        },
+        sureCash () {
+            let num = this.cash_num;
+            if (isNaN(num) || num === ""){
+                this.$Message.warning("请输入准确的数值");
+                return this.isTextSure = true;
+                
+            } else if(Number(num) > Number(this.balance_num)){
+                this.$Message.warning("提现金额大于当前可用余额！");
+                return this.isTextSure = true;
+            } 
+            this.show_text_trade = true;
+        },
+        async trade_Sure() {
+            if (this.cash_pwd === "") {
+                return this.$Message.error("密码不能为空！");
+            }
+            let data = {
+                user_id:mylocalStorage.getItem("user_id"),
+                cash_pwd: this.cash_pwd
+            };
+            this.loading = true;
+            let res = await this.$Http.changeTradePwd(data);
+            let is_exist = res.data.is_exist;
+            if (is_exist) {
+                this.cashPost();
+            } else {
+                this.loading = false;
+                this.$Message.error("交易密码错误！");
+            }
+        },
+        async cashPost () {
             let data = {
                 user_id: mylocalStorage.getItem("user_id"),
                 balance_num: Number(this.cash_num),
@@ -156,10 +211,13 @@ export default {
                 this.deposit_show_modal = false;
                 this.cash_num = "";
                 this.isTextSure = true;
+                this.show_text_trade = false;
+                this.queryTotal();
             } else {
                 this.$Message.error("提现失败！");
                 this.loading = false;
                 this.deposit_show_modal = false;
+                this.show_text_trade = false;
             }
         }
     }
