@@ -165,26 +165,26 @@
                     startVal: 0,
                     endVal: 0,
                     duration: 100,
-                    float: 2
+                    float: 1
                 },
                 balance: {
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2,
+                    float: 1,
                     income: 0
                 },
                 income: {
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2
+                    float: 1
                 },
                 bonus: {
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2
+                    float: 1
                 },
                 banner: {
                     speed: 1500
