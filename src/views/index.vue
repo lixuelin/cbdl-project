@@ -333,7 +333,7 @@
                 this.balance.income = res.data.income;
                 queryInvestTotal(data).then(response => {
                     let data = response.data.data;
-                    this.total.endVal = data[0].total + this.balance.endVal;
+                    this.total.endVal = data[0].total + this.balance.endVal + data[1].total;
                     this.income.endVal = data[1].total;
                     this.bonus.endVal = data[2].total;
                 }).catch(error => {
