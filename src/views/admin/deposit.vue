@@ -145,6 +145,7 @@ export default {
                                             this.change_deposit = true;
                                             this.deposit_info.deposit_num = params.row.deposit_num;
                                             this.deposit_info.id = params.row.id;
+                                            this.deposit_info.user_id = params.row.user_id;
                                         }
                                     }
                                 }, "未审核")
@@ -225,6 +226,11 @@ export default {
                 this.modal_loading = false;
                 this.change_deposit = false;
                 this.getBalance()
+                this.deposit_info.reality_num = "";
+            } if (res.status === 500) {
+                this.$Message.error("投资金额大于当前用户余额，请提醒用户充值！");
+                this.modal_loading = false;
+                this.change_deposit = false;
                 this.deposit_info.reality_num = "";
             } else{
                 this.$Message.error("请求失败！")
