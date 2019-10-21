@@ -20,7 +20,7 @@ const allBank = {
         color: "#3679ff",
         name: "中国建设银行"
     },
-    
+
     "boc": {
         icon: "icon-yinhanglogo-5",
         color: "#f54966",
@@ -45,7 +45,27 @@ const allBank = {
         icon: "icon-yinhanglogo-1",
         color: "#3679ff",
         name: "交通银行"
-    }
+    },
+    "dc": {
+        icon: "icon-gongshangyinhang",
+        color: "#f54966",
+        name: "深发/平安银行"
+    },
+    "jxrcu": {
+        icon: "icon-gongshangyinhang",
+        color: "#63a35c",
+        name: "江西省农村信用"
+    },
+    "spdb": {
+        icon: "icon-gongshangyinhang",
+        color: "#3679ff",
+        name: "浦东发展银行"
+    },
+    "ncp": {
+        icon: "icon-gongshangyinhang",
+        color: "#3679ff",
+        name: "南昌银行"
+    },
 };
 
 export function checkBackInfo(bank) {
