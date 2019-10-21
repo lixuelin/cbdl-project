@@ -207,7 +207,6 @@ export default {
             let res = await this.$Http.queryBalanceAdmin(data);
             this.deposit_list = res.data.balance_list;
             this.pageInfo.total = res.data.total;
-            console.log(res)
         },
         changePage(page) {
             this.pageInfo.currentPage = page;
@@ -228,7 +227,7 @@ export default {
                 this.change_deposit = false;
                 this.getBalance()
                 this.deposit_info.reality_num = "";
-            } if (res.status === 500) {
+            } else if (res.status === 500) {
                 this.$Message.error("投资金额大于当前用户余额，请提醒用户充值！");
                 this.modal_loading = false;
                 this.change_deposit = false;
