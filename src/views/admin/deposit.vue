@@ -146,6 +146,7 @@ export default {
                                             this.deposit_info.deposit_num = params.row.deposit_num;
                                             this.deposit_info.id = params.row.id;
                                             this.deposit_info.user_id = params.row.user_id;
+                                            this.deposit_info.type = params.row.type;
                                         }
                                     }
                                 }, "未审核")
