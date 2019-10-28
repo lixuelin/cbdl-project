@@ -26,7 +26,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="invest-module">
+		<div class="invest-module invest-module-abeam">
 			<h3>支付方式</h3>
 			<div class="invest-module-way">
 				<ul>
