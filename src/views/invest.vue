@@ -26,16 +26,16 @@
 				</ul>
 			</div>
 		</div>
-		<div class="invest-module">
+		<div class="invest-module invest-module-abeam">
 			<h3>支付方式</h3>
 			<div class="invest-module-way">
 				<ul>
 					<template v-for="(item, index) in invest_check_pay">
 						<li @click="checkInvestPay(index)" :key="item">
 							<div :class="{'invest-module-pay': true,
-                            'invest-module-wx': index === 0,
-                            'invest-module-ali': index === 1,
-                            'invest-module-pay-checked': index === checked_pay.index}">
+							'invest-module-wx': index === 0,
+							'invest-module-ali': index === 1,
+							'invest-module-pay-checked': index === checked_pay.index}">
 								<template v-if="index === 0">
 									<span class="iconfont icon-weixinzhifu"></span>
 								</template>
@@ -209,6 +209,7 @@
 					user_id: mylocalStorage.getItem("user_id")
 				}
 				let res = await this.$Http.queryBalanceLastInvest(data)
+				console.log(res.data)
 				this.is_sure = res.data.is_sure;
 			},
 			async getBalance() {
@@ -232,6 +233,7 @@
 					financial_id: this.financial_id
 				}
 				let res = await this.$Http.queryIncomeCount(data);
+				console.log(res.data)
 				this.total.invest = res.data[0].total;
 				this.total.income = res.data[1].total;
 			},
