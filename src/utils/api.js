@@ -61,6 +61,10 @@ const requestApi = {
         method: "get",
         url: "/balance/last_invest"
     },
+    queryAmountInvest: { // 查看最后一次投资是否确认
+        method: "get",
+        url: "/invest/amount"
+    },
 };
 
 module.exports = requestApi;

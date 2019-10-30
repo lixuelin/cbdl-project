@@ -62,7 +62,8 @@
 			</div>
 			<div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">  
-                    <h3>生态1号</h3>
+                    <h3>生态1号 </h3>
+                    <h4>发行量 {{amount.financial_first}}</h4>
                     <p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
                     <p class="b-home-main-newcomer-year">月收益</p>
                     <div class="b-home-main-newcomer-tip">
@@ -71,6 +72,7 @@
                 </div>
 				<div class="b-home-main-newcomer-box">
                     <h3>生态2号</h3>
+                    <h4> 发行量 {{amount.financial_two}}</h4>
                     <p class="b-home-main-newcomer-invest">5.3%-6.1%</p>
                     <p class="b-home-main-newcomer-year">15天收益</p>
                     <div class="b-home-main-newcomer-tip">
@@ -155,6 +157,10 @@
                 modal2: false,
                 name: "李学麟",
                 code: "",
+                amount: {
+                    financial_first: "500W",
+                    financial_two: "300W"
+                },
                 userInfo: {
                     name: "李雪莉",
                     photo: "./../assets/image/photo.jpeg",
@@ -331,6 +337,9 @@
                 let res = await this.$Http.queryBalanceCount(data);
                 this.balance.endVal = res.data.count;
                 this.balance.income = res.data.income;
+                let amount = await this.$Http.queryAmountInvest();
+                this.amount.financial_first = amount.data.first + "W"; 
+                this.amount.financial_two = amount.data.two + "W";
                 queryInvestTotal(data).then(response => {
                     let data = response.data.data;
                     this.total.endVal = data[0].total + this.balance.endVal + data[1].total;
