@@ -3,16 +3,30 @@
 		<title-view :title="title"></title-view>
         <div class="investment_flow_financial">
             <div>
-                <span>生态2号</span>
-                <p>¥{{financial.total}}</p>
+                <span>生态1号</span>
+                <p>¥{{financial.first.total}}</p>
             </div>
             <div>
                 <span>剩余投资</span>
-                <p>¥{{financial.surplus}}</p>
+                <p>¥{{financial.first.surplus}}</p>
             </div>
             <div>
                 <span>已投资</span>
-                <p>¥{{financial.invest_num}}</p>
+                <p>¥{{financial.first.invest_num}}</p>
+            </div>
+        </div>
+        <div class="investment_flow_financial">
+            <div>
+                <span>生态2号</span>
+                <p>¥{{financial.two.total}}</p>
+            </div>
+            <div>
+                <span>剩余投资</span>
+                <p>¥{{financial.two.surplus}}</p>
+            </div>
+            <div>
+                <span>已投资</span>
+                <p>¥{{financial.two.invest_num}}</p>
             </div>
         </div>
 		<div class="admin-main-search">
@@ -261,9 +275,16 @@
                 invests: [],
                 bankList: [],
                 financial: {
-                    total: 0,
-                    invest_num: 0,
-                    surplus: 0
+                    first: {
+                        total: 0,
+                        invest_num: 0,
+                        surplus: 0
+                    },
+                    two: {
+                        total: 0,
+                        invest_num: 0,
+                        surplus: 0
+                    },
                 }
             };
         },
@@ -291,9 +312,12 @@
             },
            async getFinancialNum() {
                 let res = await this.$Http.queryFinancialNum();
-                this.financial.total = res.data.financial_count;
-                this.financial.invest_num = res.data.invests;
-                this.financial.surplus = res.data.financial_count - res.data.invests;
+                this.financial.first.total = res.data.first.financial_count;
+                this.financial.two.total = res.data.two.financial_count;
+                this.financial.first.invest_num = res.data.first.invests;
+                this.financial.two.invest_num = res.data.two.invests;
+                this.financial.first.surplus = res.data.first.financial_count - res.data.first.invests;
+                this.financial.two.surplus = res.data.two.financial_count - res.data.two.invests;
             },
             queryBankList() {
                 queryBanks().then(response => {

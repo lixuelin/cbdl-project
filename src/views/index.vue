@@ -60,7 +60,39 @@
 					</div>
 				</div>
 			</div>
-			<div class="b-home-main-newcomer">
+            <div class="b-home-main-newcomer">
+                <div class="b-home-main-newcomer-box">
+                    <h4>500W</h4>
+                    <p>总发行量</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <p class="b-home-main-newcomer-invest">3.95-4.1%</p>
+                    <p class="b-home-main-newcomer-year">月收益</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h3>生态1号 </h3>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>期限30天</p>
+                    </div>
+                </div>
+            </div>
+            <div class="b-home-main-newcomer">
+                <div class="b-home-main-newcomer-box">
+                    <h4>300W</h4>
+                    <p>总发行量</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <p class="b-home-main-newcomer-invest">5.3-6.1%</p>
+                    <p class="b-home-main-newcomer-year">15天收益</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h3>生态2号</h3>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>期限15天</p>
+                    </div>
+                </div>
+            </div>
+			<!-- <div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">  
                     <h3>生态1号 </h3>
                     <h4>发行量 {{amount.financial_first}}</h4>
@@ -79,7 +111,7 @@
                         <p>投资期限最长15天</p>
                     </div>
                 </div>
-			</div>
+			</div> -->
 			<!-- <div class="b-home-main-share"> -->
 				<!-- <div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>
 				<div class="b-home-main-share-btn">

@@ -133,6 +133,64 @@
 
         &-newcomer {
             display: flex;
+            margin-bottom: 10px;
+            .paddingCont(15px);
+            background: #fff;
+            .border_radius();
+            .shadow_box();
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+
+            &-box {
+                flex: 1;
+                &:last-child {
+                    border-right: none;
+                }
+
+                & h3 {
+                    font-size: 18px;
+                }
+
+                & h4 {
+                    font-size: 22px;
+                }
+        
+            }
+
+            &-invest {
+                color: #3679ff;
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            &-year {
+                color: #b1b8c7;
+                font-size: 12px;
+            }
+
+            &-tip {
+                display: flex;
+                justify-content: center;
+
+                & p {
+                    flex: 1;
+                    line-height: 200%;
+                    justify-content: center;
+                }
+            }
+
+            &-btn {
+                .paddingCont(10px 0 0 0);
+
+                & button {
+                    width: 80%;
+                }
+            }
+        }
+
+        /* &-newcomer {
+            display: flex;
             .paddingCont(15px);
             background: #fff;
             .border_radius();
@@ -141,7 +199,7 @@
 
             &-box {
                 flex: 1;
-                border-right: 1px solid #eee;
+                border: 1px solid #eee;
                 &:last-child {
                     border-right: none;
                 }
@@ -181,7 +239,7 @@
                     width: 80%;
                 }
             }
-        }
+        } */
 
         &-banner {
             position: relative;

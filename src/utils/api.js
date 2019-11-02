@@ -51,7 +51,7 @@ const requestApi = {
     },
     queryFinancialNum: { // 查询生态2号限制投资额度和已投资额度
         method: "get",
-        url: "/invest/financial_two"
+        url: "/invest/financial"
     },
     queryBalanceIncome: { // 查询余额收益
         method: "get",
