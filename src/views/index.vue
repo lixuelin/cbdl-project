@@ -62,10 +62,6 @@
 			</div>
             <div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">
-                    <h4>500W</h4>
-                    <p>总发行量</p>
-                </div>
-                <div class="b-home-main-newcomer-box">
                     <p class="b-home-main-newcomer-invest">3.95-4.1%</p>
                     <p class="b-home-main-newcomer-year">月收益</p>
                 </div>
@@ -75,12 +71,12 @@
                         <p>期限30天</p>
                     </div>
                 </div>
-            </div>
-            <div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">
-                    <h4>300W</h4>
+                    <h4>500W</h4>
                     <p>总发行量</p>
                 </div>
+            </div>
+            <div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">
                     <p class="b-home-main-newcomer-invest">5.3-6.1%</p>
                     <p class="b-home-main-newcomer-year">15天收益</p>
@@ -90,6 +86,10 @@
                     <div class="b-home-main-newcomer-tip">
                         <p>期限15天</p>
                     </div>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h4>300W</h4>
+                    <p>总发行量</p>
                 </div>
             </div>
 			<!-- <div class="b-home-main-newcomer">
