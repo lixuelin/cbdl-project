@@ -3,7 +3,7 @@
 		<div class="bank-list">
 			<ul>
 				<template v-for="bank in bankList">
-					<li :style="bankBg(bank)">
+					<li :style="bankBg(bank)" :key="bank">
 						<div class="bank-list-cont">
 							<div class="bank-list-cont-name">
 								<h3>{{bank.bank_name}}</h3>

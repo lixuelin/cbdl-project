@@ -3,7 +3,7 @@
 		<div>
 			<ul>
 				<template v-for="item in invest">
-					<li>
+					<li :key="item.title">
 						<div class="invest-card-title">
 							<h4>{{item.title}}</h4>
 							<div class="invest-card-title-btn">

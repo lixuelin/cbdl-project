@@ -1,7 +1,7 @@
 <template>
 	<div class="card" v-if="is_show_list">
-		<template v-for="(item, index) in investList">
-			<div class="card-box">
+		<template v-for="item in investList">
+			<div class="card-box" :key="item">
 				<header class="card-head">
 					<div class="card-head-time">
 						<span>{{item.create_time}}</span>
@@ -28,13 +28,13 @@
 					</div>
 					<div class="card-body-handler">
 						<template v-if="item.income_status === 2">
-							<Button type="primary" size="small" disabled="">提现</Button>
+							<Button type="primary" size="small" disabled="">转入余额</Button>
 						</template>
 						<template v-else-if="item.income_status === -1">
-							<Button type="success" size="small" @click="cashMoney(item)">待提现</Button>
+							<Button type="success" size="small" @click="cashMoney(item)">转入余额</Button>
 						</template>
 						<template v-else>
-							<Button type="primary" size="small" @click="cashMoney(item)">提现</Button>
+							<Button type="primary" size="small" @click="cashMoney(item)">转入余额</Button>
 						</template>
 					</div>
 				</article>
@@ -42,7 +42,7 @@
 		</template>
 		<Modal v-model="cash_list_modal" width="220">
 			<p slot="header">
-				<span>提现</span>
+				<span>转入余额</span>
 			</p>
 			<div>
 				<div class="card-body-handler-draw">
@@ -60,7 +60,7 @@
 					<p>实际到账：</p>
 					<p>{{cash_info.cash}}</p>
 				</div>
-				<p class="card-body-handler-tips">资金返回至注册时填写的银行卡内</p>
+				<p class="card-body-handler-tips">资金返回至余额内</p>
 			</div>
 			<div slot="footer">
 				<Button type="success" size="default" long @click="cash_list_modal_sure = true">确定</Button>
@@ -85,7 +85,7 @@
 				<span>提现</span>
 			</p>
 			<div class="">
-				<p>提现成功</p>
+				<p>转入余额成功</p>
 				<p>资金将在2小时日内到账，如有疑问请咨询客服</p>
 			</div>
 			<div slot="footer">
@@ -124,7 +124,7 @@
                 cash_loading: false
             };
         },
-        props: ["investList"],
+        props: ["investList", "financial"],
         components: {
             "hr-view": cut
         },
@@ -177,11 +177,11 @@
                     if (is_exist) {
                         this.cashInvestMoney(user_id);
                     } else {
-                        this.loading = false;
+                        this.cash_loading = false;
                         this.$Message.error("密码错误！");
                     }
                 }).catch(error => {
-                    this.loading = false;
+                    this.cash_loading = false;
                     console.log(error);
                 });
                 
@@ -194,9 +194,9 @@
                     brokerage: this.cash_info.brokerage,
                     cash_num: this.cash_info.cash,
                     income_num: this.cash_invest.income_num,
-                    invest_time: this.cash_invest.create_time
+                    invest_time: this.cash_invest.create_time,
+                    financial_id: this.financial
                 };
-                console.log(data, "data");
                 IncomeCashOne(data).then(response => {
                     let cash_status = response.data.data.success;
                     if (cash_status) {
@@ -213,6 +213,7 @@
                     }
                 }).catch(error => {
                     this.$Message.error("提现失败！");
+                    this.cash_loading = false;
                     console.log(error);
                 });
             }

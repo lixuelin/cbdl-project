@@ -82,7 +82,26 @@
             .shadow_box();
 
             &-tip {
+                position: relative;
+                padding: 0 10px;
+                font-size: 12px;
                 color: #646d7f;
+
+                & span {
+                    font-size: 10px;
+                }
+
+                &::before{
+                    position: absolute;
+                    left: 2px;
+                    top: 50%;
+                    content: "";
+                    width: 4px;
+                    height: 4px;
+                    background: #3679ff;
+                    .border_radius(4px);
+                    transform: translateY(-50%)
+                }
             }
 
             &-hide i {
@@ -90,7 +109,7 @@
             }
 
             & h3 span {
-                font-size: 22px;
+                font-size: 26px;
             }
 
             &-class {
@@ -99,21 +118,45 @@
 
                 &-money {
                     flex: 1;
+                    & p span {
+                        padding-left: 10px;
+                        color: #f00;
+                    }
                 }
 
                 & h4 span {
-                    font-size: 18px;
+                    font-size: 22px;
                 }
             }
 
         }
 
         &-newcomer {
+            display: flex;
+            margin-bottom: 10px;
             .paddingCont(15px);
             background: #fff;
             .border_radius();
             .shadow_box();
             text-align: center;
+            align-items: center;
+            justify-content: center;
+
+            &-box {
+                flex: 1;
+                &:last-child {
+                    border-right: none;
+                }
+
+                & h3 {
+                    font-size: 18px;
+                }
+
+                & h4 {
+                    font-size: 22px;
+                }
+        
+            }
 
             &-invest {
                 color: #3679ff;
@@ -145,6 +188,58 @@
                 }
             }
         }
+
+        /* &-newcomer {
+            display: flex;
+            .paddingCont(15px);
+            background: #fff;
+            .border_radius();
+            .shadow_box();
+            text-align: center;
+
+            &-box {
+                flex: 1;
+                border: 1px solid #eee;
+                &:last-child {
+                    border-right: none;
+                }
+
+                & h4 {
+                    font-size: 16px;
+                }
+        
+            }
+
+            &-invest {
+                color: #3679ff;
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            &-year {
+                color: #b1b8c7;
+                font-size: 12px;
+            }
+
+            &-tip {
+                display: flex;
+                justify-content: center;
+
+                & p {
+                    flex: 1;
+                    line-height: 200%;
+                    justify-content: center;
+                }
+            }
+
+            &-btn {
+                .paddingCont(10px 0 0 0);
+
+                & button {
+                    width: 80%;
+                }
+            }
+        } */
 
         &-banner {
             position: relative;
@@ -242,6 +337,7 @@
         }
 
         &-menu {
+            margin-top: 15px;
             background: #fff;
 
             &-help {
@@ -256,9 +352,9 @@
                         padding-right: 5px;
                     }
 
-                    &:last-child {
-                        border-bottom: none;
-                    }
+                    // &:last-child {
+                    //     border-bottom: none;
+                    // }
                 }
             }
         }

@@ -25,10 +25,10 @@
 			<div class="b-home-main-means" v-if="true">
 				<div class="b-home-main-means-total">
 					<p class="b-home-main-means-tip">
-						<span>总本金</span>
+						<span>总资产</span>
 						<span class="b-home-main-means-hide">
                             <Icon type="eye-disabled"></Icon>
-							<!--<Icon type="ios-eye"></Icon>-->
+							<!-- <Icon type="ios-eye"></Icon> -->
                         </span>
 					</p>
 					<h3>
@@ -37,6 +37,13 @@
 					</h3>
 				</div>
 				<div class="b-home-main-means-class">
+                    <div class="b-home-main-means-class-money">
+						<p class="b-home-main-means-tip">余额 <span v-if="balance.income">+ {{balance.income}}</span></p>
+						<h4>
+							<countTo :startVal='balance.startVal' :endVal='balance.endVal' :duration='balance.speed'
+							         :decimals="balance.float"></countTo>
+						</h4>
+					</div>
 					<div class="b-home-main-means-class-money">
 						<p class="b-home-main-means-tip">投资收益</p>
 						<h4>
@@ -53,19 +60,60 @@
 					</div>
 				</div>
 			</div>
-			<div class="b-home-main-newcomer">
-				<p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
-				<p class="b-home-main-newcomer-year">月收益</p>
-				<div class="b-home-main-newcomer-tip">
-					<p>投资期限最长1个月</p>
-					<p>随时提现，到账速度快</p>
-				</div>
-				<div class="b-home-main-newcomer-btn">
-					<i-button type="primary" @click="goToInvest">立即投资</i-button>
-				</div>
-			</div>
-			<div class="b-home-main-share">
-				<div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>
+            <div class="b-home-main-newcomer">
+                <div class="b-home-main-newcomer-box">
+                    <p class="b-home-main-newcomer-invest">3.95-4.1%</p>
+                    <p class="b-home-main-newcomer-year">月收益</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h3>生态1号 </h3>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>期限30天</p>
+                    </div>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h4>500W</h4>
+                    <p>总发行量</p>
+                </div>
+            </div>
+            <div class="b-home-main-newcomer">
+                <div class="b-home-main-newcomer-box">
+                    <p class="b-home-main-newcomer-invest">5.3-6.1%</p>
+                    <p class="b-home-main-newcomer-year">15天收益</p>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h3>生态2号</h3>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>期限15天</p>
+                    </div>
+                </div>
+                <div class="b-home-main-newcomer-box">
+                    <h4>300W</h4>
+                    <p>总发行量</p>
+                </div>
+            </div>
+			<!-- <div class="b-home-main-newcomer">
+                <div class="b-home-main-newcomer-box">  
+                    <h3>生态1号 </h3>
+                    <h4>发行量 {{amount.financial_first}}</h4>
+                    <p class="b-home-main-newcomer-invest">3.95%-4.1%</p>
+                    <p class="b-home-main-newcomer-year">月收益</p>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>投资期限最长1个月</p>
+                    </div>
+                </div>
+				<div class="b-home-main-newcomer-box">
+                    <h3>生态2号</h3>
+                    <h4> 发行量 {{amount.financial_two}}</h4>
+                    <p class="b-home-main-newcomer-invest">5.3%-6.1%</p>
+                    <p class="b-home-main-newcomer-year">15天收益</p>
+                    <div class="b-home-main-newcomer-tip">
+                        <p>投资期限最长15天</p>
+                    </div>
+                </div>
+			</div> -->
+			<!-- <div class="b-home-main-share"> -->
+				<!-- <div class="b-home-main-share-tip">分享给好友，好友注册时输入您的邀请码，并成功投资后，您就能获得丰厚奖金哦～</div>
 				<div class="b-home-main-share-btn">
 					<div @click="wxShare">
 						<p class="b-home-main-share-btn-icon">
@@ -73,7 +121,7 @@
 						</p>
 						<span class="b-home-main-share-btn-word">微信</span>
 					</div>
-				</div>
+				</div> -->
 				<!--<div class="b-home-main-share-btn" >-->
 				<!--<div @click="wxShare">-->
 				<!--<p class="b-home-main-share-btn-icon">-->
@@ -82,7 +130,7 @@
 				<!--<span class="b-home-main-share-btn-word">朋友圈</span>-->
 				<!--</div>-->
 				<!--</div>-->
-			</div>
+			<!-- </div> -->
 			<div class="b-home-main-menu">
 				<div class="b-home-main-menu-help">
 					<ul>
@@ -141,6 +189,10 @@
                 modal2: false,
                 name: "李学麟",
                 code: "",
+                amount: {
+                    financial_first: "500W",
+                    financial_two: "300W"
+                },
                 userInfo: {
                     name: "李雪莉",
                     photo: "./../assets/image/photo.jpeg",
@@ -151,19 +203,26 @@
                     startVal: 0,
                     endVal: 0,
                     duration: 100,
-                    float: 2
+                    float: 1
+                },
+                balance: {
+                    startVal: 0,
+                    endVal: 0,
+                    duration: 300,
+                    float: 1,
+                    income: 0
                 },
                 income: {
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2
+                    float: 1
                 },
                 bonus: {
                     startVal: 0,
                     endVal: 0,
                     duration: 300,
-                    float: 2
+                    float: 1
                 },
                 banner: {
                     speed: 1500
@@ -296,18 +355,26 @@
                 this.$Message.warning("分享功能正在维护中！！");
             },
             goToInvest() {
-                this.$router.push({ "name": "invest" });
+                this.$router.push({ "name": "invest", params: {
+                    financial_id: 2
+                }});
             },
-            queryTotal() {
+            async queryTotal() {
                 let data = {
                     user_id: mylocalStorage.getItem("user_id")
                 };
                 if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
                     return;
                 }
+                let res = await this.$Http.queryBalanceCount(data);
+                this.balance.endVal = res.data.count;
+                this.balance.income = res.data.income;
+                let amount = await this.$Http.queryAmountInvest();
+                this.amount.financial_first = amount.data.first + "W"; 
+                this.amount.financial_two = amount.data.two + "W";
                 queryInvestTotal(data).then(response => {
                     let data = response.data.data;
-                    this.total.endVal = data[0].total;
+                    this.total.endVal = data[0].total + this.balance.endVal + data[1].total;
                     this.income.endVal = data[1].total;
                     this.bonus.endVal = data[2].total;
                 }).catch(error => {

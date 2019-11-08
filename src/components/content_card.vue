@@ -11,7 +11,7 @@
 		<article class="content-card-body">
 			<ul>
 				<template v-for="item in content.invest">
-					<li>
+					<li :key="item.title">
 						<div class="content-card-body-rate">
 							<div class="content-card-body-rate-num">
 								<span>{{item.rate}}</span>

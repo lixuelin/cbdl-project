@@ -181,6 +181,14 @@
     }
 }
 
+.balance-menu {
+    & li {
+        & a {
+            color: #3388ff;
+        }
+    }
+}
+
 .invest-card {
     background: #fff;
     .border_radius();
@@ -368,6 +376,31 @@
         }
     }
 
+}
+
+.note {
+    padding: 15px 10px;
+    & li {
+        display: flex;
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        background: #fff;
+
+        & div{
+            flex: 1;
+            &:last-child{ 
+                text-align: right;
+            }
+        }
+    }
+
+    &-type, &-num {
+        font-size: 16px;
+    }
+
+    &-time, &-tip {
+        font-size: 12px;
+    }
 }
 
 .foot {

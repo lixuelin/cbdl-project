@@ -225,10 +225,12 @@
                 this.cash_info = {
                     total: this.total.endVal,
                     brokerage: Number(invest_brokerage).toFixed(2),
-                    cash: Number(this.total.endVal),
+                    cash: Number(this.total.endVal)-Number(invest_brokerage).toFixed(2),
                     invest_num: invest_total.toFixed(2),
                     invest_time: invest_time
                 };
+
+                console.log(this.cash_info,"cash_info")
             },
             cashAllSure() {
                 let user_id = mylocalStorage.getItem("user_id");
@@ -280,6 +282,7 @@
                     }
                 }).catch(error => {
                     this.$Message.error("提现失败！");
+                    this.loading = false;
                     console.log(error);
                 });
             }

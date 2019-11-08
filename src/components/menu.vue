@@ -2,13 +2,13 @@
 	<div class="admin-menu">
 		<Menu :theme="theme2" :accordion="true">
 			<template v-for="(item, index) in menu">
-				<Submenu :name="index">
+				<Submenu :name="index" :key="item.title">
 					<template slot="title">
 						<Icon type="ios-paper"/>
 						<span>{{item.title}}</span>
 					</template>
-					<template v-for="(child, i) in item.child">
-						<MenuItem :name="index+ '-'+ i" :to="child.path">
+					<template v-for="(child, i) in item.child" >
+						<MenuItem :key="child.name" :name="index+ '-'+ i" :to="child.path">
 							<span>{{child.name}}</span>
 						</MenuItem>
 					</template>
@@ -27,7 +27,6 @@
             return {
                 theme2: "light",
                 menu: [
-    
                     {
                         title: "投资管理",
                         child: [
@@ -58,16 +57,29 @@
                             }
                         ]
                     },
+                    // {
+                    //     title: "提现管理",
+                    //     child: [
+                    //         {
+                    //             name: "提现日流水",
+                    //             path: "/admin/withdraw_flow"
+                    //         },
+                    //         {
+                    //             name: "提现汇总",
+                    //             path: "/admin/withdraw_summary"
+                    //         }
+                    //     ]
+                    // },
                     {
-                        title: "提现管理",
+                        title: "充值中心",
                         child: [
                             {
-                                name: "提现日流水",
-                                path: "/admin/withdraw_flow"
+                                name: "充值记录",
+                                path: "/admin/deposit"
                             },
                             {
-                                name: "提现汇总",
-                                path: "/admin/withdraw_summary"
+                                name: "余额收益",
+                                path: "/admin/balance_flow"
                             }
                         ]
                     },

@@ -1,6 +1,34 @@
 <template>
 	<div id="investment_flow" class="admin-main">
 		<title-view :title="title"></title-view>
+        <div class="investment_flow_financial">
+            <div>
+                <span>生态1号</span>
+                <p>¥{{financial.first.total}}</p>
+            </div>
+            <div>
+                <span>剩余投资</span>
+                <p>¥{{financial.first.surplus}}</p>
+            </div>
+            <div>
+                <span>已投资</span>
+                <p>¥{{financial.first.invest_num}}</p>
+            </div>
+        </div>
+        <div class="investment_flow_financial">
+            <div>
+                <span>生态2号</span>
+                <p>¥{{financial.two.total}}</p>
+            </div>
+            <div>
+                <span>剩余投资</span>
+                <p>¥{{financial.two.surplus}}</p>
+            </div>
+            <div>
+                <span>已投资</span>
+                <p>¥{{financial.two.invest_num}}</p>
+            </div>
+        </div>
 		<div class="admin-main-search">
 			<div class="admin-main-search-box">
 				<div class="admin-main-search-box-fields">
@@ -50,7 +78,7 @@
 					<Select v-model="search.bank_name" placeholder="全部" style="width:200px">
 						<Option value="all">全部</Option>
 						<template v-for="bank in bankList">
-							<Option :value="bank.bank_name">{{bank.bank_name}}</Option>
+							<Option :value="bank.bank_name" :key="bank">{{bank.bank_name}}</Option>
 						</template>
 					</Select>
 				</div>
@@ -153,6 +181,10 @@
                         key: "verify_num"
                     },
                     {
+                        title: "理财类型",
+                        key: "financial_type"
+                    },
+                    {
                         title: "操作",
                         key: "action",
                         width: 100,
@@ -241,15 +273,30 @@
                 
                 ],
                 invests: [],
-                bankList: []
+                bankList: [],
+                financial: {
+                    first: {
+                        total: 0,
+                        invest_num: 0,
+                        surplus: 0
+                    },
+                    two: {
+                        total: 0,
+                        invest_num: 0,
+                        surplus: 0
+                    },
+                }
             };
         },
         components: {
             "title-view": pageTitle
         },
-        mounted() {
+        created() {
             this.queryBankList();
             this.getInvestList();
+            this.getFinancialNum();
+        },
+        mounted() {
         },
         methods: {
             changePage(page) {
@@ -262,6 +309,15 @@
             },
             download() {
                 window.location = "/invest/download_invest";
+            },
+           async getFinancialNum() {
+                let res = await this.$Http.queryFinancialNum();
+                this.financial.first.total = res.data.first.financial_count;
+                this.financial.two.total = res.data.two.financial_count;
+                this.financial.first.invest_num = res.data.first.invests;
+                this.financial.two.invest_num = res.data.two.invests;
+                this.financial.first.surplus = res.data.first.financial_count - res.data.first.invests;
+                this.financial.two.surplus = res.data.two.financial_count - res.data.two.invests;
             },
             queryBankList() {
                 queryBanks().then(response => {
@@ -320,5 +376,6 @@
 </script>
 
 <style lang="less" scoped>
-	@import "./../../assets/admin/components";
+    @import "./../../assets/admin/components";
+    @import "./../../assets/admin/invest";
 </style>

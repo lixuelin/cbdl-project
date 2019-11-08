@@ -52,7 +52,7 @@
 						</div>
 					</li>
 					<template v-for="item in next_list">
-						<li>
+						<li :key="item">
 							<div class="bonus-body-next-part bonus-body-next-name">
 								<div>
 									<p>{{item.household}}</p>
@@ -86,7 +86,7 @@
 					<p>{{bonus.total}}</p>
 				</div>
 				<hr-view></hr-view>
-				<p class="bonus-head-total-handler-tips">资金返回至账号下绑定银行卡内</p>
+				<p class="bonus-head-total-handler-tips">资金返回至余额内</p>
 			</div>
 			<div slot="footer">
 				<Button @click="draw_modal_sure = true" long size="default" type="success">确定</Button>
@@ -95,9 +95,9 @@
 						<span>提现</span>
 					</p>
 					<div>
-						<p>请输入提现密码：</p>
+						<p>请输入交易密码：</p>
 						<div class="bonus-head-total-handler-password">
-							<i-input placeholder="请输入提现密码" style="width: 220px" type="password"
+							<i-input placeholder="请输入交易密码" style="width: 220px" type="password"
 							         v-model="cash_pwd"></i-input>
 						</div>
 					</div>
@@ -114,7 +114,7 @@
 			</p>
 			<div class="bonus-body-next-list">
 				<template v-for="item in first_user_list">
-					<div class="bonus-body-next-list-cont">
+					<div class="bonus-body-next-list-cont" :key="item">
 						<span>{{item.household}}</span>
 						<button></button>
 						<Button @click="showNextNextUser(item)" size="small" type="primary">团队分享</Button>
@@ -131,7 +131,7 @@
 			</p>
 			<div class="bonus-body-next-list">
 				<template v-for="item in second_user_list">
-					<div class="bonus-body-next-list-cont">
+					<div class="bonus-body-next-list-cont" :key="item">
 						<span>{{item.household}}</span>
 					</div>
 				</template>
@@ -152,7 +152,7 @@
 					<span>我的奖金</span>
 				</div>
 				<template v-for="item in next_invest">
-					<div class="bonus-body-next-list-cont">
+					<div class="bonus-body-next-list-cont" :key="item">
 						<span>{{item.household}}</span>
 						<span>{{item.invest_num}}</span>
 						<span>{{item.create_time}}</span>
@@ -296,10 +296,11 @@
                 }
                 this.cash_pwd = "";
                 bonusCashMoney(data).then(response => {
+                    console.log(data, "ddd")
                     this.draw_modal = false;
                     this.draw_modal_sure = false;
                     this.bonusTotal();
-                    this.this.modal_loading = false;
+                    this.modal_loading = false;
                     this.$Message.success("提现成功，2小时内未到账请联系客服！");
                 }).catch(error => {
                     this.$Message.error("提现失败！");

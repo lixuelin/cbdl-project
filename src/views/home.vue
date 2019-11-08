@@ -8,7 +8,7 @@
 		<router-view v-if="isRouterAlive"></router-view>
 		<div class="home-foot">
 			<ul>
-				<li v-for="(item, index) in menu" @click="checkedPage(index)">
+				<li v-for="(item, index) in menu" :key="item.name" @click="checkedPage(index)">
 					<router-link :to="item.route">
 						<div :class="{'home-foot-menu': true, 'home-foot-active': menu_active === index}">
 							<div>
@@ -42,14 +42,19 @@
                         "route": "/home"
                     },
                     {
-                        "name": "收益",
+                        "name": "理财",
                         "type": "iconfont icon-funds-line",
-                        "route": "/income"
+                        "route": "/financial"
                     },
                     {
                         "name": "奖金",
                         "type": "iconfont icon-Dollar",
                         "route": "/bonus"
+                    },
+                    {
+                        "name": "余额",
+                        "type": "iconfont icon-Dollar",
+                        "route": "/balance"
                     }
                 ],
                 isRouterAlive: true
