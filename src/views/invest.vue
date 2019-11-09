@@ -156,6 +156,7 @@
                 this.checked_money.money = this.invest_check_money[index];
             },
             checkInvestPay(index) {
+				this.isSureInvest()
                 this.checked_pay.index = index;
                 this.checked_pay.pay = this.invest_check_pay[index];
                 if (index === 0) {
