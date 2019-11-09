@@ -185,6 +185,10 @@ export default {
                     key: "account_time"
                 },
                 {
+                    title: "投资时间",
+                    key: "invest_time"
+                },
+                {
                     title: "创建时间",
                     key: "create_time"
                 }
