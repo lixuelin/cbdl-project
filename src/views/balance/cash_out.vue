@@ -19,7 +19,7 @@
         <div class="cash-out-content">
             <div class="cash-out-content-box">
                 <p class="cash-out-content-tip">提现金额</p>
-                <p class="cash-out-content-all"><span>全部提现</span></p>
+                <!-- <p class="cash-out-content-all"><span>全部提现</span></p> -->
             </div>
             <div class="cash-out-content-text">
                 <span>¥</span>
@@ -81,7 +81,8 @@ export default {
             bank_code: "41005000040046406",
             bank_add: "中国农业银行深圳中心区支行",
             show_text_trade: false,
-            cash_pwd: ""
+            cash_pwd: "",
+            is_sure: false,
         }
     },
     components: {
@@ -153,6 +154,14 @@ export default {
                 this.$Message.error("请求银行卡信息失败！");
             }
         },
+        async isSureInvest() {
+            let data = {
+                user_id: mylocalStorage.getItem("user_id")
+            }
+            let res = await this.$Http.queryBalanceLastCash(data)
+            console.log(res, 'sss')
+            this.is_sure = res.data.is_sure;
+        },
         async queryTotal() {
             let data = {
                 user_id: mylocalStorage.getItem("user_id")
@@ -164,6 +173,7 @@ export default {
             this.balance_num = res.data.count.toFixed(1);
         },
         sureCash () {
+            this.isSureInvest()
             let num = this.cash_num;
             if (isNaN(num) || num === "" || Number(num) === 0){
                 this.$Message.warning("请输入准确的数值");
@@ -173,12 +183,17 @@ export default {
                 this.$Message.warning("提现金额大于当前可用余额！");
                 return this.isTextSure = true;
             } 
+            if(!this.is_sure) {
+                this.$Message.warning("当前有提现申请正在等待审核，请稍后再试！");
+                return;
+            }
             this.show_text_trade = true;
         },
         async trade_Sure() {
             if (this.cash_pwd === "") {
                 return this.$Message.error("密码不能为空！");
             }
+            
             let data = {
                 user_id:mylocalStorage.getItem("user_id"),
                 cash_pwd: this.cash_pwd
