@@ -24,17 +24,22 @@
 		<div class="b-home-main">
 			<div class="b-home-main-means" v-if="true">
 				<div class="b-home-main-means-total">
-					<p class="b-home-main-means-tip">
-						<span>总资产</span>
-						<span class="b-home-main-means-hide">
-                            <Icon type="eye-disabled"></Icon>
-							<!-- <Icon type="ios-eye"></Icon> -->
-                        </span>
-					</p>
-					<h3>
-						<countTo :startVal='total.startVal' :endVal='total.endVal' :duration='total.speed'
-						         :decimals="total.float"></countTo>
-					</h3>
+                    <div class="b-home-main-means-total-cont">
+                        <p class="b-home-main-means-tip">
+                            <span>总资产</span>
+                            <span class="b-home-main-means-hide">
+                                <Icon type="eye-disabled"></Icon>
+                                <!-- <Icon type="ios-eye"></Icon> -->
+                            </span>
+                        </p>
+                        <h3>
+                            <countTo :startVal='total.startVal' :endVal='total.endVal' :duration='total.speed'
+                                    :decimals="total.float"></countTo>
+                        </h3>
+                    </div>
+					<div class="b-home-main-means-total-btn">
+                        <Button type="success" size="small" @click="goToDeposit">充值</Button>
+                    </div>
 				</div>
 				<div class="b-home-main-means-class">
                     <div class="b-home-main-means-class-money">
@@ -79,7 +84,7 @@
             <div class="b-home-main-newcomer">
                 <div class="b-home-main-newcomer-box">
                     <p class="b-home-main-newcomer-invest">5.3-6.1%</p>
-                    <p class="b-home-main-newcomer-year">15天收益</p>
+                    <p class="b-home-main-newcomer-year">月收益</p>
                 </div>
                 <div class="b-home-main-newcomer-box">
                     <h3>生态2号</h3>
@@ -179,6 +184,7 @@
     import foot from "./../components/foot";
     import { mylocalStorage, queryInvestTotal } from "./../utils/request_api";
     import { delCookie } from "./../utils/cookie";
+import { log } from 'util';
     
     export default {
         name: "index",
@@ -313,6 +319,9 @@
                     this.userInfo.name = mylocalStorage.getItem("username");
                 }
             },
+            goToDeposit() {
+                this.$router.push({ path: "/deposit" });
+            },
             wxRegCallback() {
                 // 用于微信JS-SDK回调
                 this.wxShareTimeline();
@@ -367,6 +376,7 @@
                     return;
                 }
                 let res = await this.$Http.queryBalanceCount(data);
+                
                 this.balance.endVal = res.data.count;
                 this.balance.income = res.data.income;
                 let amount = await this.$Http.queryAmountInvest();
