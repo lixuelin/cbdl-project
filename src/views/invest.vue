@@ -172,7 +172,7 @@
                         return;
 					}
 
-                    if (Number(this.checked_money.money) < this.balance_count) {
+                    if (Number(this.checked_money.money) <= this.balance_count) {
 						this.show_text_trade = true;
 					} else {
 						this.$Message.warning("你的余额不足，请充值！");
