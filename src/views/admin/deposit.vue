@@ -221,6 +221,9 @@ export default {
             this.search.end_time = date[1];
         },
         async updateDeposit() {
+            if (Number(this.deposit_info.reality_num) <= 0) {
+                return this.$Message.error("请输入准确的数值！");
+            }
             let data = this.deposit_info;
             data.operator = mylocalStorage.getItem("username");
             this.modal_loading = true;

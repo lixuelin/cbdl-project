@@ -79,11 +79,11 @@ export default {
     methods: {
         valativeNum(){
             let num = this.deposit_num;
-            if (isNaN(num) || num === ""){
-                this.$Message.error("请输入准确的数值");
+            if (isNaN(num) || num === "" || Number(num) <= 0){
+                this.$Message.error("请输入准确的数值！");
                 this.isTextSure = true;
             } else if (this.isFloat(Number(num)/100)) {
-                this.$Message.error("请转账金额为100的倍数");
+                this.$Message.error("请转账金额为100的倍数！");
                 this.isTextSure = true;
             } else {
                 this.isTextSure = false;
