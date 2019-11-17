@@ -158,7 +158,7 @@
             checkInvestPay(index) {
 				this.isSureInvest()
                 this.checked_pay.index = index;
-                this.checked_pay.pay = this.invest_check_pay[index];
+				this.checked_pay.pay = this.invest_check_pay[index];
                 if (index === 0) {
                     this.checked_pay.index = 0;
                     this.checked_pay.pay = this.invest_check_pay[0];
@@ -172,12 +172,12 @@
                         return;
 					}
 
-                    if (Number(this.checked_money.money) <= this.balance_count) {
+                    if (Number(this.checked_money.money) <= this.balance_count.toFixed(1)) {
 						this.show_text_trade = true;
 					} else {
 						this.$Message.warning("你的余额不足，请充值！");
 					}
-                }
+				}
                 if (index === 1) {
                     this.$Message.warning("支付宝功能正在维护中！");
                     this.checked_pay.index = 0;
