@@ -61,7 +61,7 @@ const allBank = {
         color: "#3679ff",
         name: "浦东发展银行"
     },
-    "ncp": {
+    "ncb": {
         icon: "icon-gongshangyinhang",
         color: "#3679ff",
         name: "南昌银行"
