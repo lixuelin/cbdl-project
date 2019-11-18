@@ -82,7 +82,7 @@ export default {
             bank_add: "中国农业银行深圳中心区支行",
             show_text_trade: false,
             cash_pwd: "",
-            is_sure: false,
+            is_sure: true,
         }
     },
     components: {
