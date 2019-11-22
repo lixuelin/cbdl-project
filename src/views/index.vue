@@ -6,7 +6,7 @@
 			</div>
 			<template v-if="is_login">
 				<div class="b-home-header-top">
-					<p class="b-home-header-welcome">Hi,{{name}}，您的邀请码：{{code}}</p>
+					<p class="b-home-header-welcome">普通用户-{{name}}，您的邀请码：{{code}}</p>
 					<p>
 						<span @click="loginOut">退出</span>
 					</p>

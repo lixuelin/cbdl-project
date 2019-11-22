@@ -32,7 +32,7 @@
 			</div>
 		</header>
 		<div class="bonus-body">
-			<h3>我的团队</h3>
+			<h3>我的团队 总收益：¥{{income_total}}</h3>
 			<div class="bonus-body-next">
 				<ul>
 					<li>
@@ -206,7 +206,8 @@
                 next_user: false,
                 first_user_list: [],
                 next_next_user: false,
-                second_user_list: []
+                second_user_list: [],
+                income_total: 0
             };
         },
         components: {
@@ -217,8 +218,17 @@
         mounted() {
             this.bonusTotal();
             this.getList();
+            this.getTeamIncome();
         },
         methods: {
+            async getTeamIncome() {
+                let data = {
+                    user_id: mylocalStorage.getItem("user_id")
+                };
+                let res = await this.$Http.queryTeamIncome(data);
+                console.log(res.data);
+                this.income_total = res.data.total;
+            },
             getList() {
                 let user_id = mylocalStorage.getItem("user_id");
                 let data = {

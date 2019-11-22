@@ -69,6 +69,10 @@ const requestApi = {
         method: "get",
         url: "/invest/amount"
     },
+    queryTeamIncome: { // 查看团队收益
+        method: "get",
+        url: "/income/team_income"
+    },
 };
 
 module.exports = requestApi;
