@@ -223,152 +223,133 @@
         methods: {
             async getTeamIncome() {
                 let data = {
-                    user_id: mylocalStorage.getItem("user_id")
+                    user_id: localStorage.getItem("user_id")
                 };
                 let res = await this.$Http.queryTeamIncome(data);
-                console.log(res.data);
-                this.income_total = res.data.total;
+                this.income_total = res.data?res.data.total:0;
             },
             getList() {
-                let user_id = mylocalStorage.getItem("user_id");
+                let user_id = localStorage.getItem("user_id");
                 let data = {
                     user_id
                 };
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                if (localStorage.getItem("user_id") === "" || localStorage.getItem("user_id") === null) {
                     return;
                 }
                 this.getBonusList(data);
             },
-            getBonusList(data) {
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
-                    return;
+            async getBonusList(data) {
+                let res = await this.$Http.queryBonusList(data);
+                if (res.status !== 200) {
+                    return this.$Message.error("奖金列表获取失败！");
                 }
-                queryBonusList(data).then(response => {
-                    let data = response.data.data.bonus_list;
-                    if (data.length !== 0) {
-                        this.next_list = data;
-                    } else {
-                        this.next_list = [];
-                    }
-                }).catch(error => {
-                    this.$Message.error("奖金列表获取失败！");
-                });
+                let bonus_data = res.data.bonus_list;
+                if (bonus_data.length !== 0) {
+                    this.next_list = bonus_data;
+                } else {
+                    this.next_list = [];
+                }
             },
-            bonusTotal() {
+            async bonusTotal() {
                 let data = {
-                    user_id: mylocalStorage.getItem("user_id")
+                    user_id: localStorage.getItem("user_id")
                 };
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                if (localStorage.getItem("user_id") === "" || localStorage.getItem("user_id") === null) {
                     return;
                 }
-                queryBonusTotal(data).then(response => {
-                    this.bonus = response.data.data;
-                }).catch(error => {
-                    this.$Message.error("奖金获取失败");
-                    console.log(error);
-                });
+                let res = await this.$Http.queryBonusTotal(data);
+                if(res.status !== 200) {
+                    return this.$Message.error("奖金获取失败");
+                }
+                this.bonus = res.data;
             },
-            cashBonusSure() {
-    
-                let user_id = mylocalStorage.getItem("user_id");
+            async cashBonusSure() {
                 if (this.cash_pwd === "") {
                     return this.$Message.error("密码不能为空！");
                 }
                 
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                if (localStorage.getItem("user_id") === "" || localStorage.getItem("user_id") === null) {
                     return;
                 }
                 
                 let data = {
-                    user_id,
+                    id: localStorage.getItem("user_id"),
                     cash_pwd: this.cash_pwd
                 };
                 this.modal_loading = true;
-                checkCashPwd(data).then(response => {
-                    let is_exist = response.data.data.is_exist;
-                    if (is_exist) {
-                        this.cashBonus(user_id);
-    
-                    } else {
-                        this.$Message.error("密码错误！");
-                    }
-                }).catch(error => {
-                    console.log(error);
-                });
+                let res = await this.$Http.queryUser(data);
+                if (!res.data) {
+                    return this.$Message.error("密码错误！");
+                } 
+                this.cashBonus(user_id);
             },
-            cashBonus(user_id) {
+            async cashBonus(user_id) {
                 let data = {
                     user_id,
                     cash_num: this.bonus.total
                 };
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                if (localStorage.getItem("user_id") === "" || localStorage.getItem("user_id") === null) {
                     return;
                 }
                 this.cash_pwd = "";
-                bonusCashMoney(data).then(response => {
-                    console.log(data, "ddd")
-                    this.draw_modal = false;
-                    this.draw_modal_sure = false;
-                    this.bonusTotal();
-                    this.modal_loading = false;
-                    this.$Message.success("提现成功，2小时内未到账请联系客服！");
-                }).catch(error => {
-                    this.$Message.error("提现失败！");
-                    console.log(error);
-                });
+                let res = await this.$Http.bonusCashMoney(data);
+                if(res.status !== 200) {
+                    return this.$Message.error("提现失败！");
+                }
+                this.draw_modal = false;
+                this.draw_modal_sure = false;
+                this.bonusTotal();
+                this.modal_loading = false;
+                this.$Message.success("提现成功，2小时内未到账请联系客服！");
             },
-            showNext(item) {
+            async showNext(item) {
                 let data = {
                     user_id: item.user_id
                 };
                 this.next_household = item.household;
                 this.show_next = true;
-                if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+                if (localStorage.getItem("user_id") === "" || localStorage.getItem("user_id") === null) {
                     return;
                 }
-                queryBonusNextList(data).then(response => {
-                    let data = response.data.data.list;
-                    if (data.length !== 0) {
-                        this.next_invest = data;
-                    } else {
-                        this.next_invest = [];
-                    }
-                }).catch(error => {
-                    this.$Message.error("奖金列表获取失败！");
-                });
+                let res = await this.$Http.queryBonusNextList(data);
+                if (res.status !== 200) {
+                    return this.$Message.error("奖金列表获取失败！");
+                }
+                let next_data = res.data.list;
+                if(next_data.length === 0) {
+                    return this.next_invest = [];
+                }
+                this.next_invest = next_data;
             },
-            showNextUser() {
+            async showNextUser() {
                 let data = {
-                    user_id: mylocalStorage.getItem("user_id")
+                    user_id: localStorage.getItem("user_id")
                 };
-                findNext(data).then(response => {
-                    let data = response.data.data;
-                    if (data.length === 0) {
-                        this.$Message.warning("当前用户没有团队");
-                    } else {
-                        this.next_user = true;
-                        this.first_user_list = data;
-                    }
-                }).catch(error => {
-                    console.log(error);
-                });
+                let res = await this.$Http.queryUserNext(data);
+                if(res.status !== 200) {
+                    return this.$Message.error("请求失败！")
+                }
+                if (res.data.length === 0) {
+                    this.$Message.warning("当前用户没有团队");
+                } else {
+                    this.next_user = true;
+                    this.first_user_list = res.data;
+                }
             },
-            showNextNextUser(item) {
+            async showNextNextUser(item) {
                 let data = {
                     user_id: item.lower_id
                 };
-                findNext(data).then(response => {
-                    let data = response.data.data;
-                    if (data.length === 0) {
-                        this.$Message.warning("当前用户没有团队");
-                    } else {
-                        this.next_next_user = true;
-                        this.second_user_list = data;
-                    }
-                    
-                }).catch(error => {
-                    console.log(error);
-                });
+                let res = await this.$Http.queryUserNext(data);
+                if(res.status !== 200) {
+                    return this.$Message.error("请求失败！")
+                }
+                if (res.data.length === 0) {
+                    this.$Message.warning("当前用户没有团队");
+                } else {
+                    this.next_user = true;
+                    this.first_user_list = res.data;
+                }
             }
         }
     };

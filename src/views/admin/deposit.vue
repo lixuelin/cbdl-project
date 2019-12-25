@@ -207,7 +207,6 @@ export default {
             let data = this.search;
             data.pageSize = this.pageInfo.currentPageSize;
             data.currentPage = this.pageInfo.currentPage;
-            data.user_id = mylocalStorage.getItem("user_id");
             let res = await this.$Http.queryBalanceAdmin(data);
             this.deposit_list = res.data.balance_list;
             this.pageInfo.total = res.data.total;

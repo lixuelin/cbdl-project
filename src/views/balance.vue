@@ -2,11 +2,11 @@
     <div class="balance">
         <div class="balance-header">
             <div class="balance-header-user">
-                <h1>{{userInfo.name}}</h1>
+                <h1>{{ userInfo.name }}</h1>
             </div>
             <div class="balance-header-photo">
                 <div class="balance-header-photo-box">
-                    <img src="./../assets/image/photo.jpg" alt="">
+                    <img src="./../assets/image/photo.jpg" alt="" />
                 </div>
             </div>
         </div>
@@ -15,8 +15,12 @@
                 <p class="balance-property-content-title">我的余额</p>
                 <p class="balance-property-content-num">
                     ¥
-                    <countTo :startVal='total.startVal' :endVal='total.endVal' :duration='total.speed'
-						         :decimals="total.float"></countTo>
+                    <countTo
+                        :startVal="total.startVal"
+                        :endVal="total.endVal"
+                        :duration="total.speed"
+                        :decimals="total.float"
+                    ></countTo>
                 </p>
                 <div class="balance-property-content-btn">
                     <button @click="goToDeposit">转账</button>
@@ -24,7 +28,11 @@
                 </div>
             </div>
         </div>
-        <menu-view class="balance-menu" :menu="menu" :isLogin="is_login"></menu-view>
+        <menu-view
+            class="balance-menu"
+            :menu="menu"
+            :isLogin="is_login"
+        ></menu-view>
         <foot></foot>
     </div>
 </template>
@@ -33,10 +41,10 @@
 import countTo from "vue-count-to";
 import menuView from "./../components/menu_card";
 import foot from "./../components/foot";
-import {mylocalStorage} from "./../utils/request_api"
+import { mylocalStorage } from "./../utils/request_api";
 export default {
     name: "balance",
-    data () {
+    data() {
         return {
             is_login: false,
             userInfo: {
@@ -52,25 +60,25 @@ export default {
                 float: 2
             },
             menu: [
-                    {
-                        "name": "转账记录",
-                        "type": "iconfont icon-credit-card",
-                        "route": "/deposit_note"
-                    },
-                    {
-                        "name": "提现记录",
-                        "type": "iconfont icon-icon_eye",
-                        "route": "/cash_note"
-                    }
-                ]
-        }
+                {
+                    name: "转账记录",
+                    type: "iconfont icon-credit-card",
+                    route: "/deposit_note"
+                },
+                {
+                    name: "提现记录",
+                    type: "iconfont icon-icon_eye",
+                    route: "/cash_note"
+                }
+            ]
+        };
     },
     components: {
         menuView,
         countTo,
         foot
     },
-    mounted (){
+    mounted() {
         this.isLogin();
         this.getBalance();
     },
@@ -84,20 +92,23 @@ export default {
         async getBalance() {
             let data = {
                 user_id: mylocalStorage.getItem("user_id")
-            }
-            let res = await this.$Http.queryBalanceCount(data)
+            };
+            let res = await this.$Http.queryBalanceTotal(data);
             this.total.endVal = res.data.count;
         },
-        goToDeposit () {
-            this.$router.push({path: "/deposit"})
+        goToDeposit() {
+            this.$router.push({ path: "/deposit" });
         },
-        goToCash () {
-            this.$router.push({path: "/cash_out", query: {
-                num: this.total.endVal.toFixed(1)
-            }})
+        goToCash() {
+            this.$router.push({
+                path: "/cash_out",
+                query: {
+                    num: this.total.endVal.toFixed(1)
+                }
+            });
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>

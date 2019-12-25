@@ -1,16 +1,5 @@
 <template>
     <div class="invest">
-        <!--<div class="invest-module">-->
-        <!--<h3>项目详情</h3>-->
-        <!--<div class="invest-module-about">-->
-        <!--<p>据悉，双方商定将发挥各自优势，集聚创新资源，在引导支持民营企业强化关键核心技术攻关、引导支持民营企-->
-        <!--业加强创新能力建设、深入推进科技创新政策的宣传普及等9个方面开展战略合作，进一步提升民营企业创新能力，-->
-        <!--为经济高质量发展提供强有力的科技支撑。</p>-->
-        <!--<p>据悉，双方商定将发挥各自优势，集聚创新资源，在引导支持民营企业强化关键核心技术攻关、引导支持民营企-->
-        <!--业加强创新能力建设、深入推进科技创新政策的宣传普及等9个方面开展战略合作，进一步提升民营企业创新能力，-->
-        <!--为经济高质量发展提供强有力的科技支撑。</p>-->
-        <!--</div>-->
-        <!--</div>-->
         <div class="invest-module">
             <h3>选择投资金额</h3>
             <div class="invest-module-bank">
@@ -18,9 +7,13 @@
                     <template v-for="(item, index) in invest_check_money">
                         <li @click="checkInvestMoney(index)" :key="item">
                             <div
-                                :class="{'invest-module-bank-num': true,'invest-module-bank-checked': index === checked_money.index}"
+                                :class="{
+                                    'invest-module-bank-num': true,
+                                    'invest-module-bank-checked':
+                                        index === checked_money.index
+                                }"
                             >
-                                <span>{{item}}</span>
+                                <span>{{ item }}</span>
                             </div>
                         </li>
                     </template>
@@ -34,18 +27,23 @@
                     <template v-for="(item, index) in invest_check_pay">
                         <li @click="checkInvestPay(index)" :key="item">
                             <div
-                                :class="{'invest-module-pay': true,
-							'invest-module-wx': index === 0,
-							'invest-module-ali': index === 1,
-							'invest-module-pay-checked': index === checked_pay.index}"
+                                :class="{
+                                    'invest-module-pay': true,
+                                    'invest-module-wx': index === 0,
+                                    'invest-module-ali': index === 1,
+                                    'invest-module-pay-checked':
+                                        index === checked_pay.index
+                                }"
                             >
                                 <template v-if="index === 0">
-                                    <span class="iconfont icon-weixinzhifu"></span>
+                                    <span
+                                        class="iconfont icon-weixinzhifu"
+                                    ></span>
                                 </template>
                                 <template v-else>
                                     <span class="iconfont icon-alipay"></span>
                                 </template>
-                                <span>{{item}}</span>
+                                <span>{{ item }}</span>
                             </div>
                         </li>
                     </template>
@@ -59,11 +57,11 @@
             <h3>投资总额</h3>
             <div class="invest-module-count">
                 <div class="invest-module-count-invest">
-                    <p>{{total.invest}}</p>
+                    <p>{{ total.invest }}</p>
                     <span>投资金额</span>
                 </div>
                 <div class="invest-module-count-income">
-                    <p>{{total.income}}</p>
+                    <p>{{ total.income }}</p>
                     <span>投资收益</span>
                 </div>
             </div>
@@ -93,7 +91,12 @@
                 </div>
             </div>
             <div slot="footer">
-                <i-button type="primary" long :loading="loading" @click="trade_Sure">
+                <i-button
+                    type="primary"
+                    long
+                    :loading="loading"
+                    @click="trade_Sure"
+                >
                     <span>确定</span>
                 </i-button>
             </div>
@@ -222,33 +225,49 @@ export default {
                 user_id: mylocalStorage.getItem("user_id")
             };
             let res = await this.$Http.queryBalanceLastInvest(data);
-            console.log(res.data);
+            if (res.status !== 200) {
+                return this.$Message.error("请求失败！");
+            }
             this.is_sure = res.data.is_sure;
         },
         async getBalance() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id")
+                user_id: localStorage.getItem("user_id")
             };
-            let res = await this.$Http.queryBalanceCount(data);
+            let res = await this.$Http.queryBalanceTotal(data);
+            if (res.status !== 200) {
+                return this.$Message.error("请求失败！");
+            }
             this.balance_count = res.data.count;
         },
         async getInvestList() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
+                user_id: localStorage.getItem("user_id"),
                 financial_id: this.financial_id
             };
             let res = await this.$Http.queryInvestList(data);
+            if (res.status !== 200) {
+                return this.$Message.error("请求失败！");
+            }
             this.invest_list = res.data;
         },
         async getInvestCount() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
+                user_id: localStorage.getItem("user_id"),
                 financial_id: this.financial_id
             };
-            let res = await this.$Http.queryIncomeCount(data);
-            console.log(res.data);
-            this.total.invest = res.data[0].total;
-            this.total.income = res.data[1].total;
+            let arr = [
+                this.$Http.queryIncomeCount(data),
+                this.$Http.queryInvestTotal(data)
+            ];
+            let res = await Promise.all(arr);
+            res.forEach(data => {
+                if (data.status !== 200) {
+                    return this.$Message.error("请求失败！");
+                }
+            });
+            this.total.income = res[0].data.total;
+            this.total.invest = res[1].data.total;
         },
         isUpdateInvest(data) {
             if (data.is_update) {
@@ -262,13 +281,12 @@ export default {
                 return this.$Message.error("密码不能为空！");
             }
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
+                id: localStorage.getItem("user_id"),
                 cash_pwd: this.cash_pwd
             };
             this.loading = true;
-            let res = await this.$Http.changeTradePwd(data);
-            let is_exist = res.data.is_exist;
-            if (is_exist) {
+            let res = await this.$Http.queryUser(data);
+            if (res.data) {
                 this.postInvest();
             } else {
                 this.loading = false;
@@ -277,21 +295,20 @@ export default {
         },
         async postInvest() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
-                money: this.checked_money.money,
-                pay: this.checked_pay.pay,
+                user_id: localStorage.getItem("user_id"),
+                invest_num: this.checked_money.money,
+                invest_pay: this.checked_pay.pay,
                 financial_id: this.financial_id
             };
             if (
-                mylocalStorage.getItem("user_id") === "" ||
-                mylocalStorage.getItem("user_id") === null
+                localStorage.getItem("user_id") === "" ||
+                localStorage.getItem("user_id") === null
             ) {
                 this.$Message.warning("请先登录后操作！");
                 return;
             }
             let res = await this.$Http.createInvest(data);
-            let code = res.status;
-            if (code === 200) {
+            if (res.status === 200) {
                 this.$Message.success("投资成功，10分钟内未到账请联系客服!");
                 this.show_text_trade = false;
                 this.loading = false;
