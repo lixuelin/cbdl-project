@@ -169,9 +169,14 @@ export default {
                 currentPage: this.invest_pageInfo.currentPage,
                 pageSize: this.invest_pageInfo.currentPageSize
             };
-            let res = await this.$Http.queryInvestEveryDay(data);
-            this.invests = res.data.invests;
-            this.invest_pageInfo.total = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryInvestEveryDay(data);
+                this.invests = res.data.invests;
+                this.invest_pageInfo.total = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async getIncomeEveryday() {
             let data = {
@@ -180,9 +185,14 @@ export default {
                 currentPage: this.income_pageInfo.currentPage,
                 pageSize: this.income_pageInfo.currentPageSize
             };
-            let res = await this.$Http.queryIncomeEveryDay(data);
-            this.incomes = res.data.incomes;
-            this.income_pageInfo.total = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryIncomeEveryDay(data);
+                this.incomes = res.data.incomes;
+                this.income_pageInfo.total = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         }
     }
 };

@@ -93,8 +93,13 @@ export default {
             let data = {
                 user_id: mylocalStorage.getItem("user_id")
             };
-            let res = await this.$Http.queryBalanceTotal(data);
-            this.total.endVal = res.data.count;
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceTotal(data);
+                this.total.endVal = res.data.count;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         goToDeposit() {
             this.$router.push({ path: "/deposit" });

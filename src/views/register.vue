@@ -320,31 +320,46 @@ export default {
             delete data.cardCheck;
             delete data.cashPwdCheck;
             this.is_load = true;
-            let res = await this.$Http.createUser(data);
-            if (res.status !== 200) {
-                return this.$Message.error("注册失败!");
+            let res = null;
+            try {
+                res = await this.$Http.createUser(data);
+                if (res.status !== 200) {
+                    return this.$Message.error("注册失败!");
+                }
+                this.$Message.success("注册成功!");
+                this.$router.push({ name: "login" });
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            this.$Message.success("注册成功!");
-            this.$router.push({ name: "login" });
         },
         async getInviteCode(value, callback) {
             let data = {
                 invite_code: value
             };
-            let res = await this.$Http.queryUser(data);
-            if (Object.keys(res.data).length === 0) {
-                callback(new Error("邀请码不存在请重新输入！"));
+            let res = null;
+            try {
+                let res = await this.$Http.queryUser(data);
+                if (Object.keys(res.data).length === 0) {
+                    callback(new Error("邀请码不存在请重新输入！"));
+                }
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
         },
         async getBankCard(value, callback) {
             let data = {
                 card: value
             };
-            let res = await this.$Http.queryUser(data);
-            if (Object.keys(res.data).length !== 0) {
-                callback(new Error("银行卡已经被使用，请重新输入！"));
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
+                if (Object.keys(res.data).length !== 0) {
+                    callback(new Error("银行卡已经被使用，请重新输入！"));
+                }
+                callback();
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            callback();
         }
     }
 };

@@ -375,8 +375,9 @@ export default {
                 this.$Http.queryIncomeTotal(data),
                 this.$Http.queryBonusTotal(data)
             ];
+            let res = null;
             try {
-                let res = await Promise.all(arr);
+                res = await Promise.all(arr);
                 this.balance.endVal = res[0].data.count;
                 this.balance.income = res[0].data.income;
                 this.invest_total = Number(res[1].data.total);
@@ -388,7 +389,11 @@ export default {
                     this.income.endVal +
                     this.bonus.endVal;
             } catch (error) {
-                return this.$Message.error("请求失败");
+                res.forEach(error => {
+                    if (error.status !== 200) {
+                        this.$Message.error(`${error.msg}`);
+                    }
+                });
             }
         },
         del() {

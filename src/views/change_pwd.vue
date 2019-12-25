@@ -186,19 +186,15 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.queryUser(data);
+                if (res.data) {
+                    callback();
+                } else {
+                    this.formValidate.oldPassWord = "";
+                    callback(new Error(`原始${tips}输入验证失败`));
+                }
             } catch (error) {
-                this.$Message.error("请求失败");
-            }
-            if (res.status !== 200) {
                 this.formValidate.oldPassWord = "";
-                this.$Message.error(`原始${tips}输入错误`);
-                return;
-            }
-            if (res.data) {
-                callback();
-            } else {
-                this.formValidate.oldPassWord = "";
-                callback(new Error(`原始${tips}输入验证失败`));
+                return this.$Message.error(`${res.msg}`);
             }
         },
         async changePassword(tip) {
@@ -214,12 +210,10 @@ export default {
                 tips = "提现密码";
             }
             this.is_load = true;
+            let res = null;
             try {
-                let res = await this.$Http.updateUser(data);
+                res = await this.$Http.updateUser(data);
                 this.is_load = false;
-                if (res.status !== 200) {
-                    return this.$Message.error(`${tips}修改失败`);
-                }
                 this.$Message.success("修改成功!");
                 if (tip === "login") {
                     localStorage.setItem("user_id", "");
@@ -232,7 +226,8 @@ export default {
                     }, 1000);
                 }
             } catch (error) {
-                return this.$Message.error(`请求失败`);
+                this.is_load = false;
+                return this.$Message.error(`${tips}请求失败:${res.msg}`);
             }
         }
     }

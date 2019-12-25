@@ -378,19 +378,29 @@ export default {
             window.location = "/invest/download_invest";
         },
         async getFinancialNum() {
-            let res = await this.$Http.queryFinancialNum();
-            this.financial.first.total = res.data.first.financial_count;
-            this.financial.two.total = res.data.two.financial_count;
-            this.financial.first.invest_num = res.data.first.invests;
-            this.financial.two.invest_num = res.data.two.invests;
-            this.financial.first.surplus =
-                res.data.first.financial_count - res.data.first.invests;
-            this.financial.two.surplus =
-                res.data.two.financial_count - res.data.two.invests;
+            let res = null;
+            try {
+                res = await this.$Http.queryFinancialNum();
+                this.financial.first.total = res.data.first.financial_count;
+                this.financial.two.total = res.data.two.financial_count;
+                this.financial.first.invest_num = res.data.first.invests;
+                this.financial.two.invest_num = res.data.two.invests;
+                this.financial.first.surplus =
+                    res.data.first.financial_count - res.data.first.invests;
+                this.financial.two.surplus =
+                    res.data.two.financial_count - res.data.two.invests;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async queryBankList() {
-            let res = await this.$Http.queryUserBanks();
-            this.bankList = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryUserBanks();
+                this.bankList = res.data;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async getInvestList() {
             let data = {
@@ -406,12 +416,13 @@ export default {
                 invest_pay: this.search.invest_pay,
                 cash_status: this.search.cash_status
             };
+            let res = null;
             try {
-                let res = await this.$Http.queryAdminInvestList(data);
+                res = await this.$Http.queryAdminInvestList(data);
                 this.invests = res.data.invests;
                 this.pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error("请求失败");
+                this.$Message.error(`请求失败: ${res.msg}`);
             }
         },
         async verifyInvestNum() {
@@ -428,12 +439,17 @@ export default {
                 this.$Message.warning("请输入正确的投资金额！");
                 return;
             }
-            let res = await this.$Http.updateInvestVerify(data);
-            this.change_invest = false;
-            this.invest_info.verify_num = 0;
-            this.invest_info.invest_id = null;
-            this.$Message.success("修改成功！");
-            this.getInvestList();
+            let res = null;
+            try {
+                res = await this.$Http.updateInvestVerify(data);
+                this.change_invest = false;
+                this.invest_info.verify_num = 0;
+                this.invest_info.invest_id = null;
+                this.$Message.success("修改成功！");
+                this.getInvestList();
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         }
     }
 };

@@ -39,9 +39,13 @@ export default {
                 this.$Message.warning("请先登录后操作！");
                 return;
             }
-
-            let res = await this.$Http.queryBalance(data);
-            this.note_list = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryBalance(data);
+                this.note_list = res.data;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         }
     }
 };

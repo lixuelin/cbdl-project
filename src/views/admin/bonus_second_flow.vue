@@ -210,9 +210,14 @@ export default {
                 currentPage: this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize
             };
-            let res = await this.$Http.queryBonusAdminSecond(data);
-            this.data = res.data.bonus;
-            this.pageInfo.total = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryBonusAdminSecond(data);
+                this.data = res.data.bonus;
+                this.pageInfo.total = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         }
     }
 };

@@ -177,7 +177,7 @@ export default {
                     return;
                 }
 
-                if (!this.is_sure) {
+                if (this.is_sure) {
                     this.$Message.warning(
                         "当前有投资申请正在等待审核，请稍后再试！"
                     );
@@ -222,34 +222,41 @@ export default {
         },
         async isSureInvest() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id")
+                user_id: mylocalStorage.getItem("user_id"),
+                balance_type: 2
             };
-            let res = await this.$Http.queryBalanceLastInvest(data);
-            if (res.status !== 200) {
-                return this.$Message.error("请求失败！");
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceLastInvest(data);
+                this.is_sure = res.data;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            this.is_sure = res.data.is_sure;
         },
         async getBalance() {
             let data = {
                 user_id: localStorage.getItem("user_id")
             };
-            let res = await this.$Http.queryBalanceTotal(data);
-            if (res.status !== 200) {
-                return this.$Message.error("请求失败！");
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceTotal(data);
+                this.balance_count = res.data.count;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            this.balance_count = res.data.count;
         },
         async getInvestList() {
             let data = {
                 user_id: localStorage.getItem("user_id"),
                 financial_id: this.financial_id
             };
-            let res = await this.$Http.queryInvestList(data);
-            if (res.status !== 200) {
-                return this.$Message.error("请求失败！");
+            let res = null;
+            try {
+                res = await this.$Http.queryInvestList(data);
+                this.invest_list = res.data;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            this.invest_list = res.data;
         },
         async getInvestCount() {
             let data = {
@@ -260,14 +267,18 @@ export default {
                 this.$Http.queryIncomeCount(data),
                 this.$Http.queryInvestTotal(data)
             ];
-            let res = await Promise.all(arr);
-            res.forEach(data => {
-                if (data.status !== 200) {
-                    return this.$Message.error("请求失败！");
-                }
-            });
-            this.total.income = res[0].data.total;
-            this.total.invest = res[1].data.total;
+            let res = null;
+            try {
+                res = await Promise.all(arr);
+                this.total.income = res[0].data.total;
+                this.total.invest = res[1].data.total;
+            } catch (error) {
+                res.forEach(error => {
+                    if (error.status !== 200) {
+                        return this.$Message.error(`${error.msg}`);
+                    }
+                });
+            }
         },
         isUpdateInvest(data) {
             if (data.is_update) {
@@ -285,12 +296,13 @@ export default {
                 cash_pwd: this.cash_pwd
             };
             this.loading = true;
-            let res = await this.$Http.queryUser(data);
-            if (res.data) {
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
                 this.postInvest();
-            } else {
+            } catch (error) {
                 this.loading = false;
-                this.$Message.error("交易密码错误！");
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async postInvest() {
@@ -307,15 +319,16 @@ export default {
                 this.$Message.warning("请先登录后操作！");
                 return;
             }
-            let res = await this.$Http.createInvest(data);
-            if (res.status === 200) {
+            let res = null;
+            try {
+                res = await this.$Http.createInvest(data);
                 this.$Message.success("投资成功，10分钟内未到账请联系客服!");
                 this.show_text_trade = false;
                 this.loading = false;
                 this.cash_pwd = "";
                 this.getBalance();
-            } else {
-                this.$Message.error("抱歉投资失败！");
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
                 this.loading = false;
                 this.show_text_trade = false;
             }

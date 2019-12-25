@@ -21,7 +21,7 @@ const BalanceApi = {
     },
     queryBalanceAdmin: {
         method: "get",
-        url: "/balance/admin"
+        url: "/balance/admin?type=manager"
     },
     createBalance: {
         method: "post",

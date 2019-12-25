@@ -6,8 +6,6 @@
 
 import axios from "axios";
 import { getCookie, setCookie } from "./cookie";
-import { mylocalStorage } from "./request_api";
-
 import serviceApi from "./../api/api";
 
 let instance = axios.create({
@@ -86,22 +84,22 @@ instance.interceptors.response.use(
         if (res.config.headers.authorization) {
             setCookie("session_id", res.config.headers.authorization);
         }
-        console.log(res.data);
         return res.data;
     },
     error => {
         if (error.response) {
             let data = {
                 status: error.response.status,
-                msg: error.response.data.message
+                msg: error.response.data.message || error.response.data.msg,
+                type: error.response.data.type
             };
             if (data.status === 401) {
                 iview.Message.error(data.msg);
-                mylocalStorage.setItem("username", "");
-                mylocalStorage.setItem("user_id", "");
-                mylocalStorage.setItem("session_id", "");
-                mylocalStorage.setItem("code", "");
-                if (mylocalStorage.getItem("type") === "manager") {
+                localStorage.setItem("username", "");
+                localStorage.setItem("user_id", "");
+                localStorage.setItem("session_id", "");
+                localStorage.setItem("code", "");
+                if (data.type === "manager") {
                     router.push({
                         path: "/manager"
                     });

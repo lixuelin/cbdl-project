@@ -61,21 +61,26 @@ export default {
                 this.$Message.error("用户密码不能为空！");
                 return;
             }
-            let res = await this.$Http.adminUserLogin(this.user);
-            if (!res.data) {
-                this.$Message.error(res.msg);
-            }
-            localStorage["username"] = res.data.username;
-            localStorage["user_id"] = res.data.user_id;
-            localStorage["session_id"] = res.data.token;
-            localStorage["type"] = "manager";
-            localStorage["role_id"] = res.data.role_id;
-            setCookie("session_id", res.data.token);
-            this.$Message.success("登录成功!");
-            if (res.data.role_id === 2) {
-                this.$router.push({ path: "/admin/investment_flow" });
-            } else {
-                this.$router.push({ path: "/admin" });
+            let res = null;
+            try {
+                res = await this.$Http.adminUserLogin(this.user);
+                if (!res.data) {
+                    this.$Message.error(res.msg);
+                }
+                localStorage["username"] = res.data.username;
+                localStorage["user_id"] = res.data.user_id;
+                localStorage["session_id"] = res.data.token;
+                localStorage["type"] = "manager";
+                localStorage["role_id"] = res.data.role_id;
+                setCookie("session_id", res.data.token);
+                this.$Message.success("登录成功!");
+                if (res.data.role_id === 2) {
+                    this.$router.push({ path: "/admin/investment_flow" });
+                } else {
+                    this.$router.push({ path: "/admin" });
+                }
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
         }
     }

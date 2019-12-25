@@ -411,13 +411,23 @@ export default {
                 currentPage: this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize
             };
-            let res = await this.$$Http.queryUsers(data);
-            this.users = res.data.users;
-            this.pageInfo.userTotal = res.data.total;
+            let res = null;
+            try {
+                res = await this.$$Http.queryUsers(data);
+                this.users = res.data.users;
+                this.pageInfo.userTotal = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async queryBankList() {
-            let res = await this.$Http.queryUserBanks();
-            this.bankList = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryUserBanks();
+                this.bankList = res.data;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async resetCashPwd() {
             let card = this.resetCashCurrent.card;
@@ -427,11 +437,18 @@ export default {
                 cash_pwd
             };
             this.modal_loading = true;
-            let res = await this.$Http.updateUser(data);
-            this.resetCashCurrent = null;
-            this.resetCashModal = false;
-            this.$Message.success("提现密码修改成功！");
-            this.queryUserList();
+            let res = null;
+            try {
+                res = await this.$Http.updateUser(data);
+                this.resetCashCurrent = null;
+                this.resetCashModal = false;
+                this.$Message.success("提现密码修改成功！");
+                this.modal_loading = false;
+                this.queryUserList();
+            } catch (error) {
+                this.modal_loading = false;
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async resetLoginPwd() {
             let card = this.resetLoginCurrent.card;
@@ -441,11 +458,18 @@ export default {
                 password
             };
             this.modal_loading = true;
-            let res = await this.$Http.updateUser(data);
-            this.resetLoginCurrent = null;
-            this.resetLoginModal = false;
-            this.$Message.success("登录密码修改成功！");
-            this.queryUserList();
+            let res = null;
+            try {
+                res = await this.$Http.updateUser(data);
+                this.resetLoginCurrent = null;
+                this.resetLoginModal = false;
+                this.$Message.success("登录密码修改成功！");
+                this.modal_loading = false;
+                this.queryUserList();
+            } catch (error) {
+                this.modal_loading = false;
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         handleSubmit(name) {
             this.$refs[name].validate(valid => {
@@ -462,12 +486,18 @@ export default {
             data.id = this.resetBankCurrent.id;
             delete data.cardCheck;
             this.modal_loading = true;
-            let res = await this.$Http.updateUser(data);
-            this.resetCashCurrent = null;
-            this.resetBankModal = false;
-            this.modal_loading = false;
-            this.$Message.success("银行信息修改成功！");
-            this.queryUserList();
+            let res = null;
+            try {
+                res = await this.$Http.updateUser(data);
+                this.resetCashCurrent = null;
+                this.resetBankModal = false;
+                this.modal_loading = false;
+                this.$Message.success("银行信息修改成功！");
+                this.queryUserList();
+            } catch (error) {
+                this.modal_loading = false;
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         }
     }
 };

@@ -242,15 +242,18 @@ export default {
                 id: this.user_id
             };
             this.modal_loading = true;
-            let res = await this.$Http.updateUser(data);
-            this.modal_loading = false;
-            if (!res.succes) {
+            let res = null;
+            try {
+                res = await this.$Http.updateUser(data);
+                this.modal_loading = false;
+                this.$Message.success("登录密码修改成功!");
+                setTimeout(() => {
+                    this.$router.push({ path: "/" });
+                }, 1000);
+            } catch (error) {
+                this.modal_loading = false;
                 return this.$Message.error("登录密码修改失败!");
             }
-            this.$Message.success("登录密码修改成功!");
-            setTimeout(() => {
-                this.$router.push({ path: "/" });
-            }, 1000);
         }
     }
 };

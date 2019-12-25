@@ -63,19 +63,17 @@ export default {
         this.getCount();
     },
     methods: {
-        getCount() {
-            queryCount()
-                .then(response => {
-                    let data = response.data.data;
-                    this.count_list.forEach((item, i) => {
-                        item.total = data[i];
-                        console.log(i, "ddd");
-                    });
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.log(error);
+        async getCount() {
+            let res = null;
+            try {
+                res = await this.$Http.queryCount();
+                let data = res.data;
+                this.count_list.forEach((item, i) => {
+                    item.total = data[i];
                 });
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         }
     }
 };

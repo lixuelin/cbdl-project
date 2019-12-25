@@ -123,9 +123,14 @@ export default {
             let data = this.search;
             data.pageSize = this.pageInfo.currentPageSize;
             data.currentPage = this.pageInfo.currentPage;
-            let res = await this.$Http.queryBalanceIncome(data);
-            this.deposit_list = res.data.balance_list;
-            this.pageInfo.total = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceIncome(data);
+                this.deposit_list = res.data.balance_list;
+                this.pageInfo.total = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         },
         changePage(page) {
             this.pageInfo.currentPage = page;

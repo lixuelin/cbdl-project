@@ -161,10 +161,9 @@ export default {
             let data = {
                 id: mylocalStorage.getItem("user_id")
             };
-
-            let res = await this.$Http.queryUser(data);
-
-            if (res.data) {
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
                 this.bank = res.data;
                 this.bank.card =
                     res.data.card.substr(0, 4) +
@@ -173,16 +172,22 @@ export default {
                         res.data.card.length - 4,
                         res.data.card.length
                     );
-            } else {
-                this.$Message.error("请求银行卡信息失败！");
+            } catch (error) {
+                this.$Message.error(`请求银行卡信息失败:${res.msg}！`);
             }
         },
         async isSureInvest() {
             let data = {
-                user_id: localStorage.getItem("user_id")
+                user_id: localStorage.getItem("user_id"),
+                balance_type: 3
             };
-            let res = await this.$Http.queryBalanceLastCash(data);
-            this.is_sure = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceLastCash(data);
+                this.is_sure = res.data;
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}`);
+            }
         },
         async queryTotal() {
             let data = {
@@ -194,8 +199,13 @@ export default {
             ) {
                 return;
             }
-            let res = await this.$Http.queryBalanceTotal(data);
-            this.balance_num = res.data.count.toFixed(1);
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceTotal(data);
+                this.balance_num = res.data.count.toFixed(1);
+            } catch (error) {
+                this.$Message.error(`请求失败: ${res.msg}！`);
+            }
         },
         sureCash() {
             this.isSureInvest();
@@ -226,15 +236,25 @@ export default {
                 cash_pwd: this.cash_pwd
             };
             this.loading = true;
-            let res = await this.$Http.queryUser(data);
-            if (res.data) {
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
                 this.cashPost();
-            } else {
+            } catch (error) {
                 this.loading = false;
-                this.$Message.error("交易密码错误！");
+                this.$Message.error(`交易密码错误:${res.msg}！`);
             }
         },
         async cashPost() {
+            this.isSureInvest();
+            if (this.is_sure) {
+                this.loading = false;
+                this.deposit_show_modal = false;
+                this.show_text_trade = false;
+                return this.$Message.warning(
+                    "当前有提现申请正在等待审核，请稍后再试！"
+                );
+            }
             let data = {
                 user_id: localStorage.getItem("user_id"),
                 balance_num: Number(this.cash_num),
@@ -248,8 +268,9 @@ export default {
                 return;
             }
             this.loading = true;
-            let res = await this.$Http.createBalance(data);
-            if (res.status === 200) {
+            let res = null;
+            try {
+                res = await this.$Http.createBalance(data);
                 this.$Message.success("提现成功！");
                 this.loading = false;
                 this.deposit_show_modal = false;
@@ -257,8 +278,8 @@ export default {
                 this.isTextSure = true;
                 this.show_text_trade = false;
                 this.queryTotal();
-            } else {
-                this.$Message.error("提现失败！");
+            } catch (error) {
+                this.$Message.error(`提现失败:${res.msg}！`);
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.show_text_trade = false;

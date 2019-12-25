@@ -157,9 +157,14 @@ export default {
                 currentPage: this.team.pageInfo.currentPage,
                 pageSize: this.team.pageInfo.currentPageSize
             };
-            let res = await this.$Http.queryBonusEveryDay(data);
-            this.team.data = res.data.bonusList;
-            this.team.pageInfo.userTotal = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryBonusEveryDay(data);
+                this.team.data = res.data.bonusList;
+                this.team.pageInfo.userTotal = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         },
         async getNextBouns() {
             let data = {
@@ -168,10 +173,14 @@ export default {
                 currentPage: this.team_share.pageInfo.currentPage,
                 pageSize: this.team_share.pageInfo.currentPageSize
             };
-
-            let res = await this.$Http.queryNextBonusEveryDay(data);
-            this.team_share.data = res.data.bonusList;
-            this.team_share.pageInfo.userTotal = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryNextBonusEveryDay(data);
+                this.team_share.data = res.data.bonusList;
+                this.team_share.pageInfo.userTotal = res.data.total;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         },
         search_bonus() {
             this.getBouns();

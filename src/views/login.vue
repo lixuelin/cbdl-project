@@ -96,22 +96,24 @@ export default {
             });
         },
         async loginUser(data) {
-            let res = await this.$Http.userLogin(data);
-            if (res.status !== 200) {
-                return this.$Message.error("登录失败!");
+            let res = null;
+            try {
+                res = await this.$Http.userLogin(data);
+                let user_info = res.data;
+                if (user_info.role_id !== 3) {
+                    return this.$Message.error("用户不存在!");
+                }
+                localStorage["username"] = user_info.username;
+                localStorage["user_id"] = user_info.user_id;
+                localStorage["session_id"] = user_info.token;
+                localStorage["code"] = user_info.code;
+                localStorage["type"] = "web";
+                setCookie("session_id", user_info.token);
+                this.$Message.success("登录成功!");
+                this.$router.push({ path: "/home" });
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
             }
-            let user_info = res.data;
-            if (user_info.role_id !== 3) {
-                return this.$Message.error("用户不存在!");
-            }
-            localStorage["username"] = user_info.username;
-            localStorage["user_id"] = user_info.user_id;
-            localStorage["session_id"] = user_info.token;
-            localStorage["code"] = user_info.code;
-            localStorage["type"] = "web";
-            setCookie("session_id", user_info.token);
-            this.$Message.success("登录成功!");
-            this.$router.push({ path: "/home" });
         },
         gotoRegister() {
             this.$router.push({ name: "register" });

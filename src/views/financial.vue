@@ -38,8 +38,13 @@ export default {
     },
     methods: {
         async getFinancial() {
-            let res = await this.$Http.queryFinancial();
-            this.financial_list = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryFinancial();
+                this.financial_list = res.data;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
+            }
         },
         gotoInvest(item) {
             this.$router.push({

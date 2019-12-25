@@ -107,7 +107,8 @@ export default {
             bank_code: "41005000040046406",
             bank_add: "中国农业银行深圳中心区支行",
             loading: false,
-            bank: {}
+            bank: {},
+            is_sure: []
         };
     },
     components: {
@@ -117,6 +118,19 @@ export default {
         this.getBankInfo();
     },
     methods: {
+        async isSureInvest() {
+            let data = {
+                user_id: mylocalStorage.getItem("user_id"),
+                balance_type: 0
+            };
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceLastInvest(data);
+                this.is_sure = res.data;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
+            }
+        },
         valativeNum() {
             let num = this.deposit_num;
             if (isNaN(num) || num === "" || Number(num) <= 0) {
@@ -136,9 +150,15 @@ export default {
             return n + ".0" != n;
         },
         deposit() {
+            this.isSureInvest();
             if (this.isTextSure) {
                 this.$Message.error("请输入准确的数值");
                 return;
+            }
+            if (this.is_sure) {
+                return this.$Message.warning(
+                    "当前有转账申请正在等待审核，请稍后再试！"
+                );
             }
             this.deposit_show_modal = true;
         },
@@ -146,16 +166,15 @@ export default {
             let data = {
                 id: localStorage.getItem("user_id")
             };
-
-            let res = await this.$Http.queryUser(data);
-
-            if (res.data) {
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
                 this.bank = res.data;
                 this.bank.card = this.bank.card.substring(
                     this.bank.card.length - 4
                 );
-            } else {
-                this.$Message.error("请求银行卡信息失败！");
+            } catch (error) {
+                this.$Message.error(`请求银行卡信息失败:${res.msg}！`);
             }
         },
         ctrlCBtn() {
@@ -180,6 +199,14 @@ export default {
             });
         },
         async sureDeposit() {
+            this.isSureInvest();
+            if (this.is_sure) {
+                this.loading = false;
+                this.deposit_show_modal = false;
+                return this.$Message.warning(
+                    "当前有转账申请正在等待审核，请稍后再试！"
+                );
+            }
             let data = {
                 user_id: localStorage.getItem("user_id"),
                 balance_num: this.deposit_num,
@@ -193,14 +220,15 @@ export default {
                 return;
             }
             this.loading = true;
-            let res = await this.$Http.createBalance(data);
-            if (res.status === 200) {
+            let res = null;
+            try {
+                res = await this.$Http.createBalance(data);
                 this.$Message.success("转账成功！");
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.deposit_num = "";
                 this.isTextSure = true;
-            } else {
+            } catch (error) {
                 this.$Message.error("转账失败！");
                 this.loading = false;
                 this.deposit_show_modal = false;

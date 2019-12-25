@@ -54,8 +54,9 @@ export default {
             let data = {
                 id: localStorage.getItem("user_id")
             };
+            let res = null;
             try {
-                let res = await this.$Http.queryUser(data);
+                res = await this.$Http.queryUser(data);
                 this.bankList[0].bank_name = res.data.bank_name;
                 this.bankList[0].card_type = res.data.card_type;
                 this.bankList[0].bank_code = res.data.bank_code;
@@ -68,7 +69,7 @@ export default {
                     );
                 this.bankList[0].card = card;
             } catch (error) {
-                return this.$Message.error("请求失败！");
+                return this.$Message.error(`请求失败: ${res.msg}！`);
             }
         },
         bankBg(bank) {
