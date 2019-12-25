@@ -406,7 +406,7 @@ export default {
             };
             let res = null;
             try {
-                res = await this.$$Http.queryUsers(data);
+                res = await this.$Http.queryUsers(data);
                 this.users = res.data.users;
                 this.pageInfo.userTotal = res.data.total;
             } catch (error) {
