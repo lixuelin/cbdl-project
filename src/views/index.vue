@@ -306,7 +306,7 @@ export default {
             this.$router.push({ path: "/register" });
         },
         isLogin() {
-            if (mylocalStorage.getItem("username")) {
+            if (localStorage.getItem("username")) {
                 this.is_login = true;
                 this.userInfo.name = localStorage.getItem("username");
             }

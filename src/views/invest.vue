@@ -221,7 +221,7 @@ export default {
         },
         async isSureInvest() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
+                user_id: localStorage.getItem("user_id"),
                 balance_type: 2
             };
             let res = null;
