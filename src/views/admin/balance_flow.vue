@@ -58,7 +58,6 @@
 
 <script>
 import pageTitle from "./../../components/title";
-import { mylocalStorage } from "../../utils/request_api";
 export default {
     name: "deposit",
     data() {

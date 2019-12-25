@@ -183,12 +183,6 @@
 </template>
 
 <script>
-import {
-    queryInvestList,
-    queryBanks,
-    downloadEveryExecl,
-    updateVerify
-} from "./../../utils/admin_api";
 import pageTitle from "./../../components/title";
 
 export default {

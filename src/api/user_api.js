@@ -32,10 +32,6 @@ const UserApi = {
         method: "post",
         url: "/admin_login?type=admin"
     },
-    queryUserInfo: {
-        method: "post",
-        url: "/user/find_user?type=mobile"
-    },
     queryUserNext: {
         method: "get",
         url: "/user/find_next?type=mobile"

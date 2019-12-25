@@ -37,7 +37,6 @@
 
 <script>
 import { setCookie } from "./../utils/cookie";
-import { mylocalStorage, loginRequest } from "./../utils/admin_api";
 
 export default {
     name: "login",
@@ -80,7 +79,7 @@ export default {
                     this.$router.push({ path: "/admin" });
                 }
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         }
     }

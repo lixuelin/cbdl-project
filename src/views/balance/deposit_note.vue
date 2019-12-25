@@ -11,7 +11,6 @@
 
 <script>
 import noteCard from "./../../components/note_card";
-import { mylocalStorage } from "./../../utils/request_api";
 
 export default {
     name: "note",

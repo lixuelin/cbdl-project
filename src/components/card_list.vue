@@ -139,11 +139,6 @@
 </template>
 
 <script>
-import {
-    mylocalStorage,
-    IncomeCashOne,
-    checkCashPwd
-} from "../utils/request_api";
 import cut from "./cut";
 
 export default {
@@ -174,9 +169,6 @@ export default {
     props: ["investList", "financial"],
     components: {
         "hr-view": cut
-    },
-    mounted() {
-        console.log(this.investList);
     },
     methods: {
         goToHelp() {

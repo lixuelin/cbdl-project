@@ -108,7 +108,6 @@
 import Clipboard from "clipboard";
 import card from "./../components/card_list";
 import foot from "./../components/foot";
-import { mylocalStorage, userInvest } from "./../utils/request_api";
 
 export default {
     name: "invest",
@@ -255,7 +254,7 @@ export default {
                 res = await this.$Http.queryInvestList(data);
                 this.invest_list = res.data;
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async getInvestCount() {
@@ -275,7 +274,7 @@ export default {
             } catch (error) {
                 res.forEach(error => {
                     if (error.status !== 200) {
-                        return this.$Message.error(`${error.msg}`);
+                        return this.$Message.error(`请求失败:${error.msg}`);
                     }
                 });
             }
@@ -328,7 +327,7 @@ export default {
                 this.cash_pwd = "";
                 this.getBalance();
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
                 this.loading = false;
                 this.show_text_trade = false;
             }

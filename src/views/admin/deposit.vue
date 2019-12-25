@@ -112,7 +112,6 @@
 
 <script>
 import pageTitle from "./../../components/title";
-import { mylocalStorage } from "../../utils/request_api";
 export default {
     name: "deposit",
     data() {
@@ -276,7 +275,7 @@ export default {
                 return this.$Message.error("请输入准确的数值！");
             }
             let data = this.deposit_info;
-            data.operator = mylocalStorage.getItem("username");
+            data.operator = localStorage.getItem("username");
             this.modal_loading = true;
             let res = null;
             try {

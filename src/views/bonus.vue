@@ -237,15 +237,6 @@
 <script>
 import countTo from "vue-count-to";
 import { uniqBy } from "lodash";
-import {
-    bonusCashMoney,
-    checkCashPwd,
-    mylocalStorage,
-    queryBonusList,
-    queryBonusNextList,
-    queryBonusTotal,
-    findNext
-} from "../utils/request_api";
 import cut from "./../components/cut";
 import foot from "./../components/foot";
 
@@ -365,7 +356,7 @@ export default {
                 }
                 this.cashBonus(user_id);
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async cashBonus(user_id) {
@@ -416,6 +407,7 @@ export default {
             let data = {
                 user_id: localStorage.getItem("user_id")
             };
+            let res = null;
             try {
                 res = await this.$Http.queryUserNext(data);
                 if (res.data.length === 0) {
@@ -424,7 +416,7 @@ export default {
                 this.next_user = true;
                 this.first_user_list = res.data;
             } catch (error) {
-                this.$Message.error("请求失败！");
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async showNextNextUser(item) {
@@ -440,7 +432,7 @@ export default {
                 this.next_user = true;
                 this.first_user_list = res.data;
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         }
     }

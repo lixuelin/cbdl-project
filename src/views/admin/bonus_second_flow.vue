@@ -112,7 +112,6 @@
 </template>
 
 <script>
-import { queryAdminSecondBonusList } from "./../../utils/admin_api";
 import pageTitle from "./../../components/title";
 
 export default {

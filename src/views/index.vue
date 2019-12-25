@@ -173,9 +173,7 @@ import menuView from "./../components/menu_card";
 import contentCard from "./../components/content_card";
 import newCard from "./../components/news_card";
 import foot from "./../components/foot";
-import { mylocalStorage, queryInvestTotal } from "./../utils/request_api";
 import { delCookie } from "./../utils/cookie";
-import { log } from "util";
 
 export default {
     name: "index",
@@ -391,7 +389,7 @@ export default {
             } catch (error) {
                 res.forEach(error => {
                     if (error.status !== 200) {
-                        this.$Message.error(`${error.msg}`);
+                        this.$Message.error(`请求失败:${error.msg}`);
                     }
                 });
             }

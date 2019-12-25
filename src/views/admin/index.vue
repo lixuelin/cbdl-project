@@ -21,7 +21,6 @@
 
 <script>
 import countTo from "vue-count-to";
-import { queryCount } from "./../../utils/admin_api";
 
 export default {
     name: "admin_index",

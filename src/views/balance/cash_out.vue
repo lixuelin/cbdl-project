@@ -78,7 +78,6 @@
 import foot from "./../../components/foot";
 import Clipboard from "clipboard";
 import { checkBackInfo } from "./../../utils/bank";
-import { mylocalStorage } from "./../../utils/request_api";
 
 export default {
     name: "cash-out",
@@ -159,7 +158,7 @@ export default {
         },
         async getBankInfo() {
             let data = {
-                id: mylocalStorage.getItem("user_id")
+                id: localStorage.getItem("user_id")
             };
             let res = null;
             try {

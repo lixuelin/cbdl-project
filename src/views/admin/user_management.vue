@@ -157,13 +157,6 @@
 
 <script>
 import BIN from "bankcardinfo";
-import {
-    mylocalStorage,
-    queryUsers,
-    updateBankInfo,
-    queryBanks
-} from "./../../utils/admin_api";
-import { updateCashPwd, updateLoginPwd } from "./../../utils/request_api";
 import pageTitle from "./../../components/title";
 
 export default {

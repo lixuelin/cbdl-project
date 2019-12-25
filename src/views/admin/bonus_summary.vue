@@ -65,10 +65,6 @@
 </template>
 
 <script>
-import {
-    queryBonusEveryDay,
-    queryNextBonusEveryDay
-} from "./../../utils/admin_api";
 import pageTitle from "./../../components/title";
 
 export default {

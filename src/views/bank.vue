@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { mylocalStorage, queryBank } from "./../utils/request_api";
 import { checkBackInfo } from "./../utils/bank";
 
 export default {

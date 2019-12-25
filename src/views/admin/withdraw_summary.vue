@@ -49,7 +49,6 @@
 </template>
 
 <script>
-    import { queryCashEveryDay, queryCashEveryDayBonus } from "./../../utils/admin_api";
     import pageTitle from "./../../components/title";
     
     export default {

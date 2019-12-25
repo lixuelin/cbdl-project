@@ -41,7 +41,6 @@
 import countTo from "vue-count-to";
 import menuView from "./../components/menu_card";
 import foot from "./../components/foot";
-import { mylocalStorage } from "./../utils/request_api";
 export default {
     name: "balance",
     data() {
@@ -84,14 +83,14 @@ export default {
     },
     methods: {
         isLogin() {
-            if (mylocalStorage.getItem("username")) {
+            if (localStorage.getItem("username")) {
                 this.is_login = true;
-                this.userInfo.name = mylocalStorage.getItem("username");
+                this.userInfo.name = localStorage.getItem("username");
             }
         },
         async getBalance() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id")
+                user_id: localStorage.getItem("user_id")
             };
             let res = null;
             try {

@@ -88,12 +88,6 @@
 
 <script>
 import BIN from "bankcardinfo";
-import {
-    registerRequest,
-    registerRequestUserName,
-    registeInviteCode,
-    registeBankCard
-} from "./../utils/request_api";
 
 export default {
     name: "register",
@@ -323,13 +317,10 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.createUser(data);
-                if (res.status !== 200) {
-                    return this.$Message.error("注册失败!");
-                }
                 this.$Message.success("注册成功!");
                 this.$router.push({ name: "login" });
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async getInviteCode(value, callback) {
@@ -343,7 +334,7 @@ export default {
                     callback(new Error("邀请码不存在请重新输入！"));
                 }
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         },
         async getBankCard(value, callback) {
@@ -358,7 +349,7 @@ export default {
                 }
                 callback();
             } catch (error) {
-                this.$Message.error(`${res.msg}`);
+                this.$Message.error(`请求失败:${res.msg}`);
             }
         }
     }

@@ -68,13 +68,6 @@
 </template>
 
 <script>
-import {
-    mylocalStorage,
-    checkLoginPwd,
-    updateLoginPwd,
-    checkCashPwd,
-    updateCashPwd
-} from "./../utils/request_api";
 import { delCookie } from "./../utils/cookie";
 
 export default {

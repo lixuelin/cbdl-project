@@ -79,10 +79,6 @@
 </template>
 
 <script>
-import {
-    queryInvestEveryDay,
-    queryIncomeEveryDay
-} from "./../../utils/admin_api";
 import pageTitle from "./../../components/title";
 
 export default {

@@ -81,7 +81,6 @@
 
 <script>
 import BIN from "bankcardinfo";
-import { queryUserMsg, updateLoginPwd } from "../utils/request_api";
 
 export default {
     name: "forget",

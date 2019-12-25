@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import { queryAdminBonusList } from "./../../utils/admin_api";
 import pageTitle from "./../../components/title";
 
 export default {
