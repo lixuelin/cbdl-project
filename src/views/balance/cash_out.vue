@@ -217,7 +217,7 @@ export default {
                 return (this.isTextSure = true);
             }
 
-            if (this.is_sure) {
+            if (this.is_sure.length > 0) {
                 this.$Message.warning(
                     "当前有提现申请正在等待审核，请稍后再试！"
                 );
@@ -246,7 +246,7 @@ export default {
         },
         async cashPost() {
             this.isSureInvest();
-            if (this.is_sure) {
+            if (this.is_sure.length > 0) {
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.show_text_trade = false;
