@@ -80,7 +80,6 @@
 </template>
 
 <script>
-    import { queryCashList, verify_cash } from "./../../utils/admin_api";
     import pageTitle from "./../../components/title";
     
     export default {

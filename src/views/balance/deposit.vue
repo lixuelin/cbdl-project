@@ -4,14 +4,22 @@
             <p class="deposit-content-tip">转账金额</p>
             <div class="deposit-content-text">
                 <span>¥</span>
-                <input type="text" v-model="deposit_num" @blur="valativeNum" @focus="textNum" placeholder="请输入转账金额">
+                <input
+                    type="text"
+                    v-model="deposit_num"
+                    @blur="valativeNum"
+                    @focus="textNum"
+                    placeholder="请输入转账金额"
+                />
             </div>
             <p class="deposit-content-tip">转账金额为100的倍数</p>
         </div>
         <div class="deposit-pay">
             <div class="deposit-pay-way">
                 <p>付款方式</p>
-                <div class="deposit-pay-way-choose">{{bank.bank_name}}（尾号{{bank.card}}）</div>
+                <div class="deposit-pay-way-choose">
+                    {{ bank.bank_name }}（尾号{{ bank.card }}）
+                </div>
             </div>
         </div>
         <div class="deposit-commit">
@@ -25,25 +33,57 @@
             <div>
                 <p>请您将投资款转账到公司账户，收到后将计算收益：</p>
                 <div class="invest-sure-count">
-                    <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="company">
+                    <p
+                        class="ctrlBtn"
+                        @click="ctrlCBtn"
+                        :data-clipboard-text="company"
+                    >
                         <span>账户：</span>
                         <span>深圳市鑫鼎翔电子商务有限公司</span>
-                        <Button type="primary" size="small" data-clipboard-text="深圳市鑫鼎翔电子商务有限公司">复制</Button>
+                        <Button
+                            type="primary"
+                            size="small"
+                            data-clipboard-text="深圳市鑫鼎翔电子商务有限公司"
+                            >复制</Button
+                        >
                     </p>
-                    <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_add">
+                    <p
+                        class="ctrlBtn"
+                        @click="ctrlCBtn"
+                        :data-clipboard-text="bank_add"
+                    >
                         <span>开户行：</span>
                         <span>中国农业银行深圳中心区支行</span>
-                        <Button type="primary" size="small" data-clipboard-text="中国农业银行深圳中心区支行">复制</Button>
+                        <Button
+                            type="primary"
+                            size="small"
+                            data-clipboard-text="中国农业银行深圳中心区支行"
+                            >复制</Button
+                        >
                     </p>
-                    <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_code">
+                    <p
+                        class="ctrlBtn"
+                        @click="ctrlCBtn"
+                        :data-clipboard-text="bank_code"
+                    >
                         <span>银行账号：</span>
                         <span>41005000040046406</span>
-                        <Button type="primary" size="small" data-clipboard-text="41005000040046406">复制</Button>
+                        <Button
+                            type="primary"
+                            size="small"
+                            data-clipboard-text="41005000040046406"
+                            >复制</Button
+                        >
                     </p>
                 </div>
             </div>
             <div slot="footer">
-                <i-button type="primary" long :loading="loading" @click="sureDeposit">
+                <i-button
+                    type="primary"
+                    long
+                    :loading="loading"
+                    @click="sureDeposit"
+                >
                     <span>确定</span>
                 </i-button>
             </div>
@@ -54,11 +94,10 @@
 <script>
 import foot from "./../../components/foot";
 import Clipboard from "clipboard";
-import {mylocalStorage} from "./../../utils/request_api";
 
 export default {
     name: "deposit",
-    data () {
+    data() {
         return {
             deposit_num: "",
             isTextSure: true,
@@ -67,22 +106,36 @@ export default {
             bank_code: "41005000040046406",
             bank_add: "中国农业银行深圳中心区支行",
             loading: false,
-            bank: {}
-        }
+            bank: {},
+            is_sure: []
+        };
     },
     components: {
         foot
     },
-    created(){
-        this.getBankInfo()
+    created() {
+        this.getBankInfo();
     },
     methods: {
-        valativeNum(){
+        async isSureInvest() {
+            let data = {
+                user_id: localStorage.getItem("user_id"),
+                balance_type: 0
+            };
+            let res = null;
+            try {
+                res = await this.$Http.queryBalanceLastInvest(data);
+                this.is_sure = res.data;
+            } catch (error) {
+                this.$Message.error(`${res.msg}`);
+            }
+        },
+        valativeNum() {
             let num = this.deposit_num;
-            if (isNaN(num) || num === "" || Number(num) <= 0){
+            if (isNaN(num) || num === "" || Number(num) <= 0) {
                 this.$Message.error("请输入准确的数值！");
                 this.isTextSure = true;
-            } else if (this.isFloat(Number(num)/100)) {
+            } else if (this.isFloat(Number(num) / 100)) {
                 this.$Message.error("请转账金额为100的倍数！");
                 this.isTextSure = true;
             } else {
@@ -90,30 +143,37 @@ export default {
             }
         },
         textNum() {
-           this.isTextSure = true; 
+            this.isTextSure = true;
         },
         isFloat(n) {
             return n + ".0" != n;
         },
-        deposit () {
+        deposit() {
+            this.isSureInvest();
             if (this.isTextSure) {
                 this.$Message.error("请输入准确的数值");
-                return
+                return;
             }
-            this.deposit_show_modal = true
+            if (this.is_sure) {
+                return this.$Message.warning(
+                    "当前有转账申请正在等待审核，请稍后再试！"
+                );
+            }
+            this.deposit_show_modal = true;
         },
-        async getBankInfo () {
+        async getBankInfo() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id")
-            }
-
-            let res = await this.$Http.queryBankInfo(data);
-
-            if (res.status === 200) {
-                this.bank = res.data[0];
-                this.bank.card = this.bank.card.substring(this.bank.card.length-4);
-            } else {
-                this.$Message.error("请求银行卡信息失败！");
+                id: localStorage.getItem("user_id")
+            };
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
+                this.bank = res.data;
+                this.bank.card = this.bank.card.substring(
+                    this.bank.card.length - 4
+                );
+            } catch (error) {
+                this.$Message.error(`请求银行卡信息失败:${res.msg}！`);
             }
         },
         ctrlCBtn() {
@@ -138,32 +198,43 @@ export default {
             });
         },
         async sureDeposit() {
-            
+            this.isSureInvest();
+            if (this.is_sure) {
+                this.loading = false;
+                this.deposit_show_modal = false;
+                return this.$Message.warning(
+                    "当前有转账申请正在等待审核，请稍后再试！"
+                );
+            }
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
-                balance_num: Number(this.deposit_num),
+                user_id: localStorage.getItem("user_id"),
+                balance_num: this.deposit_num,
                 balance_type: 0
             };
-            if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+            if (
+                localStorage.getItem("user_id") === "" ||
+                localStorage.getItem("user_id") === null
+            ) {
                 this.$Message.warning("请先登录后操作！");
                 return;
             }
             this.loading = true;
-            let res = await this.$Http.createBalance(data);
-            if (res.status === 200) {
+            let res = null;
+            try {
+                res = await this.$Http.createBalance(data);
                 this.$Message.success("转账成功！");
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.deposit_num = "";
                 this.isTextSure = true;
-            } else {
+            } catch (error) {
                 this.$Message.error("转账失败！");
                 this.loading = false;
                 this.deposit_show_modal = false;
             }
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>

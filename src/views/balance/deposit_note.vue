@@ -11,41 +11,46 @@
 
 <script>
 import noteCard from "./../../components/note_card";
-import {mylocalStorage} from "./../../utils/request_api";
 
 export default {
     name: "note",
-    data () {
+    data() {
         return {
-            note_list: [
-            ]
-        }
+            note_list: []
+        };
     },
     components: {
         "node-card": noteCard
     },
     created() {
-        this.getBalanceNote()
+        this.getBalanceNote();
     },
     methods: {
-        async getBalanceNote () {
+        async getBalanceNote() {
             let data = {
-                user_id: mylocalStorage.getItem("user_id"),
+                user_id: localStorage.getItem("user_id"),
                 balance_type: 0
-            }
+            };
 
-            if (mylocalStorage.getItem("user_id") === "" || mylocalStorage.getItem("user_id") === null) {
+            if (
+                localStorage.getItem("user_id") === "" ||
+                localStorage.getItem("user_id") === null
+            ) {
                 this.$Message.warning("请先登录后操作！");
                 return;
             }
-
-            let res = await this.$Http.queryBalance(data)
-            this.note_list = res.data;
+            let res = null;
+            try {
+                res = await this.$Http.queryBalance(data);
+                this.note_list = res.data;
+            } catch (error) {
+                this.$Message.error(`请求失败:${res.msg}`);
+            }
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
-    @import url("./../../assets/css/note");
+@import url("./../../assets/css/note");
 </style>
