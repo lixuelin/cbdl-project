@@ -351,11 +351,14 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.queryUser(data);
+                console.log(res, "user");
+
                 if (!res.data) {
                     return this.$Message.error("密码错误！");
                 }
-                this.cashBonus(user_id);
+                this.cashBonus(localStorage.getItem("user_id"));
             } catch (error) {
+                console.log(error, "rrr");
                 this.$Message.error(`请求失败:${res.msg}`);
             }
         },
