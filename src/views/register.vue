@@ -190,6 +190,8 @@ export default {
         const validateInviteCode = (rule, value, callback) => {
             if (value !== "") {
                 this.getInviteCode(value, callback);
+            } else {
+                callback();
             }
         };
 
@@ -331,8 +333,9 @@ export default {
             try {
                 let res = await this.$Http.queryUser(data);
                 if (Object.keys(res.data).length === 0) {
-                    callback(new Error("邀请码不存在请重新输入！"));
+                    return callback(new Error("邀请码不存在请重新输入！"));
                 }
+                callback();
             } catch (error) {
                 this.$Message.error(`请求失败:${res.msg}`);
             }
@@ -345,7 +348,9 @@ export default {
             try {
                 res = await this.$Http.queryUser(data);
                 if (Object.keys(res.data).length !== 0) {
-                    callback(new Error("银行卡已经被使用，请重新输入！"));
+                    return callback(
+                        new Error("银行卡已经被使用，请重新输入！")
+                    );
                 }
                 callback();
             } catch (error) {
