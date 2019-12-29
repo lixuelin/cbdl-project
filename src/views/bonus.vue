@@ -225,6 +225,8 @@ export default {
       let res = null;
       try {
         res = await this.$Http.queryTeamIncome(data);
+        console.log(res, "ers");
+
         this.income_total = res.data ? res.data.total : 0;
       } catch (error) {
         this.$Message.error(`请求失败 ${res.msg}`);

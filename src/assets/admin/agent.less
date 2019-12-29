@@ -1,0 +1,31 @@
+@charset "utf8";
+
+.paddingCont(@spaceCont: 0 15px) {
+    padding: @spaceCont;
+}
+
+.marginCont(@spaceCont: 0 15px) {
+    margin: @spaceCont;
+}
+
+.border_radius (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.admin-main {
+    min-height: 500px;
+}
+
+.agent-create {
+    .paddingCont(15px 15px);
+    .border_radius();
+    background-color: #fff;
+
+    &-form {
+        width: 60%;
+    }
+}

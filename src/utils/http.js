@@ -99,14 +99,11 @@ instance.interceptors.response.use(
                 localStorage.setItem("user_id", "");
                 localStorage.setItem("session_id", "");
                 localStorage.setItem("code", "");
+
                 if (data.type === "manager") {
-                    router.push({
-                        path: "/manager"
-                    });
+                    window.location.href = "/manager";
                 } else {
-                    router.push({
-                        path: "/"
-                    });
+                    window.location.href = "/";
                 }
             }
 

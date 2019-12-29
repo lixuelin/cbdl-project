@@ -43,6 +43,10 @@ const UserApi = {
     queryUserBanks: {
         method: "get",
         url: "/user/bank_list?type=manager"
+    },
+    queryNotAgentUsers: {
+        method: "get",
+        url: "/user/not_agent_users?type=manager"
     }
 };
 

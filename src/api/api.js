@@ -7,6 +7,7 @@ import Financial from "./financial_api";
 import Manager from "./manager_api";
 import Cash from "./cash_api";
 import Multiple from "./multiple_api";
+import Agent from "./Agent_api";
 
 const api = Object.assign(
     {},
@@ -18,7 +19,8 @@ const api = Object.assign(
     Financial,
     Manager,
     Cash,
-    Multiple
+    Multiple,
+    Agent
 );
 
 export default api;
