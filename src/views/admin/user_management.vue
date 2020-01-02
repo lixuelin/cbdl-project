@@ -61,7 +61,7 @@
                 </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="queryUserList"
+                        <Button type="primary" @click="queryUserList(1)"
                             >搜索</Button
                         >
                         <Button type="primary">导出excel</Button>
@@ -82,7 +82,7 @@
         </div>
         <Modal v-model="resetBankModal" width="460">
             <p slot="header" style="text-align:left">
-                <span>修改提现密码</span>
+                <span>修改银行卡号</span>
             </p>
             <div>
                 <Form
@@ -393,7 +393,7 @@ export default {
             this.search.start_time = date[0];
             this.search.end_time = date[1];
         },
-        async queryUserList() {
+        async queryUserList(init_page) {
             let data = {
                 username: this.search.username,
                 card: this.search.card,
@@ -401,7 +401,7 @@ export default {
                 bank_name: this.search.bank_name,
                 start_time: this.search.start_time,
                 end_time: this.search.end_time,
-                currentPage: this.pageInfo.currentPage,
+                currentPage: init_page ? init_page : this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize
             };
             let res = null;

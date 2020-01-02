@@ -22,6 +22,10 @@ const AgentApi = {
     queryAdminAgents: {
         method: "get",
         url: "/agent/list?type=manager"
+    },
+    queryAgentInterest: {
+        method: "get",
+        url: "/agent/interest_list?type=manager"
     }
 };
 

@@ -34,8 +34,8 @@ const AdminDeposit = () => import("@/views/admin/deposit");
 const BalanceFlow = () => import("@/views/admin/balance_flow");
 
 const Agent = () => import("@/views/admin/agent/agent_manager");
-
 const AddAgent = () => import("@/views/admin/agent/add_agent");
+const AgentInterest = () => import("@/views/admin/agent/agent_interest");
 
 // Vue.use(Router)
 
@@ -200,6 +200,11 @@ export default new VueRouter({
                     path: "/admin/add_agent",
                     name: "add_agent",
                     component: AddAgent
+                },
+                {
+                    path: "/admin/agent_interest",
+                    name: "agent_interest",
+                    component: AgentInterest
                 }
             ]
         }
