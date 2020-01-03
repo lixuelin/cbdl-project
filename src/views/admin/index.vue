@@ -71,7 +71,10 @@ export default {
                     item.total = data[i];
                 });
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

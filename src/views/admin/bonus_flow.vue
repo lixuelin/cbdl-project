@@ -71,10 +71,10 @@
             <div class="admin-main-search-box">
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="getBonusList"
+                        <Button type="primary" @click="getBonusList(1)"
                             >搜索</Button
                         >
-                        <Button type="primary">导出excel</Button>
+                        <!-- <Button type="primary">导出excel</Button> -->
                     </div>
                 </div>
             </div>
@@ -167,7 +167,7 @@ export default {
             this.search.start_time = date[0];
             this.search.end_time = date[1];
         },
-        async getBonusList() {
+        async getBonusList(init_page) {
             let data = {
                 username: this.search.username,
                 household: this.search.household,
@@ -176,7 +176,7 @@ export default {
                 invest_num: this.search.invest_num,
                 start_time: this.search.start_time,
                 end_time: this.search.end_time,
-                currentPage: this.pageInfo.currentPage,
+                currentPage: init_page ? init_page : this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize
             };
             let res = null;
@@ -185,7 +185,10 @@ export default {
                 this.data = res.data.bonus;
                 this.pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

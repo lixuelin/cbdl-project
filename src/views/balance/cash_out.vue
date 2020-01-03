@@ -172,7 +172,10 @@ export default {
                         res.data.card.length
                     );
             } catch (error) {
-                this.$Message.error(`请求银行卡信息失败:${res.msg}！`);
+                if (res.msg) {
+                    return this.$Message.error(`请求银行卡信息失败:${res.msg}`);
+                }
+                this.$Message.error(`请求银行卡信息失败:${error}`);
             }
         },
         async isSureInvest() {
@@ -185,7 +188,10 @@ export default {
                 res = await this.$Http.queryBalanceLastCash(data);
                 this.is_sure = res.data;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async queryTotal() {
@@ -203,7 +209,10 @@ export default {
                 res = await this.$Http.queryBalanceTotal(data);
                 this.balance_num = res.data.count.toFixed(1);
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}！`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         sureCash() {
@@ -241,7 +250,10 @@ export default {
                 this.cashPost();
             } catch (error) {
                 this.loading = false;
-                this.$Message.error(`交易密码错误:${res.msg}！`);
+                if (res.msg) {
+                    return this.$Message.error(`交易密码错误:${res.msg}`);
+                }
+                this.$Message.error(`交易密码错误:${error}`);
             }
         },
         async cashPost() {
@@ -278,10 +290,13 @@ export default {
                 this.show_text_trade = false;
                 this.queryTotal();
             } catch (error) {
-                this.$Message.error(`提现失败:${res.msg}！`);
                 this.loading = false;
                 this.deposit_show_modal = false;
                 this.show_text_trade = false;
+                if (res.msg) {
+                    return this.$Message.error(`提现失败:${res.msg}`);
+                }
+                this.$Message.error(`提现失败:${error}`);
             }
         }
     }

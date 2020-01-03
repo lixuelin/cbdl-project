@@ -111,7 +111,10 @@ export default {
                 this.$Message.success("登录成功!");
                 this.$router.push({ path: "/home" });
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         gotoRegister() {

@@ -410,7 +410,10 @@ export default {
                 this.users = res.data.users;
                 this.pageInfo.userTotal = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async queryBankList() {
@@ -440,7 +443,10 @@ export default {
                 this.queryUserList();
             } catch (error) {
                 this.modal_loading = false;
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async resetLoginPwd() {
@@ -461,7 +467,10 @@ export default {
                 this.queryUserList();
             } catch (error) {
                 this.modal_loading = false;
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         handleSubmit(name) {
@@ -489,7 +498,10 @@ export default {
                 this.queryUserList();
             } catch (error) {
                 this.modal_loading = false;
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

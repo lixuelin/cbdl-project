@@ -23,7 +23,9 @@
                 </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="getAgents">搜索</Button>
+                        <Button type="primary" @click="getAgents(1)"
+                            >搜索</Button
+                        >
                     </div>
                 </div>
             </div>
@@ -104,18 +106,26 @@ export default {
         this.getAgents();
     },
     methods: {
-        async getAgents() {
+        async getAgents(init_page) {
             let data = {
                 name: this.search.name,
                 super_name: this.search.super_name,
                 start_time: this.search.start_time,
                 end_time: this.search.end_time,
-                currentPage: this.pageInfo.currentPage,
+                currentPage: init_page ? init_page : this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize
             };
-            let res = await this.$Http.queryAgentInterest(data);
-            this.agents = res.data.agents;
-            this.pageInfo.agentTotal = res.data.total;
+            let res = null;
+            try {
+                res = await this.$Http.queryAgentInterest(data);
+                this.agents = res.data.agents;
+                this.pageInfo.agentTotal = res.data.total;
+            } catch (error) {
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
+            }
         }
     }
 };

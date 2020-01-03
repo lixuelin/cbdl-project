@@ -129,7 +129,7 @@
                 </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="getInvestList"
+                        <Button type="primary" @click="getInvestList(1)"
                             >搜索</Button
                         >
                         <Button type="primary" @click="download"
@@ -384,7 +384,10 @@ export default {
                 this.financial.two.surplus =
                     res.data.two.financial_count - res.data.two.invests;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async queryBankList() {
@@ -393,10 +396,13 @@ export default {
                 res = await this.$Http.queryUserBanks();
                 this.bankList = res.data;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
-        async getInvestList() {
+        async getInvestList(init_page) {
             let data = {
                 username: this.search.username,
                 card: this.search.card,
@@ -404,7 +410,7 @@ export default {
                 bank_name: this.search.bank_name,
                 start_time: this.search.start_time,
                 end_time: this.search.end_time,
-                currentPage: this.pageInfo.currentPage,
+                currentPage: init_page ? init_page : this.pageInfo.currentPage,
                 pageSize: this.pageInfo.currentPageSize,
                 invest_num: this.search.invest_num,
                 invest_pay: this.search.invest_pay,
@@ -416,7 +422,10 @@ export default {
                 this.invests = res.data.invests;
                 this.pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async verifyInvestNum() {
@@ -442,7 +451,10 @@ export default {
                 this.$Message.success("修改成功！");
                 this.getInvestList();
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

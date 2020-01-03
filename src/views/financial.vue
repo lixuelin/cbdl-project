@@ -43,7 +43,10 @@ export default {
                 res = await this.$Http.queryFinancial();
                 this.financial_list = res.data;
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         gotoInvest(item) {

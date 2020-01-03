@@ -37,7 +37,7 @@
                 </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="getInvestEveryday"
+                        <Button type="primary" @click="getInvestEveryday(1)"
                             >搜索</Button
                         >
                         <Button type="primary">导出excel</Button>
@@ -158,11 +158,13 @@ export default {
             this.search.start_time = date[0];
             this.search.end_time = date[1];
         },
-        async getInvestEveryday() {
+        async getInvestEveryday(init_page) {
             let data = {
                 start_time: this.search.start_time,
                 end_time: this.search.end_time,
-                currentPage: this.invest_pageInfo.currentPage,
+                currentPage: init_page
+                    ? init_page
+                    : this.invest_pageInfo.currentPage,
                 pageSize: this.invest_pageInfo.currentPageSize
             };
             let res = null;
@@ -171,7 +173,10 @@ export default {
                 this.invests = res.data.invests;
                 this.invest_pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async getIncomeEveryday() {
@@ -187,7 +192,10 @@ export default {
                 this.incomes = res.data.incomes;
                 this.income_pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

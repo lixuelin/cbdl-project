@@ -215,12 +215,18 @@ export default {
                 cash_pwd: this.cash_pwd
             };
             this.cash_loading = true;
-            let res = await this.$Http.queryUser(data);
-            this.cash_loading = false;
-            if (!res.data) {
-                return this.$Message.error("请求失败！");
+            let res = null;
+            try {
+                res = await this.$Http.queryUser(data);
+                this.cash_loading = false;
+                this.cashInvestMoney();
+            } catch (error) {
+                this.cash_loading = false;
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
-            this.cashInvestMoney();
         },
         async cashInvestMoney() {
             let data = {
@@ -230,20 +236,26 @@ export default {
                 invest_time: this.cash_invest.create_time,
                 financial_id: this.financial
             };
-            let res = await this.$Http.stopInvest(data);
-            this.loading = false;
-            if (res.status !== 200) {
-                return this.$Message.error("提现失败！");
+            let res = null;
+            try {
+                let res = await this.$Http.stopInvest(data);
+                this.loading = false;
+                this.cash_list_modal = false;
+                this.cash_list_modal_sure = false;
+                this.cash_success = true;
+                this.cash_pwd = "";
+                this.cash_loading = false;
+                let msg = {
+                    is_update: true
+                };
+                this.$emit("changeInvestList", msg);
+            } catch (error) {
+                this.loading = false;
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
-            this.cash_list_modal = false;
-            this.cash_list_modal_sure = false;
-            this.cash_success = true;
-            this.cash_pwd = "";
-            this.cash_loading = false;
-            let msg = {
-                is_update: true
-            };
-            this.$emit("changeInvestList", msg);
         }
     },
     watch: {

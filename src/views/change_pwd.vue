@@ -187,7 +187,10 @@ export default {
                 }
             } catch (error) {
                 this.formValidate.oldPassWord = "";
-                return this.$Message.error(`${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async changePassword(tip) {
@@ -220,7 +223,10 @@ export default {
                 }
             } catch (error) {
                 this.is_load = false;
-                return this.$Message.error(`${tips}请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

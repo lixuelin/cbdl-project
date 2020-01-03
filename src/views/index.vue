@@ -387,11 +387,16 @@ export default {
                     this.income.endVal +
                     this.bonus.endVal;
             } catch (error) {
+                let c = 0;
                 res.forEach(error => {
                     if (error.status !== 200) {
                         this.$Message.error(`请求失败:${error.msg}`);
+                        c++;
                     }
                 });
+                if (c === 0) {
+                    this.$Message.error(`请求失败:${error}`);
+                }
             }
         },
         del() {

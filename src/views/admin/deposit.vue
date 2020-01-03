@@ -62,7 +62,9 @@
                 </div>
                 <div class="admin-main-search-box-fields">
                     <div class="admin-main-search-box-btns">
-                        <Button type="primary" @click="getBalance">搜索</Button>
+                        <Button type="primary" @click="getBalance(1)"
+                            >搜索</Button
+                        >
                     </div>
                 </div>
             </div>
@@ -249,17 +251,22 @@ export default {
         this.getBalance();
     },
     methods: {
-        async getBalance() {
+        async getBalance(init_page) {
             let data = this.search;
             data.pageSize = this.pageInfo.currentPageSize;
-            data.currentPage = this.pageInfo.currentPage;
+            data.currentPage = init_page
+                ? init_page
+                : this.pageInfo.currentPage;
             let res = null;
             try {
                 res = await this.$Http.queryBalanceAdmin(data);
                 this.deposit_list = res.data.balance_list;
                 this.pageInfo.total = res.data.total;
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         changePage(page) {
@@ -286,10 +293,13 @@ export default {
                 this.getBalance();
                 this.deposit_info.reality_num = "";
             } catch (error) {
-                this.$Message.error(`请求失败: ${res.msg}`);
                 this.modal_loading = false;
                 this.change_deposit = false;
                 this.deposit_info.reality_num = "";
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

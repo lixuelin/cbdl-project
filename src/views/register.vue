@@ -322,7 +322,10 @@ export default {
                 this.$Message.success("注册成功!");
                 this.$router.push({ name: "login" });
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async getInviteCode(value, callback) {
@@ -337,7 +340,10 @@ export default {
                 }
                 callback();
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         },
         async getBankCard(value, callback) {
@@ -354,7 +360,10 @@ export default {
                 }
                 callback();
             } catch (error) {
-                this.$Message.error(`请求失败:${res.msg}`);
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }

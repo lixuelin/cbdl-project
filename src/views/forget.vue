@@ -251,7 +251,10 @@ export default {
                 }, 1000);
             } catch (error) {
                 this.modal_loading = false;
-                return this.$Message.error("登录密码修改失败!");
+                if (res.msg) {
+                    return this.$Message.error(`请求失败:${res.msg}`);
+                }
+                this.$Message.error(`请求失败:${error}`);
             }
         }
     }
