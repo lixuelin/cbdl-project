@@ -81,6 +81,21 @@
             .border_radius();
             .shadow_box();
 
+            &-total {
+                display: flex;
+
+                &-cont {
+                    flex: 1;
+                }
+
+                &-btn {
+                    display: flex;
+                    flex-basis: 100px;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
             &-tip {
                 position: relative;
                 padding: 0 10px;
@@ -91,7 +106,7 @@
                     font-size: 10px;
                 }
 
-                &::before{
+                &::before {
                     position: absolute;
                     left: 2px;
                     top: 50%;
@@ -100,7 +115,7 @@
                     height: 4px;
                     background: #3679ff;
                     .border_radius(4px);
-                    transform: translateY(-50%)
+                    transform: translateY(-50%);
                 }
             }
 
@@ -128,7 +143,6 @@
                     font-size: 22px;
                 }
             }
-
         }
 
         &-newcomer {
@@ -155,12 +169,11 @@
                 & h4 {
                     font-size: 22px;
                 }
-        
             }
 
             &-invest {
                 color: #3679ff;
-                font-size: 22px;
+                font-size: 20px;
                 font-weight: 700;
             }
 
@@ -259,7 +272,6 @@
             }
         }
 
-
         &-invest {
             .marginCont(15px 0);
         }
@@ -326,8 +338,6 @@
                     }
                 }
             }
-
-
         }
 
         &-company {
@@ -341,7 +351,6 @@
             background: #fff;
 
             &-help {
-
                 & li {
                     .marginCont();
                     color: #2c3340;
@@ -374,8 +383,5 @@
                 width: 100%;
             }
         }
-
     }
-
-
 }
