@@ -46,9 +46,6 @@ export default {
       }
     },
     gotoInvest(item) {
-      if (item.id === 2) {
-        return this.$Message.warning(`今日额度已抢完！`);
-      }
       this.$router.push({
         name: "invest",
         params: {
