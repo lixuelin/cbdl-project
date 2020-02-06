@@ -224,7 +224,8 @@ export default {
     },
     async getBalance() {
       let data = {
-        user_id: localStorage.getItem("user_id")
+        user_id: localStorage.getItem("user_id"),
+        is_cash: 1
       };
       let res = null;
       try {

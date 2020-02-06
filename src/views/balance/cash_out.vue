@@ -176,7 +176,9 @@ export default {
     },
     async queryTotal() {
       let data = {
-        user_id: localStorage.getItem("user_id")
+        user_id: localStorage.getItem("user_id"),
+        is_cash: 0,
+        is_invest: 1
       };
       if (
         localStorage.getItem("user_id") === "" ||
