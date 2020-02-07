@@ -357,9 +357,7 @@ export default {
     },
     async queryCapital() {
       let data = {
-        user_id: localStorage.getItem("user_id"),
-        is_cash: 1,
-        is_invest: 1
+        user_id: localStorage.getItem("user_id")
       };
       let arr = [
         this.$Http.queryBalanceTotal(data),
