@@ -6,7 +6,7 @@
       </div>
       <template v-if="is_login">
         <div class="b-home-header-top">
-          <p class="b-home-header-welcome">普通用户-{{ name }}，您的邀请码：{{ code }}</p>
+          <p class="b-home-header-welcome">{{is_vip}}-{{ name }}，您的邀请码：{{ code }}</p>
           <p>
             <span @click="loginOut">退出</span>
           </p>
@@ -175,6 +175,7 @@ export default {
       is_login: false,
       modal2: false,
       name: "李学麟",
+      is_vip: "普通用户",
       code: "",
       amount: {
         financial_first: "500W",
@@ -270,6 +271,7 @@ export default {
     if (localStorage.getItem("username")) {
       this.name = localStorage.getItem("username");
       this.code = localStorage.getItem("code");
+      this.is_vip = localStorage.getItem("is_vip");
     }
 
     // this.queryTotal();
