@@ -26,6 +26,10 @@ const AgentApi = {
     queryAgentInterest: {
         method: "get",
         url: "/agent/interest_list?type=manager"
+    },
+    queryAgentList: {
+        method: "get",
+        url: "/agent/agent_list?type=mobile"
     }
 };
 

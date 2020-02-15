@@ -85,6 +85,12 @@
           </div>
         </div>
       </div>
+      <div class="b-home-main-agent">
+        <div class="b-home-main-agent-bg" @click="goToAgent">
+          <p class="b-home-main-agent-join">加入代理商</p>
+          <p class="b-home-main-agent-win">你我共赢</p>
+        </div>
+      </div>
       <div class="b-home-main-newcomer">
         <div class="b-home-main-newcomer-box">
           <p class="b-home-main-newcomer-invest">3.42-4.45%</p>
@@ -397,6 +403,9 @@ export default {
       setTimeout(() => {
         this.modal2 = false;
       }, 1000);
+    },
+    goToAgent() {
+      this.$router.push({ path: "/agent" });
     }
   }
 };
