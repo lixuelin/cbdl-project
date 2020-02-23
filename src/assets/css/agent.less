@@ -91,6 +91,20 @@
             }
         }
 
+        &-recommend {}
+
+        &-description {
+            margin-bottom: 15px;
+
+            &-title {
+                text-indent: 20px;
+            }
+
+            &-cont {
+                text-indent: 40px;
+            }
+        }
+
         &-count {
             display: flex;
             padding: 10px 15px;
@@ -218,5 +232,35 @@
 
     & li {
         margin-right: 15px;
+    }
+}
+
+.agents {
+    &-nothing {
+        padding-top: 70%;
+        color: #999;
+        text-align: center;
+    }
+
+    &-show {
+        & li {
+            display: flex;
+            line-height: 40px;
+            text-align: center;
+
+            & span {
+                flex: 1;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+
+            &:first-child {
+                background-color: #ccc;
+            }
+        }
     }
 }
