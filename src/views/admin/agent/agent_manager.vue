@@ -29,6 +29,20 @@
         />
       </div>
     </div>
+    <Modal v-model="showModal" width="460">
+      <p slot="header" style="text-align:left">
+        <span>代理商升级</span>
+      </p>
+      <div style="padding: 20px; text-align:left">
+        <RadioGroup v-model="upgrade_agent">
+          <Radio label="黄金代理" :disabled="agent.agent_id === 2"></Radio>
+          <Radio label="钻石代理"></Radio>
+        </RadioGroup>
+      </div>
+      <div slot="footer">
+        <Button type="primary" size="large" long @click="upgradeAgent">升级</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -44,6 +58,9 @@ export default {
         name: "",
         super_name: ""
       },
+      showModal: false,
+      agent: {},
+      upgrade_agent: "",
       columns: [
         {
           title: "#",
@@ -127,7 +144,8 @@ export default {
                     on: {
                       click: async () => {
                         await this.getBalance(params.row.user_id);
-                        this.updateAgent(params.row);
+                        this.showModal = true;
+                        this.agent = params.row;
                       }
                     }
                   },
@@ -182,6 +200,7 @@ export default {
         let res = await this.$Http.queryAgentList();
         res.data.forEach(item => {
           this.agent_list[item.id] = item.cost;
+          this.agent_list[item.name] = item.id;
         });
         console.log(this.agent_list, "ss");
       } catch (error) {
@@ -258,6 +277,39 @@ export default {
         if (res.msg) {
           return this.$Message.error(`请求失败:${res.msg}`);
         }
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
+    async upgradeAgent() {
+      let agent_many = this.agent_list[this.agent_list[this.upgrade_agent]];
+      let pay_money = this.agent_list[this.agent.agent_id];
+      console.log(agent_many, pay_money);
+
+      if (this.balance_count < agent_many - pay_money) {
+        return this.$Message.warning(`当前用户余额不足！请提醒充值`);
+      }
+
+      let data = {
+        id: this.agent.id,
+        agent_id: this.agent_list[this.upgrade_agent],
+        balance_num: agent_many - pay_money,
+        user_id: this.agent.user_id
+      };
+
+      try {
+        let res = await this.$Http.upgradeAgent(data);
+        if (res.success === false) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
+        this.$Message.success("升级成功");
+        this.showModal = false;
+        this.upgradeAgent = "";
+        this.getAgents();
+      } catch (error) {
+        if (res.msg) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
+        this.showModal = false;
         this.$Message.error(`请求失败:${error}`);
       }
     }

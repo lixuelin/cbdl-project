@@ -38,6 +38,10 @@ const AgentApi = {
     updateAgent: {
         method: "put",
         url: "/agent?type=manager"
+    },
+    upgradeAgent: {
+        method: "put",
+        url: "/agent/upgrade_agent?type=manager"
     }
 };
 
