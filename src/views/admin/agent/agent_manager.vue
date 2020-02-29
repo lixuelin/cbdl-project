@@ -257,12 +257,12 @@ export default {
         is_super: false,
         user_id: agent.user_id,
         agent_id: agent.agent_id,
-        super_agent: agent.super_agent,
-        super_user_id: agent.super_user_id,
         balance_num: agent_many
       };
 
-      if (agent.super_name !== "") {
+      if (agent.super_agent) {
+        data.super_agent = agent.super_agent;
+        data.super_user_id = agent.super_user_id;
         data.is_super = true;
       }
 
