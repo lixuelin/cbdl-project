@@ -86,7 +86,8 @@
         </div>
       </div>
       <div class="b-home-main-agent">
-        <div class="b-home-main-agent-bg" @click="goToAgent">
+        <div class="b-home-main-agent-bg">
+          <Button type="success" size="default" @click="goToAgent">加入代理</Button>
           <p class="b-home-main-agent-join">加入代理商</p>
           <p class="b-home-main-agent-win">你我共赢</p>
         </div>
@@ -290,6 +291,7 @@ export default {
       localStorage.setItem("username", "");
       localStorage.setItem("code", "");
       localStorage.setItem("type", "");
+      localStorage.setItem("is_vip", "");
       delCookie("session_id");
       this.$router.push({
         path: "/",

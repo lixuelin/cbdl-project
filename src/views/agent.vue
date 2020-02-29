@@ -1,28 +1,28 @@
 <template>
   <div class="agent">
-    <div class="agent-module">
-      <h3>选择代理商</h3>
-      <div class="agent-module-bank">
-        <ul>
-          <template v-for="(item, index) in agent_list">
-            <li @click="checkAgent(item, index)" :key="item">
-              <div
-                :class="{'agent-module-bank-num': true,'agent-module-bank-checked': index === agent_index}"
-              >
-                <span>{{item.name | format_agent}}</span>
-              </div>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </div>
-    <div class="agent-module agent-module-abeam">
-      <h3>推荐码</h3>
-      <div class="agent-module-recommend">
-        <Input type="text" v-model="recommend" placeholder="请输入邀请码"></Input>
-      </div>
-    </div>
     <template v-if="is_vip === '普通用户'">
+      <div class="agent-module">
+        <h3>选择代理商</h3>
+        <div class="agent-module-bank">
+          <ul>
+            <template v-for="(item, index) in agent_list">
+              <li @click="checkAgent(item, index)" :key="item">
+                <div
+                  :class="{'agent-module-bank-num': true,'agent-module-bank-checked': index === agent_index}"
+                >
+                  <span>{{item.name | format_agent}}</span>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+      <div class="agent-module agent-module-abeam">
+        <h3>推荐码</h3>
+        <div class="agent-module-recommend">
+          <Input type="text" v-model="recommend" placeholder="请输入邀请码"></Input>
+        </div>
+      </div>
       <div class="agent-module agent-module-abeam">
         <h3>我要当代理商</h3>
         <div class="agent-module-way">
@@ -36,9 +36,53 @@
         </div>
       </div>
     </template>
-    <div class="agent-module">
+    <template v-if="is_vip !== '普通用户'">
+      <div class="agent-module">
+        <h3>代理商分润</h3>
+        <div class="agent-module-count">
+          <div class="agent-module-count-invest">
+            <p>{{income_total}}</p>
+            <span>用户分润</span>
+          </div>
+          <div class="agent-module-count-income">
+            <p>{{recommend_total}}</p>
+            <span>代理推广</span>
+          </div>
+        </div>
+      </div>
+      <div class="agent-module agent-module-abeam">
+        <h3>我要提现</h3>
+        <div class="agent-module-way">
+          <div class="agent-module-pay" @click="cashAgent">
+            <span>提现到余额</span>
+          </div>
+        </div>
+      </div>
+      <div class="agent-module">
+        <h3>收益列表</h3>
+        <div class="agent-module-income">
+          <ul>
+            <li>
+              <span>获得收益</span>
+              <span>团队收益</span>
+              <span>收益比率</span>
+              <span>创建时间</span>
+            </li>
+            <template v-for="item in income_list">
+              <li :key="item.agent_num">
+                <span>{{item.agent_num}}</span>
+                <span>{{item.team_income}}</span>
+                <span>{{item.agent_rate}}</span>
+                <span>{{item.create_time}}</span>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+    <div class="agent-module" @click="is_show_agent =! is_show_agent">
       <h3>代理商协议</h3>
-      <div class="agent-module-description">
+      <div class="agent-module-description" v-show="is_show_agent">
         <p class="agent-module-description-title">白银代理一次性投资15000万</p>
         <p class="agent-module-description-title">黄金代理一次性投资30000万</p>
         <p class="agent-module-description-title">钻石代理一次性投资60000万</p>
@@ -94,7 +138,12 @@ export default {
       is_sure: true,
       recommend: "",
       is_vip: "普通用户",
-      super_agent: {}
+      super_agent: {},
+      income_list: [],
+      income_total: 0,
+      recommend_total: 0,
+      is_create: false,
+      is_show_agent: true
     };
   },
 
@@ -102,6 +151,7 @@ export default {
     this.getBalance();
     this.getAgent();
     this.is_vip = localStorage.getItem("is_vip");
+    this.getAgentIncome();
   },
 
   filters: {
@@ -114,8 +164,21 @@ export default {
     "card-view": card,
     foot
   },
-
   methods: {
+    async getAgentIncome() {
+      let data = {
+        id: 2,
+        user_id: localStorage.getItem("user_id")
+      };
+      try {
+        let res = await this.$Http.queryAgentIncome(data);
+        this.income_list = res.data.list;
+        this.income_total = res.data.income_total;
+        this.recommend_total = res.data.recommend_total;
+      } catch (error) {
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
     async getAgent() {
       try {
         let res = await this.$Http.queryAgentList();
@@ -151,12 +214,13 @@ export default {
           }
           return this.$Message.error(msg);
         }
-        if (this.check_agent.id > res.data.id) {
-          return this.$Message.warning(
-            "当前选择代理商级别不能高于推荐代理商！"
-          );
-        }
+        // if (this.check_agent.id > res.data.id) {
+        //   return this.$Message.warning(
+        //     "当前选择代理商级别不能高于推荐代理商！"
+        //   );
+        // }
         this.super_agent = res.data;
+        this.is_create = true;
       }
 
       this.show_module = true;
@@ -196,18 +260,19 @@ export default {
 
       try {
         res = await this.$Http.queryUser(data);
-        this.createAgent();
+        if (this.is_create) {
+          this.createAgent();
+        } else {
+          this.cashAgent();
+        }
       } catch (error) {
         this.loading = false;
-
         if (res.msg) {
           return this.$Message.error(`请求失败:${res.msg}`);
         }
-
         this.$Message.error(`请求失败:${error}`);
       }
     },
-
     async createAgent() {
       let data = {
         user_id: localStorage.getItem("user_id"),
@@ -230,7 +295,27 @@ export default {
         if (res.msg) {
           return this.$Message.error(`请求失败:${res.msg}`);
         }
-
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
+    async cashAgent() {
+      let data = {
+        user_id: localStorage.getItem("user_id"),
+        balance_num: Number(this.income_total) + Number(this.recommend_total)
+      };
+      let res = null;
+      try {
+        res = await this.$Http.updateAgentIncome(data);
+        this.loading = false;
+        this.show_module = false;
+        this.cash_pwd = "";
+        this.$Message.success(`提现成功`);
+      } catch (error) {
+        this.loading = false;
+        this.show_module = false;
+        if (res.msg) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
         this.$Message.error(`请求失败:${error}`);
       }
     },

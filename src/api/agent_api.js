@@ -42,6 +42,14 @@ const AgentApi = {
     upgradeAgent: {
         method: "put",
         url: "/agent/upgrade_agent?type=manager"
+    },
+    queryAgentIncome: {
+        method: "get",
+        url: "/agent/income_list?type=mobile"
+    },
+    updateAgentIncome: {
+        method: "put",
+        url: "/agent/income_cash?type=mobile"
     }
 };
 
