@@ -87,7 +87,7 @@
       </div>
       <div class="b-home-main-agent">
         <div class="b-home-main-agent-bg">
-          <Button type="success" size="default" @click="goToAgent">加入代理</Button>
+          <Button type="success" size="small" @click="goToAgent">加入代理</Button>
           <p class="b-home-main-agent-join">加入代理商</p>
           <p class="b-home-main-agent-win">你我共赢</p>
         </div>
@@ -369,8 +369,12 @@ export default {
       let data = {
         user_id: localStorage.getItem("user_id")
       };
+      let balance_data = {
+        user_id: localStorage.getItem("user_id"),
+        is_cash: 1
+      };
       let arr = [
-        this.$Http.queryBalanceTotal(data),
+        this.$Http.queryBalanceTotal(balance_data),
         this.$Http.queryInvestTotal(data),
         this.$Http.queryIncomeTotal(data),
         this.$Http.queryBonusTotal(data)

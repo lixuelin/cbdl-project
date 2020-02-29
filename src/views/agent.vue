@@ -83,9 +83,9 @@
     <div class="agent-module" @click="is_show_agent =! is_show_agent">
       <h3>代理商协议</h3>
       <div class="agent-module-description" v-show="is_show_agent">
-        <p class="agent-module-description-title">白银代理一次性投资15000万</p>
-        <p class="agent-module-description-title">黄金代理一次性投资30000万</p>
-        <p class="agent-module-description-title">钻石代理一次性投资60000万</p>
+        <p class="agent-module-description-title">白银代理一次性投资1.5万</p>
+        <p class="agent-module-description-title">黄金代理一次性投资3万</p>
+        <p class="agent-module-description-title">钻石代理一次性投资6万</p>
         <p class="agent-module-description-title">代理商收益</p>
         <p class="agent-module-description-cont">白银代理拿团体盈利的百分之25</p>
         <p class="agent-module-description-cont">白银代理直推荐白银代理得5000和盈利的百分之20,间接拿一代2000</p>
