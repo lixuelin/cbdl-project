@@ -142,7 +142,7 @@ export default {
       income_list: [],
       income_total: 0,
       recommend_total: 0,
-      is_create: false,
+      is_create: true,
       is_show_agent: true
     };
   },
@@ -191,6 +191,7 @@ export default {
     checkAgent(item, index) {
       this.agent_index = index;
       this.check_agent = item;
+      console.log(this.check_agent.name);
     },
     async joinAgent() {
       if (this.agent_index === null) {
@@ -214,11 +215,6 @@ export default {
           }
           return this.$Message.error(msg);
         }
-        // if (this.check_agent.id > res.data.id) {
-        //   return this.$Message.warning(
-        //     "当前选择代理商级别不能高于推荐代理商！"
-        //   );
-        // }
         this.super_agent = res.data;
         this.is_create = true;
       }
@@ -260,7 +256,7 @@ export default {
 
       try {
         res = await this.$Http.queryUser(data);
-        if (this.is_create) {
+        if (this.is_vip) {
           this.createAgent();
         } else {
           if (Number(this.income_total) + Number(this.recommend_total) === 0) {
@@ -289,6 +285,8 @@ export default {
       let res = null;
       try {
         res = await this.$Http.createAgent(data);
+        localStorage.setItem("is_vip", this.check_agent.name);
+        this.is_vip = this.check_agent.name;
         this.loading = false;
         this.show_module = false;
         this.cash_pwd = "";
