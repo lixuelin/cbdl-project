@@ -263,6 +263,10 @@ export default {
         if (this.is_create) {
           this.createAgent();
         } else {
+          if (Number(this.income_total) + Number(this.recommend_total) === 0) {
+            this.loading = false;
+            return this.$Message.warning(`提现金额为0不能提现！`);
+          }
           this.cashAgent();
         }
       } catch (error) {
@@ -279,7 +283,7 @@ export default {
         agent_id: this.check_agent.id,
         name: localStorage.getItem("username"),
         super_name: this.super_agent.super_name,
-        super_agent: this.super_agent.id,
+        super_agent: this.super_agent.agent_id,
         super_user_id: this.super_agent.user_id
       };
       let res = null;
@@ -303,6 +307,7 @@ export default {
         user_id: localStorage.getItem("user_id"),
         balance_num: Number(this.income_total) + Number(this.recommend_total)
       };
+
       let res = null;
       try {
         res = await this.$Http.updateAgentIncome(data);
