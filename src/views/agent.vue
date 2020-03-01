@@ -207,6 +207,7 @@ export default {
           invite_code: this.recommend
         };
         let res = await this.$Http.queryInviteAgent(data);
+        console.log(res, "ddd");
 
         if (res.success === false) {
           let msg = "请求错误";
@@ -215,10 +216,10 @@ export default {
           }
           return this.$Message.error(msg);
         }
+
         this.super_agent = res.data;
         this.is_create = true;
       }
-
       this.show_module = true;
     },
     async getBalance() {
@@ -277,11 +278,13 @@ export default {
       let data = {
         user_id: localStorage.getItem("user_id"),
         agent_id: this.check_agent.id,
-        name: localStorage.getItem("username"),
-        super_name: this.super_agent.super_name,
-        super_agent: this.super_agent.agent_id,
-        super_user_id: this.super_agent.user_id
+        name: localStorage.getItem("username")
       };
+      if (this.super_agent.id) {
+        data.super_name = this.super_agent.super_name;
+        data.super_agent = this.super_agent.id;
+        data.super_user_id = this.super_agent.user_id;
+      }
       let res = null;
       try {
         res = await this.$Http.createAgent(data);
