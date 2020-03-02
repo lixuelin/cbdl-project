@@ -13,7 +13,7 @@
         <template v-for="item in agent_list">
           <li :key="item.id">
             <span>{{item.agent_name}}</span>
-            <span>{{item.name}}</span>
+            <span>{{item.household}}</span>
             <span>{{item.create_time}}</span>
           </li>
         </template>
@@ -50,8 +50,9 @@ export default {
       let data = {
         id: localStorage.getItem("user_id")
       };
+      let res;
       try {
-        let res = await this.$Http.queryNextAgents(data);
+        res = await this.$Http.queryNextAgents(data);
         res.data.forEach(item => {
           item["agent_name"] = this.agents[`name_${item.agent_id}`];
         });

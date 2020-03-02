@@ -50,6 +50,10 @@ const AgentApi = {
     updateAgentIncome: {
         method: "put",
         url: "/agent/income_cash?type=mobile"
+    },
+    queryAgentByUser: {
+        method: "get",
+        url: "/agent/agent_by_user?type=mobile"
     }
 };
 

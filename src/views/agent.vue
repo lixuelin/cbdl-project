@@ -36,7 +36,7 @@
         </div>
       </div>
     </template>
-    <template v-if="is_vip !== '普通用户'">
+    <template v-if="agent.is_pass">
       <div class="agent-module">
         <h3>代理商分润</h3>
         <div class="agent-module-count">
@@ -44,7 +44,7 @@
             <p>{{income_total}}</p>
             <span>用户分润</span>
           </div>
-          <div class="agent-module-count-income">
+          <div class="agent-module-count-income" @click="goToNext">
             <p>{{recommend_total}}</p>
             <span>代理推广</span>
           </div>
@@ -143,7 +143,8 @@ export default {
       income_total: 0,
       recommend_total: 0,
       is_create: true,
-      is_show_agent: true
+      is_show_agent: true,
+      agent: {}
     };
   },
 
@@ -152,6 +153,7 @@ export default {
     this.getAgent();
     this.is_vip = localStorage.getItem("is_vip");
     this.getAgentIncome();
+    this.getAgentByUser();
   },
 
   filters: {
@@ -165,6 +167,20 @@ export default {
     foot
   },
   methods: {
+    goToNext() {
+      this.$router.push({ name: "agents" });
+    },
+    async getAgentByUser() {
+      let data = {
+        id: localStorage.getItem("user_id")
+      };
+      try {
+        let res = await this.$Http.queryAgentByUser(data);
+        this.agent = res.data;
+      } catch (error) {
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
     async getAgentIncome() {
       let data = {
         id: 2,
@@ -191,9 +207,12 @@ export default {
     checkAgent(item, index) {
       this.agent_index = index;
       this.check_agent = item;
-      console.log(this.check_agent.name);
     },
     async joinAgent() {
+      if (this.agent.is_pass) {
+        return this.$Message.warning("您已经申请代理商了，等候审批！");
+      }
+
       if (this.agent_index === null) {
         return this.$Message.warning("请先选择一个代理商");
       }
@@ -207,8 +226,6 @@ export default {
           invite_code: this.recommend
         };
         let res = await this.$Http.queryInviteAgent(data);
-        console.log(res, "ddd");
-
         if (res.success === false) {
           let msg = "请求错误";
           if (res.msg) {
@@ -259,6 +276,7 @@ export default {
         res = await this.$Http.queryUser(data);
         if (this.is_vip) {
           this.createAgent();
+          this.getAgentByUser();
         } else {
           if (Number(this.income_total) + Number(this.recommend_total) === 0) {
             this.loading = false;
@@ -280,15 +298,15 @@ export default {
         agent_id: this.check_agent.id,
         name: localStorage.getItem("username")
       };
-      if (this.super_agent.id) {
+      if (this.super_agent.agent_id) {
         data.super_name = this.super_agent.super_name;
-        data.super_agent = this.super_agent.id;
+        data.super_agent = this.super_agent.agent_id;
         data.super_user_id = this.super_agent.user_id;
       }
+
       let res = null;
       try {
         res = await this.$Http.createAgent(data);
-        localStorage.setItem("is_vip", this.check_agent.name);
         this.is_vip = this.check_agent.name;
         this.loading = false;
         this.show_module = false;
