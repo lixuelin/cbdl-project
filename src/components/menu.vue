@@ -75,15 +75,11 @@ export default {
             {
               name: "代理商列表",
               path: "/admin/agent"
+            },
+            {
+              name: "代理商收益",
+              path: "/admin/agent_interest"
             }
-            // {
-            //     name: "添加代理商",
-            //     path: "/admin/add_agent"
-            // }
-            // {
-            //     name: "代理商收益",
-            //     path: "/admin/agent_interest"
-            // }
           ]
         },
         {

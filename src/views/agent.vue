@@ -65,14 +65,14 @@
             <li>
               <span>获得收益</span>
               <span>团队收益</span>
-              <span>收益比率</span>
+              <span>下级代理</span>
               <span>创建时间</span>
             </li>
             <template v-for="item in income_list">
               <li :key="item.agent_num">
                 <span>{{item.agent_num}}</span>
                 <span>{{item.team_income}}</span>
-                <span>{{item.agent_rate}}</span>
+                <span>{{item.household}}</span>
                 <span>{{item.create_time}}</span>
               </li>
             </template>
