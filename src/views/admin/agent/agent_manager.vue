@@ -202,7 +202,6 @@ export default {
           this.agent_list[item.id] = item.cost;
           this.agent_list[item.name] = item.id;
         });
-        console.log(this.agent_list, "ss");
       } catch (error) {
         this.$Message.error(`请求失败:${error}`);
       }

@@ -234,6 +234,10 @@ export default {
           return this.$Message.error(msg);
         }
 
+        if (!res.data.is_pass) {
+          return this.$Message.warning("推荐您的代理商还未审核！");
+        }
+
         this.super_agent = res.data;
         this.is_create = true;
       }
