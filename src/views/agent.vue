@@ -189,7 +189,7 @@ export default {
       try {
         let res = await this.$Http.queryAgentIncome(data);
         this.income_list = res.data.list;
-        this.income_total = res.data.income_total;
+        this.income_total = res.data.income_total.toFixed(2);
         this.recommend_total = res.data.recommend_total;
       } catch (error) {
         this.$Message.error(`请求失败:${error}`);

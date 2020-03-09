@@ -86,9 +86,9 @@
         </div>
       </div>
       <div class="b-home-main-agent">
-        <div class="b-home-main-agent-bg">
-          <Button type="success" size="small" @click="goToAgent">加入代理</Button>
-          <p class="b-home-main-agent-join">加入代理商</p>
+        <div class="b-home-main-agent-bg" @click="goToAgent">
+          <Button type="success" size="small" @click="goToAgent">加入VIP</Button>
+          <p class="b-home-main-agent-join">加入VIP</p>
           <p class="b-home-main-agent-win">你我共赢</p>
         </div>
       </div>
