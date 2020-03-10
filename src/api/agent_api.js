@@ -13,7 +13,7 @@
 const AgentApi = {
     createAgent: {
         method: "post",
-        url: "/agent?type=manager"
+        url: "/agent?type=mobile"
     },
     querySuperAgents: {
         method: "get",
@@ -26,6 +26,34 @@ const AgentApi = {
     queryAgentInterest: {
         method: "get",
         url: "/agent/interest_list?type=manager"
+    },
+    queryNextAgents: {
+        method: "get",
+        url: "/agent/next_agent?type=mobile"
+    },
+    queryAgentList: {
+        method: "get",
+        url: "/agent/agent_list?type=mobile"
+    },
+    updateAgent: {
+        method: "put",
+        url: "/agent?type=manager"
+    },
+    upgradeAgent: {
+        method: "put",
+        url: "/agent/upgrade_agent?type=manager"
+    },
+    queryAgentIncome: {
+        method: "get",
+        url: "/agent/income_list?type=mobile"
+    },
+    updateAgentIncome: {
+        method: "put",
+        url: "/agent/income_cash?type=mobile"
+    },
+    queryAgentByUser: {
+        method: "get",
+        url: "/agent/agent_by_user?type=mobile"
     }
 };
 

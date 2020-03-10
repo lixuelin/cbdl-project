@@ -47,6 +47,10 @@ const UserApi = {
     queryNotAgentUsers: {
         method: "get",
         url: "/user/not_agent_users?type=manager"
+    },
+    queryInviteAgent: {
+        method: "get",
+        url: "/user/invite_agent?type=mobile"
     }
 };
 

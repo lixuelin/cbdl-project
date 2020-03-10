@@ -6,7 +6,7 @@
       </div>
       <template v-if="is_login">
         <div class="b-home-header-top">
-          <p class="b-home-header-welcome">普通用户-{{ name }}，您的邀请码：{{ code }}</p>
+          <p class="b-home-header-welcome">{{is_vip}}-{{ name }}，您的邀请码：{{ code }}</p>
           <p>
             <span @click="loginOut">退出</span>
           </p>
@@ -83,6 +83,13 @@
               ></countTo>
             </h4>
           </div>
+        </div>
+      </div>
+      <div class="b-home-main-agent">
+        <div class="b-home-main-agent-bg">
+          <Button type="success" size="small" @click="goToAgent">敬请期待</Button>
+          <p class="b-home-main-agent-join">加入VIP</p>
+          <p class="b-home-main-agent-win">你我共赢</p>
         </div>
       </div>
       <div class="b-home-main-newcomer">
@@ -175,6 +182,7 @@ export default {
       is_login: false,
       modal2: false,
       name: "李学麟",
+      is_vip: "普通用户",
       code: "",
       amount: {
         financial_first: "500W",
@@ -270,6 +278,7 @@ export default {
     if (localStorage.getItem("username")) {
       this.name = localStorage.getItem("username");
       this.code = localStorage.getItem("code");
+      this.is_vip = localStorage.getItem("is_vip");
     }
 
     // this.queryTotal();
@@ -282,6 +291,7 @@ export default {
       localStorage.setItem("username", "");
       localStorage.setItem("code", "");
       localStorage.setItem("type", "");
+      localStorage.setItem("is_vip", "");
       delCookie("session_id");
       this.$router.push({
         path: "/",
@@ -359,8 +369,12 @@ export default {
       let data = {
         user_id: localStorage.getItem("user_id")
       };
+      let balance_data = {
+        user_id: localStorage.getItem("user_id"),
+        is_cash: 1
+      };
       let arr = [
-        this.$Http.queryBalanceTotal(data),
+        this.$Http.queryBalanceTotal(balance_data),
         this.$Http.queryInvestTotal(data),
         this.$Http.queryIncomeTotal(data),
         this.$Http.queryBonusTotal(data)
@@ -395,6 +409,9 @@ export default {
       setTimeout(() => {
         this.modal2 = false;
       }, 1000);
+    },
+    goToAgent() {
+      this.$router.push({ path: "/agent" });
     }
   }
 };

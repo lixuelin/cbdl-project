@@ -18,6 +18,8 @@ const Deposit = () => import("@/views/balance/deposit");
 const DepositNote = () => import("@/views/balance/deposit_note");
 const CashOut = () => import("@/views/balance/cash_out");
 const CashOutNote = () => import("@/views/balance/cash_out_note");
+const AgentWeb = () => import("@/views/agent");
+const Agents = () => import("@/views/balance/agents");
 
 const Manager = () => import("@/views/manager");
 const Admin = () => import("@/views/admin/home");
@@ -86,6 +88,11 @@ export default new VueRouter({
                     component: Invest
                 },
                 {
+                    path: "/agent",
+                    name: "agent",
+                    component: AgentWeb
+                },
+                {
                     path: "/financial",
                     name: "financial",
                     component: Financial
@@ -94,6 +101,11 @@ export default new VueRouter({
                     path: "/balance",
                     name: "balance",
                     component: Balance
+                },
+                {
+                    path: "/agents",
+                    name: "agents",
+                    component: Agents
                 },
                 {
                     path: "/deposit",
@@ -196,11 +208,11 @@ export default new VueRouter({
                     name: "agent",
                     component: Agent
                 },
-                {
-                    path: "/admin/add_agent",
-                    name: "add_agent",
-                    component: AddAgent
-                },
+                // {
+                //     path: "/admin/add_agent",
+                //     name: "add_agent",
+                //     component: AddAgent
+                // },
                 {
                     path: "/admin/agent_interest",
                     name: "agent_interest",

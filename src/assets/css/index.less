@@ -133,6 +133,7 @@
 
                 &-money {
                     flex: 1;
+
                     & p span {
                         padding-left: 10px;
                         color: #f00;
@@ -142,6 +143,43 @@
                 & h4 span {
                     font-size: 22px;
                 }
+            }
+        }
+
+        &-agent {
+            position: relative;
+
+            & button {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+
+            &-bg {
+                display: block;
+                width: 100%;
+                height: 100px;
+                margin-bottom: 15px;
+                background-image: url("./../image/dailishang.jpg");
+                background-size: cover;
+                .border_radius();
+
+            }
+
+            &-join,
+            &-win {
+                font-size: 25px;
+                font-weight: 700;
+                color: #3679ff;
+            }
+
+            &-join {
+                padding: 10px 30px 5px;
+            }
+
+            &-win {
+                padding: 5px 30px 5px;
+                text-align: right;
             }
         }
 
@@ -158,6 +196,7 @@
 
             &-box {
                 flex: 1;
+
                 &:last-child {
                     border-right: none;
                 }
