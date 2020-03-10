@@ -79,6 +79,25 @@
           </ul>
         </div>
       </div>
+      <div class="agent-module">
+        <h3>下级代理</h3>
+        <div class="agent-module-income">
+          <ul>
+            <li>
+              <span>代理级别</span>
+              <span>代理商</span>
+              <span>创建时间</span>
+            </li>
+            <template v-for="item in agent_list">
+              <li :key="item.id">
+                <span>{{item.agent_name}}</span>
+                <span>{{item.household}}</span>
+                <span>{{item.create_time}}</span>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
     </template>
     <div class="agent-module" @click="is_show_agent =! is_show_agent">
       <h3>代理商协议</h3>
@@ -144,7 +163,8 @@ export default {
       recommend_total: 0,
       is_create: true,
       is_show_agent: true,
-      agent: {}
+      agent: {},
+      agents: {}
     };
   },
 
@@ -154,6 +174,7 @@ export default {
     this.is_vip = localStorage.getItem("is_vip");
     this.getAgentIncome();
     this.getAgentByUser();
+    this.getNextAgents();
   },
 
   filters: {
@@ -181,6 +202,25 @@ export default {
         this.$Message.error(`请求失败:${error}`);
       }
     },
+    async getNextAgents() {
+      let data = {
+        id: localStorage.getItem("user_id")
+      };
+      let res;
+      try {
+        res = await this.$Http.queryNextAgents(data);
+        res.data.forEach(item => {
+          item["agent_name"] = this.agents[`name_${item.agent_id}`];
+        });
+
+        this.agent_list = res.data;
+      } catch (error) {
+        if (res.msg) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
     async getAgentIncome() {
       let data = {
         id: 2,
@@ -199,6 +239,9 @@ export default {
       try {
         let res = await this.$Http.queryAgentList();
         this.agent_list = res.data;
+        res.data.forEach(item => {
+          this.agents[`name_${item.id}`] = item.name;
+        });
       } catch (error) {
         this.$Message.error(`请求失败:${error}`);
       }
