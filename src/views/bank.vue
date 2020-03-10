@@ -56,6 +56,10 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.queryUser(data);
+                if (res.status !== 200 || !res.data.id) {
+                    this.loading = false;
+                    return this.$Message.error(`没有找到用户`);
+                }
                 this.bankList[0].bank_name = res.data.bank_name;
                 this.bankList[0].card_type = res.data.card_type;
                 this.bankList[0].bank_code = res.data.bank_code;

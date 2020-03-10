@@ -70,6 +70,11 @@ const allBank = {
         icon: "icon-gongshangyinhang",
         color: "#3679ff",
         name: "富民银行"
+    },
+    spabank: {
+        icon: "icon-gongshangyinhang",
+        color: "#f54966",
+        name: "深发/平安银行"
     }
 };
 
