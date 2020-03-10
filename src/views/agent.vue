@@ -88,7 +88,7 @@
               <span>代理商</span>
               <span>创建时间</span>
             </li>
-            <template v-for="item in agent_list">
+            <template v-for="item in next_agent_list">
               <li :key="item.id">
                 <span>{{item.agent_name}}</span>
                 <span>{{item.household}}</span>
@@ -150,7 +150,7 @@ export default {
       balance_count: 0,
       show_text_trade: false,
       cash_pwd: "",
-      agent_list: ["普通代理商", "黄金代理商", "钻石代理商"],
+      agent_list: [],
       agent_index: null,
       check_agent: null,
       agent_check_pay: ["余额转账"],
@@ -163,6 +163,7 @@ export default {
       recommend_total: 0,
       is_create: true,
       is_show_agent: true,
+      next_agent_list: [],
       agent: {},
       agents: {}
     };
@@ -213,7 +214,7 @@ export default {
           item["agent_name"] = this.agents[`name_${item.agent_id}`];
         });
 
-        this.agent_list = res.data;
+        this.next_agent_list = res.data;
       } catch (error) {
         if (res.msg) {
           return this.$Message.error(`请求失败:${res.msg}`);
@@ -246,7 +247,6 @@ export default {
         this.$Message.error(`请求失败:${error}`);
       }
     },
-
     checkAgent(item, index) {
       this.agent_index = index;
       this.check_agent = item;
@@ -305,7 +305,6 @@ export default {
         this.$Message.error(`请求失败:${error}`);
       }
     },
-
     async trade_Sure() {
       if (this.cash_pwd === "") {
         return this.$Message.error("密码不能为空！");
