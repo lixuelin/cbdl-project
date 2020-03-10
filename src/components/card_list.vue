@@ -218,6 +218,10 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.queryUser(data);
+                if (res.status !== 200 || !res.data.id) {
+                    this.loading = false;
+                    return this.$Message.error(`交易密码错误`);
+                }
                 this.cash_loading = false;
                 this.cashInvestMoney();
             } catch (error) {

@@ -168,6 +168,10 @@ export default {
             let res = null;
             try {
                 res = await this.$Http.queryUser(data);
+                if (res.status !== 200 || !res.data.id) {
+                    this.loading = false;
+                    return this.$Message.error(`没有找到用户`);
+                }
                 this.bank = res.data;
                 this.bank.card = this.bank.card.substring(
                     this.bank.card.length - 4
