@@ -1,13 +1,13 @@
 <template>
   <div class="agents">
     <div class="agents-nothing" v-if="agent_list.length === 0">
-      <p>暂无下级代理</p>
+      <p>暂无下级VIP</p>
     </div>
     <div class="agents-show" v-else>
       <ul>
         <li>
-          <span>代理级别</span>
-          <span>代理商</span>
+          <span>VIP级别</span>
+          <span>VIP商</span>
           <span>创建时间</span>
         </li>
         <template v-for="item in agent_list">

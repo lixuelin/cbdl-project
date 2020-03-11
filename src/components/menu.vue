@@ -70,14 +70,14 @@ export default {
           ]
         },
         {
-          title: "代理商管理",
+          title: "VIP管理",
           child: [
             {
-              name: "代理商列表",
+              name: "VIP列表",
               path: "/admin/agent"
             },
             {
-              name: "代理商收益",
+              name: "VIP收益",
               path: "/admin/agent_interest"
             }
           ]

@@ -4,12 +4,12 @@
     <!-- <div class="admin-main-search">
       <div class="admin-main-search-box">
         <div class="admin-main-search-box-fields">
-          <span>代理商：</span>
-          <Input v-model="search.name" placeholder="请输入代理商" clearable style="width: 200px" />
+          <span>VIP：</span>
+          <Input v-model="search.name" placeholder="请输入VIP" clearable style="width: 200px" />
         </div>
         <div class="admin-main-search-box-fields">
-          <span>上级代理：</span>
-          <Input v-model="search.super_name" placeholder="请输入下级代理" clearable style="width: 200px" />
+          <span>上级VIP：</span>
+          <Input v-model="search.super_name" placeholder="请输入下级VIP" clearable style="width: 200px" />
         </div>
         <div class="admin-main-search-box-fields">
           <div class="admin-main-search-box-btns">
@@ -39,7 +39,7 @@ export default {
   name: "agent_manager",
   data() {
     return {
-      title: "代理商列表",
+      title: "VIP列表",
       search: {
         user_id: "",
         super_name: ""
@@ -51,19 +51,19 @@ export default {
           width: 56
         },
         {
-          title: "代理商",
+          title: "VIP",
           key: "name"
         },
         {
-          title: "代理商级别",
+          title: "VIP级别",
           key: "agent"
         },
         {
-          title: "下级代理商",
+          title: "下级VIP",
           key: "next_agent_name"
         },
         {
-          title: "下级代理商级别",
+          title: "下级VIP级别",
           key: "next_agent"
         },
         {

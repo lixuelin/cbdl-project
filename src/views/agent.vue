@@ -2,7 +2,7 @@
   <div class="agent">
     <template v-if="is_vip === '普通用户'">
       <div class="agent-module">
-        <h3>选择代理商</h3>
+        <h3>选择VIP</h3>
         <div class="agent-module-bank">
           <ul>
             <template v-for="(item, index) in agent_list">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="agent-module agent-module-abeam">
-        <h3>我要当代理商</h3>
+        <h3>我要当VIP</h3>
         <div class="agent-module-way">
           <ul>
             <li @click="joinAgent">
@@ -38,7 +38,7 @@
     </template>
     <template v-if="agent.is_pass">
       <div class="agent-module">
-        <h3>代理商分润</h3>
+        <h3>VIP分润</h3>
         <div class="agent-module-count">
           <div class="agent-module-count-invest">
             <p>{{income_total}}</p>
@@ -46,7 +46,7 @@
           </div>
           <div class="agent-module-count-income" @click="goToNext">
             <p>{{recommend_total}}</p>
-            <span>代理推广</span>
+            <span>VIP推广</span>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
             <li>
               <span>获得收益</span>
               <span>团队收益</span>
-              <span>下级代理</span>
+              <span>下级VIP</span>
               <span>创建时间</span>
             </li>
             <template v-for="item in income_list">
@@ -80,12 +80,12 @@
         </div>
       </div>
       <div class="agent-module">
-        <h3>下级代理</h3>
+        <h3>下级VIP</h3>
         <div class="agent-module-income">
           <ul>
             <li>
-              <span>代理级别</span>
-              <span>代理商</span>
+              <span>VIP级别</span>
+              <span>VIP</span>
               <span>创建时间</span>
             </li>
             <template v-for="item in next_agent_list">
@@ -100,19 +100,19 @@
       </div>
     </template>
     <div class="agent-module" @click="is_show_agent =! is_show_agent">
-      <h3>代理商协议</h3>
+      <h3>VIP协议</h3>
       <div class="agent-module-description" v-show="is_show_agent">
-        <p class="agent-module-description-title">白银代理一次性投资1.5万</p>
-        <p class="agent-module-description-title">黄金代理一次性投资3万</p>
-        <p class="agent-module-description-title">钻石代理一次性投资6万</p>
-        <p class="agent-module-description-title">代理商收益</p>
-        <p class="agent-module-description-cont">白银代理拿团体盈利的百分之25</p>
-        <p class="agent-module-description-cont">白银代理直推荐白银代理得5000和盈利的百分之20,间接拿一代2000</p>
-        <p class="agent-module-description-cont">黄金代理直推白银代理得7000和盈利的百分之20,间接无限2000</p>
-        <p class="agent-module-description-cont">黄金代理直推黄金代理得1万和拿盈利的百分之15，间接拿一代3000</p>
-        <p class="agent-module-description-cont">钻石代理直推白银代理得1万和拿盈利的百分之20，间接拿无限1000</p>
-        <p class="agent-module-description-cont">钻石代理直推黄金代理得1.6万和拿盈利的百分之15,间接拿无限3000</p>
-        <p class="agent-module-description-cont">钻石代理直推荐钻石代理得2万和盈利的百分之10,间接拿一代1万</p>
+        <p class="agent-module-description-title">白银VIP一次性投资1.5万</p>
+        <p class="agent-module-description-title">黄金VIP一次性投资3万</p>
+        <p class="agent-module-description-title">钻石VIP一次性投资6万</p>
+        <p class="agent-module-description-title">VIP收益</p>
+        <p class="agent-module-description-cont">白银VIP拿团体盈利的百分之25</p>
+        <p class="agent-module-description-cont">白银VIP直推荐白银VIP得5000和盈利的百分之20,间接拿一代2000</p>
+        <p class="agent-module-description-cont">黄金VIP直推白银VIP得7000和盈利的百分之20,间接无限2000</p>
+        <p class="agent-module-description-cont">黄金VIP直推黄金VIP得1万和拿盈利的百分之15，间接拿一代3000</p>
+        <p class="agent-module-description-cont">钻石VIP直推白银VIP得1万和拿盈利的百分之20，间接拿无限1000</p>
+        <p class="agent-module-description-cont">钻石VIP直推黄金VIP得1.6万和拿盈利的百分之15,间接拿无限3000</p>
+        <p class="agent-module-description-cont">钻石VIP直推荐钻石VIP得2万和盈利的百分之10,间接拿一代1万</p>
       </div>
     </div>
     <div class="agent-sure">
@@ -121,7 +121,7 @@
     <foot></foot>
     <Modal v-model="show_module" width="220">
       <p slot="header">
-        <span>加入代理商</span>
+        <span>加入VIP</span>
       </p>
       <div>
         <p>请输入交易密码：</p>
@@ -253,11 +253,11 @@ export default {
     },
     async joinAgent() {
       if (this.agent.is_pass) {
-        return this.$Message.warning("您已经申请代理商了，等候审批！");
+        return this.$Message.warning("您已经申请VIP了，等候审批！");
       }
 
       if (this.agent_index === null) {
-        return this.$Message.warning("请先选择一个代理商");
+        return this.$Message.warning("请先选择一个VIP");
       }
 
       if (Number(this.balance_count) < Number(this.check_agent.cost)) {
@@ -278,7 +278,7 @@ export default {
         }
 
         if (!res.data.is_pass) {
-          return this.$Message.warning("推荐您的代理商还未审核！");
+          return this.$Message.warning("推荐您的VIP还未审核！");
         }
 
         this.super_agent = res.data;

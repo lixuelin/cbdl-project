@@ -4,12 +4,12 @@
     <div class="admin-main-search">
       <div class="admin-main-search-box">
         <div class="admin-main-search-box-fields">
-          <span>代理商：</span>
-          <Input v-model="search.name" placeholder="请输入代理商" clearable style="width: 200px" />
+          <span>VIP：</span>
+          <Input v-model="search.name" placeholder="请输入VIP" clearable style="width: 200px" />
         </div>
         <div class="admin-main-search-box-fields">
-          <span>上级代理：</span>
-          <Input v-model="search.super_name" placeholder="请输入上级代理" clearable style="width: 200px" />
+          <span>上级VIP：</span>
+          <Input v-model="search.super_name" placeholder="请输入上级VIP" clearable style="width: 200px" />
         </div>
         <div class="admin-main-search-box-fields">
           <div class="admin-main-search-box-btns">
@@ -31,12 +31,12 @@
     </div>
     <Modal v-model="showModal" width="460">
       <p slot="header" style="text-align:left">
-        <span>代理商升级</span>
+        <span>VIP商升级</span>
       </p>
       <div style="padding: 20px; text-align:left">
         <RadioGroup v-model="upgrade_agent">
-          <Radio label="黄金代理" :disabled="agent.agent_id === 2"></Radio>
-          <Radio label="钻石代理"></Radio>
+          <Radio label="黄金VIP" :disabled="agent.agent_id === 2"></Radio>
+          <Radio label="钻石VIP"></Radio>
         </RadioGroup>
       </div>
       <div slot="footer">
@@ -53,7 +53,7 @@ export default {
   name: "agent_manager",
   data() {
     return {
-      title: "代理商列表",
+      title: "VIP列表",
       search: {
         name: "",
         super_name: ""
@@ -68,15 +68,15 @@ export default {
           width: 56
         },
         {
-          title: "代理商",
+          title: "VIP",
           key: "name"
         },
         {
-          title: "上级代理",
+          title: "上级VIP",
           key: "super_name"
         },
         {
-          title: "代理级别",
+          title: "VIP级别",
           key: "agent_level"
         },
         {
@@ -126,7 +126,7 @@ export default {
           }
         },
         {
-          title: "代理商升级",
+          title: "VIP升级",
           key: "is_pass",
           render: (h, params) => {
             if (params.row.agent_id !== 3) {

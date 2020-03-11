@@ -56,7 +56,7 @@ export default {
       },
       menu: [
         {
-          name: "下级代理",
+          name: "下级VIP",
           type: "iconfont icon-credit-card",
           route: "/agents"
         },
