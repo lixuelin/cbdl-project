@@ -106,13 +106,13 @@
         <p class="agent-module-description-title">黄金VIP一次性投资3万</p>
         <p class="agent-module-description-title">钻石VIP一次性投资6万</p>
         <p class="agent-module-description-title">VIP收益</p>
-        <p class="agent-module-description-cont">白银VIP拿团体盈利的百分之25</p>
-        <p class="agent-module-description-cont">白银VIP直推荐白银VIP得5000和盈利的百分之20,间接拿一代2000</p>
-        <p class="agent-module-description-cont">黄金VIP直推白银VIP得7000和盈利的百分之20,间接无限2000</p>
-        <p class="agent-module-description-cont">黄金VIP直推黄金VIP得1万和拿盈利的百分之15，间接拿一代3000</p>
-        <p class="agent-module-description-cont">钻石VIP直推白银VIP得1万和拿盈利的百分之20，间接拿无限1000</p>
-        <p class="agent-module-description-cont">钻石VIP直推黄金VIP得1.6万和拿盈利的百分之15,间接拿无限3000</p>
-        <p class="agent-module-description-cont">钻石VIP直推荐钻石VIP得2万和盈利的百分之10,间接拿一代1万</p>
+        <p class="agent-module-description-cont">白银VIP拿团体盈利的百分之15</p>
+        <p class="agent-module-description-cont">白银VIP直推荐白银VIP得5000和盈利的百分之10,间接拿一代2000</p>
+        <p class="agent-module-description-cont">黄金VIP直推白银VIP得7000和盈利的百分之15,间接无限2000</p>
+        <p class="agent-module-description-cont">黄金VIP直推黄金VIP得1万和拿盈利的百分之10，间接拿一代3000</p>
+        <p class="agent-module-description-cont">钻石VIP直推白银VIP得1万和拿盈利的百分之15，间接拿无限1000</p>
+        <p class="agent-module-description-cont">钻石VIP直推黄金VIP得1.6万和拿盈利的百分之10,间接拿无限3000</p>
+        <p class="agent-module-description-cont">钻石VIP直推荐钻石VIP得2万和盈利的百分之5,间接拿一代1万</p>
       </div>
     </div>
     <div class="agent-sure">
