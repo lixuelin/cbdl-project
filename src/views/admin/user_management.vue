@@ -63,16 +63,16 @@
       <div>
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
           <FormItem label=" 银行卡号：" prop="card">
-            <Input v-model="formValidate.card" placeholder="请输入银行卡号"></Input>
+            <Input v-model="formValidate.card" placeholder="请输入银行卡号" />
           </FormItem>
           <FormItem label=" 银行卡号：" prop="cardCheck">
-            <Input v-model="formValidate.cardCheck" placeholder="请再次输入银行卡号"></Input>
+            <Input v-model="formValidate.cardCheck" placeholder="请再次输入银行卡号" />
           </FormItem>
           <FormItem label="所属银行：">
             <span>{{ formValidate.bank_name }}</span>
           </FormItem>
           <FormItem label="户主：" prop="household">
-            <Input v-model="formValidate.household" placeholder="请输入户主"></Input>
+            <Input v-model="formValidate.household" placeholder="请输入户主" />
           </FormItem>
         </Form>
       </div>
@@ -109,6 +109,7 @@
 
 <script>
 import BIN from "bankcardinfo";
+import { CardBin } from "bankcard";
 import pageTitle from "./../../components/title";
 
 export default {
@@ -116,16 +117,16 @@ export default {
   data() {
     const validateCard = (rule, value, callback) => {
       if (this.formValidate.card !== "") {
-        BIN.getBankBin(this.formValidate.card)
-          .then(data => {
-            this.formValidate.bank_name = data.bankName;
-            this.formValidate.bank_code = data.bankCode;
-            this.formValidate.card_type = data.cardTypeName;
-            callback();
-          })
-          .catch(err => {
-            callback(new Error("银行卡号输入错误，请重新输入！"));
-          });
+        const Bank = new CardBin();
+        let bank_info = Bank.searchCardBin(this.formValidate.card);
+        if (bank_info.bankName) {
+          this.formValidate.bank_name = bank_info.bankName;
+          this.formValidate.bank_code = bank_info.bankCode;
+          this.formValidate.card_type = bank_info.cardTypeName;
+          callback();
+        } else {
+          callback(new Error("银行卡号输入错误，请重新输入！"));
+        }
       }
     };
     const validateCardCheck = (rule, value, callback) => {

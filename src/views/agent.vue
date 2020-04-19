@@ -20,7 +20,7 @@
       <div class="agent-module agent-module-abeam">
         <h3>推荐码</h3>
         <div class="agent-module-recommend">
-          <Input type="text" v-model="recommend" placeholder="请输入邀请码"></Input>
+          <Input type="text" v-model="recommend" placeholder="请输入邀请码" />
         </div>
       </div>
       <div class="agent-module agent-module-abeam">
