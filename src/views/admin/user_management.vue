@@ -22,7 +22,7 @@
           <Select v-model="search.bank_name" placeholder="全部" style="width:200px">
             <Option value="all">全部</Option>
             <template v-for="bank in bankList">
-              <Option :value="bank.bank_name">{{bank.bank_name}}</Option>
+              <Option :value="bank.bank_name" :key="bank.bank_name">{{bank.bank_name}}</Option>
             </template>
           </Select>
         </div>

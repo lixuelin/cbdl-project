@@ -2,11 +2,14 @@
   <div class="b-home">
     <header class="b-home-header">
       <div>
-        <h2>GRF生态理财</h2>
+        <h2>
+          GRF生态理财
+          <span>-{{is_vip}}</span>
+        </h2>
       </div>
       <template v-if="is_login">
         <div class="b-home-header-top">
-          <p class="b-home-header-welcome">{{is_vip}}-{{ name }}，您的邀请码：{{ code }}</p>
+          <p class="b-home-header-welcome">{{ name }}，您的邀请码：{{ code }}</p>
           <p>
             <span @click="loginOut">退出</span>
           </p>
