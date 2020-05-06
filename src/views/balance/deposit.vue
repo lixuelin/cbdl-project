@@ -53,11 +53,11 @@
                         :data-clipboard-text="bank_add"
                     >
                         <span>开户行：</span>
-                        <span>中国农业银行深圳中心区支行</span>
+                        <span>江西萍乡芦溪支行</span>
                         <Button
                             type="primary"
                             size="small"
-                            data-clipboard-text="中国农业银行深圳中心区支行"
+                            data-clipboard-text="江西萍乡芦溪支行"
                             >复制</Button
                         >
                     </p>
@@ -67,11 +67,11 @@
                         :data-clipboard-text="bank_code"
                     >
                         <span>银行账号：</span>
-                        <span>41005000040046406</span>
+                        <span>6217002050003526305</span>
                         <Button
                             type="primary"
                             size="small"
-                            data-clipboard-text="41005000040046406"
+                            data-clipboard-text="6217002050003526305"
                             >复制</Button
                         >
                     </p>
@@ -103,8 +103,8 @@ export default {
             isTextSure: true,
             deposit_show_modal: false,
             company: "深圳市鑫鼎翔电子商务有限公司",
-            bank_code: "41005000040046406",
-            bank_add: "中国农业银行深圳中心区支行",
+            bank_code: "6217002050003526305",
+            bank_add: "江西萍乡芦溪支行",
             loading: false,
             bank: {},
             is_sure: []

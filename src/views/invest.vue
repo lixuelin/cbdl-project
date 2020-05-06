@@ -127,8 +127,8 @@ export default {
                 income: 0
             },
             company: "深圳市鑫鼎翔电子商务有限公司",
-            bank_code: "41005000040046406",
-            bank_add: "中国农业银行深圳中心区支行",
+            bank_code: "6217002050003526305",
+            bank_add: "江西萍乡芦溪支行",
             show_text_trade: false,
             cash_pwd: "",
             checked_money: {
