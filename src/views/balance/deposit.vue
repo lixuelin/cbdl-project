@@ -31,19 +31,19 @@
                 <span>投资</span>
             </p>
             <div>
-                <p>请您将投资款转账到公司账户，收到后将计算收益：</p>
+                <p>请您将投资款转账到财务账户，收到后将计算收益：</p>
                 <div class="invest-sure-count">
                     <p
                         class="ctrlBtn"
                         @click="ctrlCBtn"
                         :data-clipboard-text="company"
                     >
-                        <span>账户：</span>
-                        <span>深圳市鑫鼎翔电子商务有限公司</span>
+                        <span>财务账户：</span>
+                        <span>刘江</span>
                         <Button
                             type="primary"
                             size="small"
-                            data-clipboard-text="深圳市鑫鼎翔电子商务有限公司"
+                            data-clipboard-text="刘江"
                             >复制</Button
                         >
                     </p>
@@ -53,11 +53,11 @@
                         :data-clipboard-text="bank_add"
                     >
                         <span>开户行：</span>
-                        <span>江西萍乡芦溪支行</span>
+                        <span>中国建设银行</span>
                         <Button
                             type="primary"
                             size="small"
-                            data-clipboard-text="江西萍乡芦溪支行"
+                            data-clipboard-text="中国建设银行"
                             >复制</Button
                         >
                     </p>
@@ -104,7 +104,7 @@ export default {
             deposit_show_modal: false,
             company: "深圳市鑫鼎翔电子商务有限公司",
             bank_code: "6217002050003526305",
-            bank_add: "江西萍乡芦溪支行",
+            bank_add: "中国建设银行",
             loading: false,
             bank: {},
             is_sure: []

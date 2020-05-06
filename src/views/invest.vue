@@ -128,7 +128,7 @@ export default {
             },
             company: "深圳市鑫鼎翔电子商务有限公司",
             bank_code: "6217002050003526305",
-            bank_add: "江西萍乡芦溪支行",
+            bank_add: "中国建设银行",
             show_text_trade: false,
             cash_pwd: "",
             checked_money: {
