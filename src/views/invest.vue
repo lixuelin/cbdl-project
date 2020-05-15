@@ -135,7 +135,16 @@ export default {
                 index: null,
                 money: null
             },
-            invest_check_money: [2980, 10000, 11400, 19800, 25600, 30000],
+            invest_check_money: [
+                1000,
+                2980,
+                5000,
+                10000,
+                11400,
+                19800,
+                25600,
+                30000
+            ],
             checked_pay: {
                 index: null,
                 pay: "转账"
