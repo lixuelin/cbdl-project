@@ -67,6 +67,39 @@
 
             & li {
                 margin-bottom: 15px;
+
+                &:last-child {
+                    display: flex;
+                    margin-left: 15px;
+                    flex: 100%;
+                    justify-content: start;
+                }
+            }
+
+            &-other {
+                &-set {
+                    margin-left: 10px;
+                }
+
+                & button {
+                    height: 30px;
+                    width: 30px;
+                    line-height: 30px;
+                    border: none;
+                    border-radius: 5px;
+                    outline: none;
+                    background: #2d8cf0;
+                    color: #fff;
+                }
+
+                & input {
+                    padding: 2px 5px;
+                    height: 30px;
+                    outline: none;
+                    width: 100px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
             }
 
             &-num {
@@ -100,7 +133,7 @@
             .shadow_box();
 
             & div {
-                flex: 1;    
+                flex: 1;
                 border-right: 1px solid #eee;
                 text-align: center;
 
@@ -113,7 +146,7 @@
                     color: #5c92ff;
                 }
 
-                &:last-child{
+                &:last-child {
                     border-right: none;
                 }
             }
@@ -208,7 +241,7 @@
     }
 }
 
-.invest-module-abeam{
+.invest-module-abeam {
     display: flex;
 
     & h3 {
