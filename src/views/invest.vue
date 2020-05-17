@@ -361,9 +361,6 @@ export default {
         return;
       }
       let res = null;
-      console.log(data);
-
-      return;
       try {
         res = await this.$Http.createInvest(data);
         this.$Message.success("投资成功，10分钟内未到账请联系客服!");
