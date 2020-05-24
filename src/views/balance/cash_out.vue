@@ -104,7 +104,9 @@ export default {
     bankIcon(bank) {
       let bankInfo = checkBackInfo(bank);
       let className = ["iconfont"];
-      className.push(bankInfo.icon);
+      if (bankInfo) {
+        className.push(bankInfo.icon);
+      }
       return className;
     },
     valativeNum() {
