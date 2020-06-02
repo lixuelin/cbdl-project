@@ -142,7 +142,7 @@ export default {
       invest_check_pay: ["余额转账"],
       invest_list: [],
       is_sure: true,
-      set_money: 0
+      set_money: 900
     };
   },
   created() {
@@ -161,7 +161,7 @@ export default {
   },
   methods: {
     minusMoney() {
-      if (this.set_money === 0) {
+      if (Number(this.set_money) === 900) {
         return;
       }
       this.set_money -= 300;
@@ -196,7 +196,7 @@ export default {
 
         if (
           Number(this.checked_money.money) <= this.balance_count.toFixed(1) &&
-          Number(this.set_money) === 0
+          Number(this.set_money) === 900
         ) {
           this.show_text_trade = true;
         } else if (Number(this.set_money) <= this.balance_count.toFixed(1)) {
