@@ -61,7 +61,7 @@ export default {
           route: "/agents"
         },
         {
-          name: "转账记录",
+          name: "收益记录",
           type: "iconfont icon-credit-card",
           route: "/deposit_note"
         },
@@ -69,6 +69,11 @@ export default {
           name: "提现记录",
           type: "iconfont icon-icon_eye",
           route: "/cash_note"
+        },
+        {
+          name: "支付",
+          type: "iconfont icon-icon_eye",
+          route: "/pay"
         }
       ]
     };

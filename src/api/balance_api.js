@@ -46,6 +46,10 @@ const BalanceApi = {
     deleteBalance: {
         method: "delete",
         url: "/balance?type=manager"
+    },
+    createTransferAccount: {
+        method: "post",
+        url: "/balance/transfer_account?type=mobile"
     }
 };
 
