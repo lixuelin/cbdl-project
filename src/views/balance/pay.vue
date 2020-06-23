@@ -5,18 +5,20 @@
       <p>这里是我们的直接客户，加油站，从这加油的话，可以优惠每升1元</p>
       <div class="pay-form">
         <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-          <template v-if="formValidate.username == current_user">
-            <Form-item label="对方账户" prop="username">
-              <i-input v-model="formValidate.username" placeholder="请输入对方账户" disabled></i-input>
-            </Form-item>
-          </template>
-          <template v-else>
-            <Form-item label="对方账户" prop="username">
-              <i-input v-model="formValidate.username" placeholder="请输入对方账户"></i-input>
-            </Form-item>
-          </template>
+          <Form-item label="对方账户" prop="username">
+            <i-input v-model="formValidate.username" placeholder="请输入对方账户" disabled></i-input>
+          </Form-item>
+          <Form-item label="初始油价">
+            <i-input v-model="initial" placeholder="请输入对方账户" disabled></i-input>
+          </Form-item>
           <Form-item label="购买金额" prop="money">
             <i-input v-model="formValidate.money" placeholder="请输入购买金额"></i-input>
+          </Form-item>
+          <Form-item label="优惠油价">
+            <i-input v-model="discount" placeholder="请输入对方账户" disabled></i-input>
+          </Form-item>
+          <Form-item label="最终价格">
+            <i-input v-model="formValidate.final_num" placeholder="请输入对方账户" disabled></i-input>
           </Form-item>
           <Form-item label="交易密码" prop="password">
             <i-input v-model="formValidate.password" type="password" placeholder="请输入密码"></i-input>
@@ -78,9 +80,13 @@ export default {
       formValidate: {
         username: "gas_station",
         money: 0,
+        final_num: 0,
         password: ""
       },
+      initial: 4.88,
+      discount: 4.78,
       profit_info: {},
+      rebate: 0,
       total: 0,
       ruleValidate: {
         username: [
@@ -137,7 +143,11 @@ export default {
       } else if (Number(num) > this.total) {
         callback(new Error("您的余额不足，请先充值!"));
       } else {
-        console.log("ddddd");
+        this.rebate = ((num / this.initial) * 0.1).toFixed(2);
+        this.formValidate.final_num = (
+          (num / this.initial) *
+          this.discount
+        ).toFixed(2);
         callback();
       }
     },
@@ -156,8 +166,9 @@ export default {
     async payMoney() {
       let data = {
         user_id: Number(localStorage.getItem("user_id")),
-        num: Number(this.formValidate.money),
-        profit_id: this.profit_info.id
+        num: this.formValidate.final_num,
+        profit_id: this.profit_info.id,
+        final_num: (this.formValidate.final_num - this.rebate).toFixed(2)
       };
       this.loading = true;
       let res = null;

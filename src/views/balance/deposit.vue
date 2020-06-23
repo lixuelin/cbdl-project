@@ -33,18 +33,18 @@
         <div class="invest-sure-count">
           <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="company">
             <span>财务账户：</span>
-            <span>刘江</span>
-            <Button type="primary" size="small" data-clipboard-text="刘江">复制</Button>
+            <span>张裕平</span>
+            <Button type="primary" size="small" data-clipboard-text="张裕平">复制</Button>
           </p>
           <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_add">
             <span>开户行：</span>
-            <span>中国建设银行</span>
-            <Button type="primary" size="small" data-clipboard-text="中国建设银行">复制</Button>
+            <span>中国工商银行</span>
+            <Button type="primary" size="small" data-clipboard-text="中国工商银行">复制</Button>
           </p>
           <p class="ctrlBtn" @click="ctrlCBtn" :data-clipboard-text="bank_code">
             <span>银行账号：</span>
-            <span>6217002050003526305</span>
-            <Button type="primary" size="small" data-clipboard-text="6217002050003526305">复制</Button>
+            <span>6222031504000332625</span>
+            <Button type="primary" size="small" data-clipboard-text="6222031504000332625">复制</Button>
           </p>
         </div>
       </div>
@@ -69,8 +69,8 @@ export default {
       isTextSure: true,
       deposit_show_modal: false,
       company: "深圳市鑫鼎翔电子商务有限公司",
-      bank_code: "6217002050003526305",
-      bank_add: "中国建设银行",
+      bank_code: "6222031504000332625",
+      bank_add: "中国工商银行",
       loading: false,
       bank: {},
       is_sure: []

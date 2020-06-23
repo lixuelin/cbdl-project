@@ -95,7 +95,7 @@
           <p class="b-home-main-agent-win">你我共赢</p>
         </div>
       </div>
-      <div class="b-home-main-newcomer">
+      <div class="b-home-main-newcomer" @click="goToFinancial">
         <div class="b-home-main-newcomer-box">
           <p class="b-home-main-newcomer-invest">3.42-4.45%</p>
           <p class="b-home-main-newcomer-year">月收益</p>
@@ -111,7 +111,7 @@
           <p>总发行量</p>
         </div>
       </div>
-      <div class="b-home-main-newcomer">
+      <div class="b-home-main-newcomer" @click="goToFinancial">
         <div class="b-home-main-newcomer-box">
           <p class="b-home-main-newcomer-invest">5.3-6.1%</p>
           <p class="b-home-main-newcomer-year">月收益</p>
@@ -288,6 +288,11 @@ export default {
     this.queryCapital();
   },
   methods: {
+    goToFinancial() {
+      this.$router.push({
+        path: "/financial"
+      });
+    },
     loginOut() {
       localStorage.setItem("user_id", "");
       localStorage.setItem("session_id", "");
