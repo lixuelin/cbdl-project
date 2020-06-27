@@ -125,7 +125,6 @@ export default {
       let res = null;
       try {
         res = await this.$Http.queryUser(data);
-        console.log(res.data, "dd");
         if (res.data.card) {
           this.$router.push({
             path: "/cash_out",
@@ -133,8 +132,9 @@ export default {
               num: this.total.endVal.toFixed(1)
             }
           });
+        } else {
+          return this.$Message.error(`没有绑定银行卡！`);
         }
-        return this.$Message.error(`没有绑定银行卡！`);
       } catch (error) {
         if (res.msg) {
           return this.$Message.error(`请求失败:${res.msg}`);
