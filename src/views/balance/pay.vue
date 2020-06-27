@@ -6,7 +6,14 @@
       <div class="pay-form">
         <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
           <Form-item label="对方账户" prop="username">
-            <i-input v-model="formValidate.username" placeholder="请输入对方账户" disabled></i-input>
+            <!-- <i-input v-model="formValidate.username" placeholder="请输入对方账户" disabled></i-input> -->
+            <Select v-model="formValidate.username">
+              <Option
+                v-for="item in business_list"
+                :value="item.username"
+                :key="item"
+              >{{ item.household }}</Option>
+            </Select>
           </Form-item>
           <Form-item label="初始油价">
             <i-input v-model="initial" placeholder="请输入对方账户" disabled></i-input>
@@ -77,9 +84,10 @@ export default {
     return {
       show_text_trade: false,
       current_user: localStorage.getItem("username"),
+      business_list: [],
       formValidate: {
         username: "gas_station",
-        money: 0,
+        money: null,
         final_num: 0,
         password: ""
       },
@@ -109,6 +117,7 @@ export default {
     };
   },
   created() {
+    this.getBusinessUser();
     this.getBalance();
     console.log(localStorage.getItem("username"), "ise");
   },
@@ -118,7 +127,24 @@ export default {
     }
   },
   methods: {
+    async getBusinessUser() {
+      console.log("dddd");
+      let res = null;
+      try {
+        res = await this.$Http.queryBusinessUser();
+        this.business_list = res.data;
+        console.log(res.data);
+        this.business_user = res.data.list;
+      } catch (error) {
+        if (res.msg) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
+        this.$Message.error(`请求失败:${error}`);
+      }
+    },
     async getBalance() {
+      console.log("dddd");
+
       let data = {
         user_id: localStorage.getItem("user_id"),
         is_cash: 1
@@ -177,7 +203,7 @@ export default {
         if (!res.success) {
           return this.$Message.error(`请求失败:${res.msg}`);
         }
-        this.$Message.success("转账成功！");
+        this.$Message.success("支付成功！");
         this.loading = false;
         this.formValidate.password = "";
         this.formValidate.money = 0;

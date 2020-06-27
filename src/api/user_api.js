@@ -51,6 +51,10 @@ const UserApi = {
     queryInviteAgent: {
         method: "get",
         url: "/user/invite_agent?type=mobile"
+    },
+    queryBusinessUser: {
+        method: "get",
+        url: "/user/business_user?type=mobile"
     }
 };
 

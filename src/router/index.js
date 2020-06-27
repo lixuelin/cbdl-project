@@ -19,6 +19,7 @@ const DepositNote = () => import("@/views/balance/deposit_note");
 const CashOut = () => import("@/views/balance/cash_out");
 const CashOutNote = () => import("@/views/balance/cash_out_note");
 const Pay = () => import("@/views/balance/pay");
+const Card = () => import("@/views/balance/card");
 const AgentWeb = () => import("@/views/agent");
 const Agents = () => import("@/views/balance/agents");
 
@@ -132,6 +133,11 @@ export default new VueRouter({
                     path: "/pay",
                     name: "pay",
                     component: Pay
+                },
+                {
+                    path: "/card",
+                    name: "card",
+                    component: Card
                 }
             ]
         },

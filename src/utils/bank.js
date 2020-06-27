@@ -16,7 +16,7 @@ const allBank = {
         name: "招商银行"
     },
     ccb: {
-        icon: "icon-yinhanglogo-",
+        icon: "icon-yinhanglogo-1",
         color: "#3679ff",
         name: "中国建设银行"
     },

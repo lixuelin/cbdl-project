@@ -97,6 +97,8 @@ export default {
         } else {
           callback(new Error("银行卡号输入错误，请重新输入！"));
         }
+      } else {
+        callback();
       }
     };
     const validateCardCheck = (rule, value, callback) => {
@@ -190,7 +192,7 @@ export default {
         ],
         card: [
           {
-            required: true,
+            required: false,
             type: "string",
             message: "银行卡号不能为空！",
             trigger: "blur"
@@ -199,9 +201,9 @@ export default {
         ],
         cardCheck: [
           {
-            required: true,
+            required: false,
             type: "string",
-            message: "再次输入银行卡号不能为空！",
+            message: "银行卡号不一致！",
             trigger: "blur"
           },
           { validator: validateCardCheck, trigger: "blur" }

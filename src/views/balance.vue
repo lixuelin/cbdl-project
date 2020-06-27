@@ -56,6 +56,11 @@ export default {
       },
       menu: [
         {
+          name: "我的银行卡",
+          type: "iconfont icon-credit-card",
+          route: "/card"
+        },
+        {
           name: "下级VIP",
           type: "iconfont icon-credit-card",
           route: "/agents"
@@ -113,13 +118,29 @@ export default {
     goToDeposit() {
       this.$router.push({ path: "/deposit" });
     },
-    goToCash() {
-      this.$router.push({
-        path: "/cash_out",
-        query: {
-          num: this.total.endVal.toFixed(1)
+    async goToCash() {
+      let data = {
+        id: localStorage.getItem("user_id")
+      };
+      let res = null;
+      try {
+        res = await this.$Http.queryUser(data);
+        console.log(res.data, "dd");
+        if (res.data.card) {
+          this.$router.push({
+            path: "/cash_out",
+            query: {
+              num: this.total.endVal.toFixed(1)
+            }
+          });
         }
-      });
+        return this.$Message.error(`没有绑定银行卡！`);
+      } catch (error) {
+        if (res.msg) {
+          return this.$Message.error(`请求失败:${res.msg}`);
+        }
+        this.$Message.error(`请求失败:${error}`);
+      }
     }
   }
 };
