@@ -2,7 +2,7 @@
   <div class="pay">
     <h1 class="pay-title">优惠购</h1>
     <article class>
-      <p>这里是我们的直接客户，加油站，从这加油的话，可以优惠每升1元</p>
+      <p>中国供销汽油</p>
       <div class="pay-form">
         <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
           <Form-item label="对方账户" prop="username">
@@ -92,7 +92,7 @@ export default {
         password: ""
       },
       initial: 4.88,
-      discount: 4.78,
+      discount: 4.48,
       profit_info: {},
       rebate: 0,
       total: 0,
@@ -143,8 +143,6 @@ export default {
       }
     },
     async getBalance() {
-      console.log("dddd");
-
       let data = {
         user_id: localStorage.getItem("user_id"),
         is_cash: 1
@@ -161,7 +159,6 @@ export default {
       }
     },
     validateNum(num, callback) {
-      console.log(num, "eee");
       if (isNaN(num) || num === "" || Number(num) <= 0) {
         callback(new Error("填写的交易金额错误!"));
       } else if (this.isFloat(Number(num) / 10)) {
@@ -197,6 +194,9 @@ export default {
         final_num: (this.formValidate.final_num - this.rebate).toFixed(2)
       };
       this.loading = true;
+      console.log(data, "data");
+
+      return;
       let res = null;
       try {
         res = await this.$Http.createTransferAccount(data);
