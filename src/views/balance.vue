@@ -23,7 +23,7 @@
           ></countTo>
         </p>
         <div class="balance-property-content-btn">
-          <button @click="goToDeposit">转账</button>
+          <!-- <button @click="goToDeposit">转账</button> -->
           <button @click="goToCash">提现</button>
         </div>
       </div>
@@ -74,12 +74,12 @@ export default {
           name: "提现记录",
           type: "iconfont icon-icon_eye",
           route: "/cash_note"
-        },
-        {
-          name: "支付",
-          type: "iconfont icon-icon_eye",
-          route: "/pay"
         }
+        // {
+        //   name: "支付",
+        //   type: "iconfont icon-icon_eye",
+        //   route: "/pay"
+        // }
       ]
     };
   },
