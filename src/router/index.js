@@ -36,6 +36,7 @@ const WithdrawSummary = () => import("@/views/admin/withdraw_summary");
 const UserManagement = () => import("@/views/admin/user_management");
 const AdminDeposit = () => import("@/views/admin/deposit");
 const BalanceFlow = () => import("@/views/admin/balance_flow");
+const UserBalance = () => import("@/views/admin/user_balance");
 
 const Agent = () => import("@/views/admin/agent/agent_manager");
 const AddAgent = () => import("@/views/admin/agent/add_agent");
@@ -214,6 +215,11 @@ export default new VueRouter({
                     path: "/admin/balance_flow",
                     name: "balance_flow",
                     component: BalanceFlow
+                },
+                {
+                    path: "/admin/user_balance",
+                    name: "user_balance",
+                    component: UserBalance
                 },
                 {
                     path: "/admin/agent",

@@ -24,13 +24,13 @@ export default {
   created() {
     this.noteData.forEach(item => {
       if (item.balance_type === 10 && item.pay_type == 2) {
-        item.type = `向加油站用户：${item.account}购买`;
+        item.type = `${item.account}加油支付`;
       }
       if (item.balance_type === 10 && item.pay_type == 1) {
         item.type = `向用户：${item.account}转账`;
       }
       if (item.balance_type === 9 && item.pay_type == 2) {
-        item.type = `用户${item.account}汽车加油支付`;
+        item.type = `经营所得对方账户：${item.account}`;
       }
       if (item.balance_type === 9 && item.pay_type == 1) {
         item.type = `用户${item.account}转入`;

@@ -66,6 +66,10 @@ export default {
             {
               name: "余额收益",
               path: "/admin/balance_flow"
+            },
+            {
+              name: "用户余额列表",
+              path: "/admin/user_balance"
             }
           ]
         },

@@ -43,6 +43,10 @@ const BalanceApi = {
         method: "get",
         url: "/balance/income?type=manager"
     },
+    queryUserBalanceCount: {
+        method: "get",
+        url: "/balance/user_balance?type=manager"
+    },
     deleteBalance: {
         method: "delete",
         url: "/balance?type=manager"
