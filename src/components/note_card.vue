@@ -30,7 +30,7 @@ export default {
         item.type = `向用户：${item.account}转账`;
       }
       if (item.balance_type === 9 && item.pay_type == 2) {
-        item.type = `经营所得对方账户：${item.account}`;
+        item.type = `经营所得：${item.account}`;
       }
       if (item.balance_type === 9 && item.pay_type == 1) {
         item.type = `用户${item.account}转入`;
