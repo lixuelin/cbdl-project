@@ -75,11 +75,6 @@ export default {
           type: "iconfont icon-icon_eye",
           route: "/cash_note"
         }
-        // {
-        //   name: "支付",
-        //   type: "iconfont icon-icon_eye",
-        //   route: "/pay"
-        // }
       ]
     };
   },

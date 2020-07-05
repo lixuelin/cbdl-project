@@ -21,7 +21,24 @@
 export default {
   name: "note",
   props: ["noteData"],
-  mounted() {}
+  created() {
+    this.noteData.forEach(item => {
+      if (item.balance_type === 10 && item.pay_type == 2) {
+        item.type = `向加油站用户：${item.account}购买`;
+      }
+      if (item.balance_type === 10 && item.pay_type == 1) {
+        item.type = `向用户：${item.account}转账`;
+      }
+      if (item.balance_type === 9 && item.pay_type == 2) {
+        item.type = `用户${item.account}汽车加油支付`;
+      }
+      if (item.balance_type === 9 && item.pay_type == 1) {
+        item.type = `用户${item.account}转入`;
+      }
+    });
+  },
+  mounted() {},
+  methods: {}
 };
 </script>
 
