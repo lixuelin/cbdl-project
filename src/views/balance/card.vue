@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div v-if="exists_bank" :style="bankBg(bank)">
+    <div class="card-box" v-if="exists_bank" :style="bankBg(bank)">
       <div class="bank-list-cont">
         <div class="bank-list-cont-name">
           <h3>{{ bank.bank_name }}</h3>
