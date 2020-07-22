@@ -99,7 +99,7 @@ export default {
   methods: {
     goToPay(type) {
       let title = "优惠加油";
-      let description = "中国供销汽油";
+      let description = "中国供销新能源";
       if (type === 1) {
         title = "转账";
         description = "通过输入用户账号转给其他人，3分钟未到账，请及时联系客服";
