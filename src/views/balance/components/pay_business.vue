@@ -87,7 +87,7 @@ export default {
         final_num: 0,
         password: ""
       },
-      initial: 4.68,
+      initial: 4.88,
       discount: 4.48,
       total: 0,
       profit_info: {},
