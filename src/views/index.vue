@@ -4,12 +4,14 @@
       <div>
         <h2>
           GRF生态理财
-          <span>-{{is_vip}}</span>
+          <span>-{{ is_vip }}</span>
         </h2>
       </div>
       <template v-if="is_login">
         <div class="b-home-header-top">
-          <p class="b-home-header-welcome">{{ name }}，您的邀请码：{{ code }}</p>
+          <p class="b-home-header-welcome">
+            {{ name }}，您的邀请码：{{ code }}
+          </p>
           <p>
             <span @click="loginOut">退出</span>
           </p>
@@ -46,7 +48,7 @@
             </h3>
           </div>
           <div class="b-home-main-means-total-btn">
-            <Button type="success" size="small" @click="goToDeposit">充值</Button>
+            <!-- <Button type="success" size="small" @click="goToDeposit">充值</Button> -->
           </div>
         </div>
         <div class="b-home-main-means-class">
@@ -189,41 +191,41 @@ export default {
       code: "",
       amount: {
         financial_first: "500W",
-        financial_two: "300W"
+        financial_two: "300W",
       },
       userInfo: {
         name: "李雪莉",
         photo: "./../assets/image/photo.jpeg",
         income: 100,
-        bonus: 20
+        bonus: 20,
       },
       total: {
         startVal: 0,
         endVal: 0,
         duration: 100,
-        float: 1
+        float: 1,
       },
       balance: {
         startVal: 0,
         endVal: 0,
         duration: 300,
         float: 1,
-        income: 0
+        income: 0,
       },
       income: {
         startVal: 0,
         endVal: 0,
         duration: 300,
-        float: 1
+        float: 1,
       },
       bonus: {
         startVal: 0,
         endVal: 0,
         duration: 300,
-        float: 1
+        float: 1,
       },
       banner: {
-        speed: 1500
+        speed: 1500,
       },
       invest_list: {
         title: "精选投资",
@@ -232,40 +234,40 @@ export default {
             rate: "2.33%",
             tip: "七日收益率",
             title: "创博动力最新投资",
-            cont: "这是最新开时发放的投资收益"
+            cont: "这是最新开时发放的投资收益",
           },
           {
             rate: "4.33%",
             tip: "七日收益率",
             title: "创博动力最新投资",
-            cont: "这是最新开时发放的投资收益"
-          }
-        ]
+            cont: "这是最新开时发放的投资收益",
+          },
+        ],
       },
       help: [
         {
           name: "规则介绍",
           type: "iconfont icon-help",
-          route: "/help"
+          route: "/help",
         },
         {
           name: "咨询客服",
           type: "iconfont icon-hot",
-          route: "/customer"
-        }
+          route: "/customer",
+        },
       ],
       menu: [
         {
           name: "我的银行卡",
           type: "iconfont icon-credit-card",
-          route: "/bank"
+          route: "/bank",
         },
         {
           name: "修改密码",
           type: "iconfont icon-icon_eye",
-          route: "/change_pwd"
-        }
-      ]
+          route: "/change_pwd",
+        },
+      ],
     };
   },
   components: {
@@ -273,7 +275,7 @@ export default {
     newCard,
     countTo,
     foot,
-    menuView
+    menuView,
   },
   mounted() {
     this.isLogin();
@@ -290,7 +292,7 @@ export default {
   methods: {
     goToFinancial() {
       this.$router.push({
-        path: "/financial"
+        path: "/financial",
       });
     },
     loginOut() {
@@ -303,7 +305,7 @@ export default {
       delCookie("session_id");
       this.$router.push({
         path: "/",
-        query: { timestamp: new Date().getTime() }
+        query: { timestamp: new Date().getTime() },
       });
     },
     gotoHelp() {
@@ -340,7 +342,7 @@ export default {
         },
         error: () => {
           alert("已取消分享");
-        }
+        },
       };
       // 将配置注入通用方法
       wxapi.ShareTimeline(option);
@@ -357,7 +359,7 @@ export default {
         },
         error: () => {
           alert("已取消分享");
-        }
+        },
       };
       // 将配置注入通用方法
       wxapi.ShareAppMessage(option);
@@ -369,23 +371,23 @@ export default {
       this.$router.push({
         name: "invest",
         params: {
-          financial_id: 2
-        }
+          financial_id: 2,
+        },
       });
     },
     async queryCapital() {
       let data = {
-        user_id: localStorage.getItem("user_id")
+        user_id: localStorage.getItem("user_id"),
       };
       let balance_data = {
         user_id: localStorage.getItem("user_id"),
-        is_cash: 1
+        is_cash: 1,
       };
       let arr = [
         this.$Http.queryBalanceTotal(balance_data),
         this.$Http.queryInvestTotal(data),
         this.$Http.queryIncomeTotal(data),
-        this.$Http.queryBonusTotal(data)
+        this.$Http.queryBonusTotal(data),
       ];
       let res = null;
       try {
@@ -402,7 +404,7 @@ export default {
           this.bonus.endVal;
       } catch (error) {
         let c = 0;
-        res.forEach(error => {
+        res.forEach((error) => {
           if (error.status !== 200) {
             this.$Message.error(`请求失败:${error.msg}`);
             c++;
@@ -420,8 +422,8 @@ export default {
     },
     goToAgent() {
       this.$router.push({ path: "/agent" });
-    }
-  }
+    },
+  },
 };
 </script>
 
